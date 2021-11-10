@@ -1,5 +1,6 @@
 import { noteService } from '../services/note.service.js';
 import noteList from '../cmps/note-list.cmp.js';
+import noteAdd from '../cmps/note-add.cmp.js';
 import noteFilter from '../cmps/note-filter.cmp.js';
 import noteDetails from './note-details.cmp.js';
 
@@ -7,9 +8,10 @@ export default {
     name: 'note-index',
     template: `
         <section class="keep-app">
-            <h1>Welcome To Your Keep</h1>
+            <!-- <h1>Welcome To Your Keep</h1> -->
             <!-- <img src="./img/homepage.jpg" alt="" class="home-bg"> -->
             <!-- <router-link to="/book">Shop Now!</router-link> -->
+            <note-add/>
             <note-filter @filtered="setFilter" />
             <note-details v-if="selectedNote" :note="selectedNote" @close="closeDetails" />
             <note-list v-else :notes="notesToShow"  @selected="selectNote" />
@@ -61,5 +63,6 @@ export default {
         noteList,
         noteFilter,
         noteDetails,
+        noteAdd,
     }
 };

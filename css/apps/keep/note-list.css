@@ -1,17 +1,26 @@
 .note-list {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, 240px);
-  grid-auto-flow: dense;
-  gap: 10px; */
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+
+  /* grid-template-rows: 100px repeat(3, minmax(50px, 1fr)); */
+  /* grid-template-rows: repeat(auto-fill, minmax(150px, 1fr)); */
+  /* grid-auto-flow: dense; */
+
+  /* gap: 10px; */
+  /* display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
-  height: 95vh;
+  flex-direction: column; */
+  /* height: 95vh; */
+  /* width: 100vw; */
+
   /* height: 500px; */
   /* list-style: none; */
-  /* column-count: 4; */
-  /* column-width: 240px; */
-  /* columns: 4; */
-  /* column-gap: 10px; */
+  /* column-count: 4;
+  vertical-align: baseline; */
+  /* column-width: 200px; */
+  /* columns: 200px 3;
+  column-gap: 10px;
+  columns:  || ; */
   /* column-fill: auto; */
 }
