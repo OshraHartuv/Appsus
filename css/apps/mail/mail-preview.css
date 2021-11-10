@@ -1,8 +1,8 @@
-.mail-list>*{
+.mail-list>*:not(:first-child){
   border-top: 1px solid rgba(146, 157, 168, 0.602);
 }
 
-.mail-list:last-child{
+.mail-list>*:last-child{
   border-bottom: 1px solid rgba(146, 157, 168, 0.602);
 }
 
@@ -41,4 +41,6 @@
   min-width: 60px;
   text-align: right;
   padding-right: 5px;
+
 }
+

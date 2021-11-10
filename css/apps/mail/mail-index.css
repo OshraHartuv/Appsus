@@ -6,27 +6,28 @@
 
 
 .mail-index{
-    display: flex;
-    max-width: 100vw;
+    flex-direction: column;
 }
 
 .mail-menu-container{
     border-right: 1px solid gray;
-    width: 30vw;
 }
 
 .mail-main{
-    max-width: 70vw;
-    flex-grow: 1;
+    max-width: 100vw;
+    min-height: 90vh;
 }
 
+.mail-list-container{
+    width: 70vw;
+    flex-grow: 1;
+
+}
 
 .mail-header{
-    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 0 10px;
+    height: 5vh;
     border-bottom: 1px solid gray;
-
-    /* line-height: 5vh; */
 }

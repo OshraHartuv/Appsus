@@ -1,6 +1,8 @@
 .mail-details{
     flex-direction: column;
     padding: 10px;
+    width: 70vw;
+
 }
 
 .mail-details h2{

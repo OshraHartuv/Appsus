@@ -7,14 +7,14 @@ import mailDetails from './mail-details.cmp.js';
 export default {
   name: 'mail-index',
   template: `
-        <section class="mail-index">
-          <mail-menu class="mail-menu-container" @mailBoxed="setMailBox"></mail-menu > 
-          <div class="mail-main">
-            <div class="mail-header">         
-              <h1>Mail</h1>
-              <mail-filter @filtered="setFilter"></mail-filter>
-            </div>
-            <mail-list v-if="!selectedMail" :mails="mailsToShow"></mail-list>
+        <section class="mail-index flex">
+          <div class="mail-header flex">         
+            <h1>Mail</h1>
+            <mail-filter @filtered="setFilter"></mail-filter>
+          </div>
+          <div class="mail-main flex">
+            <mail-menu class="mail-menu-container" @mailBoxed="setMailBox"></mail-menu > 
+            <mail-list v-if="!selectedMail" :mails="mailsToShow" class="mail-list-container"></mail-list>
             <router-view v-else></router-view>
           </div> 
 
