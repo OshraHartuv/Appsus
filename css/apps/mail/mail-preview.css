@@ -1,0 +1,44 @@
+.mail-list>*{
+  border-top: 1px solid rgba(146, 157, 168, 0.602);
+}
+
+.mail-list:last-child{
+  border-bottom: 1px solid rgba(146, 157, 168, 0.602);
+}
+
+.mail-preview {
+  display: flex;
+  gap: 10px;
+}
+
+.mail-preview > * {
+  height: 5vh;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 5vh;
+  padding-left: 5px;
+  margin-bottom: 5px;
+}
+
+.mail-preview-contact {
+  min-width: 100px;
+}
+
+.mail-preview-text {
+  flex-grow: 1;
+}
+
+.mail-preview-body {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100px;
+  flex-grow: 1;
+}
+
+.mail-preview-date {
+  min-width: 60px;
+  text-align: right;
+  padding-right: 5px;
+}

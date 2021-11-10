@@ -12,10 +12,10 @@ export default {
       v-on:leave="leave"
       class="book-list"
       > -->
-        <ul class="mail-list">
+        <ul class="mail-list clean-list">
           <li v-for="mail in mails" :key="mail.id" class="mail-preview-container" >
               <mail-preview :mail="mail" @click.native="select(mail)" />
-            </li>
+          </li>
         </ul>
       <!-- </transition-group> -->
       `,
