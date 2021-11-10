@@ -3,11 +3,9 @@
 export const noteTxt = {
     props: ['data'],
     template: `
-        <div class="note-txt">
-            <label>
-                {{data.info.txt}}
-            </label>
-        </div>
+        <section class="note-txt">          
+                {{data.info.txt}}          
+        </section>
     `,
     data() {
         return {

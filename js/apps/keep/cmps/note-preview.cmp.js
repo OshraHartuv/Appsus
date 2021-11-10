@@ -7,7 +7,7 @@ import { noteImg } from './note-img.cmp.js';
 export default {
     props: ['note'],
     template: `
-        <section class="note-preview">
+        <!-- <section class="note-preview"> -->
             <!-- <h3>i'm note-details</h3> -->
             <!-- <h2>{{note}}</h2> -->
             <!-- <section class="survey app-main"> -->
@@ -22,7 +22,7 @@ export default {
             <!-- <button type="submit">Save</button> -->
         <!-- </form> -->
 
-    </section> 
+    <!-- </section>  -->
           <!-- <p><span class="underline">{{ titleToShow }}</span></p>
           <p v-if="note.listPrice.isOnSale" class="sale">SALE!</p>
           <router-link :to="'/note/'+note.id" >

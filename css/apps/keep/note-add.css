@@ -1,0 +1,30 @@
+.note-add {
+  text-align: center;
+}
+
+.note-add .add-start {
+  width: 600px;
+  height: 45px;
+  margin: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+.new-note {
+  display: inline;
+  /* width: 600px; */
+  /* height: 90px; */
+  margin: 5px auto 5px;
+  /* padding: 15px; */
+  border: 1px black solid;
+}
+.new-note input {
+  width: 600px;
+  height: 45px;
+  /* margin: 10px; */
+  border: none;
+  padding-left: 10px;
+  /* border-radius: 5px; */
+}
+.new-note input:active {
+  border: none;
+}

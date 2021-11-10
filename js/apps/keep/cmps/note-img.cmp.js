@@ -2,7 +2,7 @@
 export const noteImg = {
     props: ['data'],
     template: `
-        <section class="note-txt">
+        <section class="note-img">
 
                 {{data.info.title}}
                 <img :src="data.info.url">
