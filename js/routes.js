@@ -4,7 +4,7 @@ import aboutPage from './pages/app-about.cmp.js';
 import mailApp from './apps/mail/pages/mail-index.cmp.js';
 import keepApp from './apps/keep/pages/note-index.cmp.js';
 // // import searchOnline from './pages/search-online.cmp.js';
-// // import bookDetails from './pages/book-details.cmp.js';
+import mailDetails from './apps/mail/pages/mail-details.cmp.js';
 // // import reviewAdd from './pages/review-add.cmp.js';
 
 // const aboutTeam = {
@@ -52,18 +52,10 @@ const routes = [
     //         },
     //     ]
     // },
-    // {
-    //     path: '/book',
-    //     component: bookApp
-    // },
-    // {
-    //     path: '/book/:bookId/review-add',
-    //     component: reviewAdd
-    // },
-    // {
-    //     path: '/book/:bookId',
-    //     component: bookDetails
-    // },
+    {
+        path: '/mail/:mailId',
+        component: mailDetails
+    },
     // {
     //     path: '/search',
     //     component: searchOnline

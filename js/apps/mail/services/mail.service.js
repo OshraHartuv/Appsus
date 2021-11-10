@@ -7,8 +7,8 @@ const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' };
 
 export const mailService = {
   query,
-  save: saveMail,
-  getById: getByMailId,
+  saveMail,
+  getMailById,
   getNextMailId,
   getPreviousMailId,
   composeMail,
@@ -41,7 +41,7 @@ function saveMail(mail) {
   else return storageService.post(MAILS_KEY, mail);
 }
 
-function getByMailId(mailId) {
+function getMailById(mailId) {
   return storageService.get(MAILS_KEY, mailId);
 }
 
@@ -58,7 +58,7 @@ function _createMails() {
         to: 'momo@momo.com',
       },
       {
-        id: 'e101',
+        id: 'e102',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
@@ -66,7 +66,7 @@ function _createMails() {
         to: 'momo@momo.com',
       },
       {
-        id: 'e101',
+        id: 'e103',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,

@@ -4,6 +4,7 @@ import mailList from '../cmps/mail.list.cmp.js';
 import mailDetails from './mail-details.cmp.js';
 
 export default {
+  name: 'mail-index',
   template: `
         <section class="mail-index app-main">            
             <h1>Welcome To Your Mail</h1>
@@ -12,6 +13,7 @@ export default {
             <mail-list v-else :mails="mailsToShow"></mail-list> 
         </section>
     `,
+
   data() {
     return {
       mails: null,
@@ -51,5 +53,6 @@ export default {
   components: {
     mailFilter,
     mailDetails,
-  }
+    mailList,
+  },
 };

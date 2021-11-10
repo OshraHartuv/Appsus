@@ -60,12 +60,11 @@ export default {
                     <button @click=remove(idx)>Delete</button>
                   </ul>
                 </div> -->
-              </div>
-              
-          <router-link :to="'/book/'+ this.book.id +'/review-add'">Add review</router-link>
-          <router-link :to="'/book/'+previousBookId"><< Previous book</router-link>
-          <router-link :to="'/book/'+nextBookId">Next book >></router-link>
-          <router-link to="/book" class="close-details">x</router-link>
+              <!-- </div> -->
+         
+          <router-link :to="'/mail/'+previousMailId"><< Previous mail</router-link>
+          <router-link :to="'/mail/'+nextMailId">Next mail >></router-link>
+          <router-link to="/mail" class="close-details">x</router-link>
           </section>
       `,
     data() {
@@ -76,18 +75,18 @@ export default {
       };
     },
     created() {
-      const { bookId: mailId } = this.$route.params;
-      mailService.getById(mailId).then((mail) => (this.mail = mail));
+      const { mailId: mailId } = this.$route.params;
+      mailService.getMailById(mailId).then((mail) => (this.mail = mail));
     },
     watch: {
       '$route.params.mailId': {
         handler() {
-          const { bookId: mailId } = this.$route.params;
-          mailService.getById(mailId)
+          const { mailId: mailId } = this.$route.params;
+          mailService.getMailById(mailId)
               .then(mail => this.mail = mail);
-          mailService.getNextBookId(mailId)
+          mailService.getNextMailId(mailId)
               .then(mailId => this.nextMailId = mailId);
-          mailService.getPreviousBookId(mailId)
+          mailService.getPreviousMailId(mailId)
               .then(mailId => this.previousMailId = mailId);
   
         },
