@@ -1,3 +1,10 @@
+@import "/Appsus/css/parts/base.css";
+@import "/Appsus/css/parts/fonts.css";
+@import "/Appsus/css/parts/helpers.css";
+@import "/Appsus/css/cmps/app-home.css";
+@import "/Appsus/css/cmps/user-msg.css";
+@import "/Appsus/css/apps/keep/note-preview.css";
+
 body {
   background-color: pink;
 }
