@@ -1,99 +1,74 @@
 import longText from '../../../cmps/long-text.cmp.js';
 import { mailService } from '../services/mail.service.js';
 import { eventBus } from '../../../services/event-bus-service.js';
+import mailFilter from '../cmps/mail-filter.cmp.js';
+import mailMenu from '../cmps/mail-menu.cmp.js';
+
+  // {
+  //   id: 'e101',
+  //   subject: 'Miss you!',
+  //   body: 'Would love to catch up sometimes',
+  //   isRead: false,
+  //   sentAt: 1631279089000,
+  //   to: 'momo@momo.com',
+  // }
 
 export default {
-    template: `
-          <section class="mail-details app-main" v-if="mail">
-              <h3>{{ subjectToShow }}</h3>
-              <ul  class="mail-details">
-                  <li>mail details</li>
-                  <li>mail details</li>
-                  <li>mail details</li>
-                  <li>mail details</li>
-                <!-- <li>
-                  <span class="underline">Author:</span>
-                  {{ (book.authors).join(' , ') }}
-                </li>
-                <li>
-                  <span class="underline">Subtitle:</span>
-                  {{ book.subtitle }}
-                </li>
-                <li>
-                  <span class="underline">Published at:</span>
-                     {{ publishedToShow }}
-                    </li>
-                    <li>
-                      <span class="underline">Description:</span> 
-                      <long-text :txt="book.description"/>
-                  </li>
-                  <li>
-                    <span class="underline">PageCount:</span>
-                    {{ pagesToShow }} 
-                  </li>
-                  <li>
-                    <span class="underline">Categories:</span>
-                    {{ (book.categories).join(' , ') }}
-                  </li>
-                  <li>
-                    <span class="underline">Language:</span> {{ book.language }}
-                  </li>
-                  <li>
-                    <span class="underline">Price:</span >
-                    <span :class="priceStyle"> 
-                      {{ priceToShow }} 
-                    </span>
-                  </li> -->
-                </ul>
-                
-                <!-- <p v-if="!book.reviews || !book.reviews.length">No reviews</p>
-                <div v-else class="reviews">
-                  <h1 class="underline">reviews:</h1>
-                  <div class="reviews-container">
-                    <ul v-for="(review, idx) in book.reviews" class="review-container">
-                  <li> <span class="underline">Review from:</span> {{review.fullName}}</li>
-                  <li><span class="underline">Rating:</span> 
-                  <span v-for="num in review.rate" class="fa fa-star checked">
-                    </span> </li>
-                    <li><span class="underline"> Read at:</span> {{review.readAt}} </li>
-                    <li><div class="underline">Review:</div> {{review.content}} </li>
-                    <button @click=remove(idx)>Delete</button>
-                  </ul>
-                </div> -->
-              <!-- </div> -->
-         
-          <router-link :to="'/mail/'+previousMailId"><< Previous mail</router-link>
-          <router-link :to="'/mail/'+nextMailId">Next mail >></router-link>
-          <router-link to="/mail" class="close-details">x</router-link>
+  template: `
+          <section class="mail-details">
+            <mail-menu class="mail-menu-container"></mail-menu> 
+            <div class="mail-main">      
+                <mail-filter ></mail-filter>
+                <div class="mail-content" v-if="mail">
+                <
+                  <div class="mail-text">
+                    <h2>{{ subjectToShow }}</h2>
+                    <h3><span class="bold">
+                    {{ contactToShow }}
+                    </span>< {{addressToShow}} ></h3>
+                    <p>to: {{ destinationToShow }} </p>
+                    <p>mail details</p>
+                    <p>mail details</p>
+                    <p>mail details</p>
+                  </div>
+                     
+                  <!-- <router-link :to="'/mail/'+previousMailId"><< Previous mail</router-link>
+                  <router-link :to="'/mail/'+nextMailId">Next mail >></router-link> -->
+                  <router-link to="/mail" class="close-details">x</router-link>
+                </div>
+            </div>
           </section>
       `,
-    data() {
-      return {
-        mail: null,
-        nextMailId: null,
-        previousMailId: null
-      };
-    },
-    created() {
-      const { mailId: mailId } = this.$route.params;
-      mailService.getMailById(mailId).then((mail) => (this.mail = mail));
-    },
-    watch: {
-      '$route.params.mailId': {
-        handler() {
-          const { mailId: mailId } = this.$route.params;
-          mailService.getMailById(mailId)
-              .then(mail => this.mail = mail);
-          mailService.getNextMailId(mailId)
-              .then(mailId => this.nextMailId = mailId);
-          mailService.getPreviousMailId(mailId)
-              .then(mailId => this.previousMailId = mailId);
-  
-        },
-        immediate: true,
+  data() {
+    return {
+      mail: null,
+      nextMailId: null,
+      previousMailId: null,
+    };
+  },
+  created() {
+    const { mailId: mailId } = this.$route.params;
+    mailService.getMailById(mailId).then((mail) => {
+      this.mail = mail;
+      console.log(this.mail);
+    });
+  },
+  watch: {
+    '$route.params.mailId': {
+      handler() {
+        const { mailId: mailId } = this.$route.params;
+        mailService.getMailById(mailId).then((mail) => (this.mail = mail));
+        mailService
+          .getNextMailId(mailId)
+          .then((mailId) => (this.nextMailId = mailId));
+        mailService
+          .getPreviousMailId(mailId)
+          .then((mailId) => (this.previousMailId = mailId));
       },
+      immediate: true,
     },
-    methods: {
+  },
+  methods: {
     //   remove(idx) {
     //     this.mail.reviews.splice(idx, 1);
     //     mailService
@@ -114,14 +89,26 @@ export default {
     //         eventBus.$emit('showMsg', msg);
     //       });
     //   },
+  },
+  computed: {
+    subjectToShow() {
+      return (
+        this.mail.subject[0].toUpperCase() + this.mail.subject.substring(1)
+      );
     },
-    computed: {
-      subjectToShow() {
-        return this.mail.subject[0].toUpperCase() + this.mail.subject.substring(1);
-      },
+    contactToShow() {
+      return (this.mail.to) ? mailService.getUser().fullname : mailService.nameToShow(this.mail)
     },
-    components: {
-      longText,
+    addressToShow(){
+      return (this.mail.to) ? mailService.getUser().email : this.mail.from
     },
-  };
-  
+    destinationToShow(){
+      return (this.mail.to) ? this.mail.to: 'me';
+    }
+  },
+  components: {
+    longText,
+    mailMenu,
+    mailFilter,
+  },
+};

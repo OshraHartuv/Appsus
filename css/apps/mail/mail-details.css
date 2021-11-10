@@ -1,0 +1,14 @@
+.mail-details{
+    display: flex;
+}
+
+.mail-content{
+    min-height: 85vh;
+    /* flex-grow: 1; */
+    display: flex;
+    flex-direction: column;
+}
+
+.mail-text{
+    flex-grow: 1;
+}

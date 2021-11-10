@@ -1,0 +1,20 @@
+.mail-menu{
+    /* background-color: lightsteelblue; */
+    /* width: 30vw; */
+    height: 95vh;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    /* position: absolute; */
+}
+
+.mail-menu button{
+    border-radius: 40px;
+    background-color: white;
+    border: none;
+    box-shadow: 0px 2px 4px 0px rgb(71 85 79 / 40%);
+}
+
+.mail-menu button:hover{
+    cursor: pointer;
+}

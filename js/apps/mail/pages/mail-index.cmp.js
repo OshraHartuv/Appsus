@@ -1,16 +1,22 @@
 import { mailService } from '../services/mail.service.js';
 import mailFilter from '../cmps/mail-filter.cmp.js';
+import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail.list.cmp.js';
 import mailDetails from './mail-details.cmp.js';
 
 export default {
   name: 'mail-index',
   template: `
-        <section class="mail-index app-main">            
-            <h1>Welcome To Your Mail</h1>
-            <mail-filter @filtered="setFilter"></mail-filter> 
+        <section class="mail-index">
+          <mail-menu class="mail-menu-container"></mail-menu> 
+          <div class="mail-main">
+            <div class="mail-header">         
+              <h1>Welcome To Your Mail</h1>
+              <mail-filter @filtered="setFilter"></mail-filter>
+            </div>   
             <mail-details :mail="selectedMail" v-if="selectedMail" @close="closeDetails"></mail-details>
-            <mail-list v-else :mails="mailsToShow"></mail-list> 
+            <mail-list v-else :mails="mailsToShow"></mail-list>
+          </div> 
         </section>
     `,
 
@@ -54,5 +60,6 @@ export default {
     mailFilter,
     mailDetails,
     mailList,
+    mailMenu
   },
 };

@@ -1,3 +1,5 @@
+import { mailService } from "../services/mail.service.js";
+
 export default {
   props: ['mail'],
   // {
@@ -30,9 +32,7 @@ export default {
       );
     },
     contactToShow() {
-      const contactMail = this.mail.to ? this.mail.to : this.mail.from;
-      const contactName = contactMail.substring(0, contactMail.indexOf('@'));
-      return contactName;
+      return mailService.nameToShow(this.mail)
     },
     dateToShow() {
       const date =

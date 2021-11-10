@@ -25,43 +25,42 @@ import mailDetails from './apps/mail/pages/mail-details.cmp.js';
 // }
 
 const routes = [
-    {
-        path: '/',
-        component: homePage
-    },
-    {
-        path: '/about',
-        component: aboutPage,
-    },
-    {
-        path: '/mail',
-        component: mailApp,
-    },
-    {
-        path: '/keep',
-        component: keepApp,
-    },
-    // children: [
-    //         {
-    //             path: '/team',
-    //             component: aboutTeam
-    //         },
-    //         {
-    //             path: '/service',
-    //             component: aboutService
-    //         },
-    //     ]
-    // },
-    {
-        path: '/mail/:mailId',
-        component: mailDetails
-    },
-    // {
-    //     path: '/search',
-    //     component: searchOnline
-    // },
-
-
+  {
+    path: '/',
+    component: homePage,
+  },
+  {
+    path: '/about',
+    component: aboutPage,
+  },
+  {
+    path: '/mail',
+    component: mailApp,
+    children: [
+    //   {
+    //     path: '/:mailId',
+    //     component: mailDetails,
+    //   },
+    //   {
+    //     path: '/service',
+    //     component: aboutService,
+    //   },
+    ],
+  },
+  {
+    path: '/keep',
+    component: keepApp,
+  },
+  //
+  // },
+  {
+      path: '/mail/:mailId',
+      component: mailDetails
+  },
+  // {
+  //     path: '/search',
+  //     component: searchOnline
+  // },
 ];
 
 export const router = new VueRouter({ routes });

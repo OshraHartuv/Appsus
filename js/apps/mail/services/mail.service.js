@@ -2,8 +2,11 @@ import { utilService } from '../../../services/util-service.js';
 import { storageService } from '../../../services/async-storage-service.js';
 
 const MAILS_KEY = 'mails';
+const loggedinUser = { 
+  email: 'user@appsus.com',
+  fullname: 'Mahatma Appsus'
+};
 _createMails();
-const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' };
 
 export const mailService = {
   query,
@@ -12,10 +15,23 @@ export const mailService = {
   getNextMailId,
   getPreviousMailId,
   composeMail,
+  nameToShow,
+  getUser
 };
 
 function query() {
   return storageService.query(MAILS_KEY);
+}
+
+function getUser(){
+  return loggedinUser;
+}
+
+function nameToShow(mail) {
+  console.log(mail);
+  const contactMail = mail.to ? mail.to : mail.from;
+  const contactName = contactMail.substring(0, contactMail.indexOf('@'));
+  return contactName;
 }
 
 function composeMail(mail) {
