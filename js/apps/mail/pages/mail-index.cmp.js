@@ -8,10 +8,10 @@ export default {
   name: 'mail-index',
   template: `
         <section class="mail-index">
-          <mail-menu class="mail-menu-container"></mail-menu> 
+          <mail-menu class="mail-menu-container" @mailBoxed="setMailBox"></mail-menu > 
           <div class="mail-main">
             <div class="mail-header">         
-              <h1>Welcome To Your Mail</h1>
+              <h1>Mail</h1>
               <mail-filter @filtered="setFilter"></mail-filter>
             </div>
             <mail-list v-if="!selectedMail" :mails="mailsToShow"></mail-list>
@@ -26,13 +26,16 @@ export default {
       mails: null,
       filterBy: null,
       selectedMail: null,
+      box: 'all',
     };
   },
   watch: {
     '$route.params.mailId': {
       handler() {
         const { mailId: mailId } = this.$route.params;
-        mailService.getMailById(mailId).then((mail) => (this.selectedMail = mail));
+        mailService
+          .getMailById(mailId)
+          .then((mail) => (this.selectedMail = mail));
       },
       immediate: true,
     },
@@ -50,19 +53,35 @@ export default {
     setFilter(filterBy) {
       this.filterBy = filterBy;
     },
+    setMailBox(box) {
+      this.box = box;
+      console.log(this.box);
+    },
   },
   computed: {
     mailsToShow() {
-      if (!this.filterBy) return this.mails;
-      // const searchStr = this.filterBy.title.toLowerCase();
-      // const fromPrice = this.filterBy.fromPrice || 0;
-      // const toPrice = this.filterBy.toPrice || Infinity;
-      // const booksToShow = this.books.filter(book => {
-      //     return book.title.toLowerCase().includes(searchStr) &&
-      //     book.listPrice.amount >= fromPrice &&
-      //     book.listPrice.amount <= toPrice
-      // });
-      // return booksToShow;
+      if (!this.filterBy) {
+        var mailsToShow = this.mails;
+        if (this.box === 'sent') {
+          mailsToShow = this.mails.filter((mail) => {
+            return mail.to;
+          });
+        } else if (this.box === 'inbox') {
+          mailsToShow = this.mails.filter((mail) => {
+            return mail.from;
+          });
+        }
+        return mailsToShow;
+        // const searchStr = this.filterBy.title.toLowerCase();
+        // const fromPrice = this.filterBy.fromPrice || 0;
+        // const toPrice = this.filterBy.toPrice || Infinity;
+        // const booksToShow = this.books.filter(book => {
+        //     return book.title.toLowerCase().includes(searchStr) &&
+        //     book.listPrice.amount >= fromPrice &&
+        //     book.listPrice.amount <= toPrice
+        // });
+        // return booksToShow;
+      }
     },
   },
 
