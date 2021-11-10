@@ -1,6 +1,6 @@
 // import bookApp from './pages/book-app.cmp.js';
-import homePage from './pages/home-page.cmp.js';
-import aboutPage from './pages/about-page.cmp.js';
+import homePage from './pages/app-home.cmp.js';
+import aboutPage from './pages/app-about.cmp.js';
 import mailApp from './apps/mail/pages/mail-index.cmp.js';
 import keepApp from './apps/keep/pages/note-index.cmp.js';
 // // import searchOnline from './pages/search-online.cmp.js';

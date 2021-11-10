@@ -7,7 +7,7 @@ export default {
             </div>
         </router-link>
             <nav>
-                <router-link active-class="active" to="/mail">Mail</router-link>|
+                <router-link active-class="active" to="/mail">Mail </router-link>|
                 <router-link to="/keep">Keep</router-link>
             </nav>
         </header>
