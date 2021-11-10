@@ -28,7 +28,6 @@ function getUser(){
 }
 
 function nameToShow(mail) {
-  console.log(mail);
   const contactMail = mail.to ? mail.to : mail.from;
   const contactName = contactMail.substring(0, contactMail.indexOf('@'));
   return contactName;

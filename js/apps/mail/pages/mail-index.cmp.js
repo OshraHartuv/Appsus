@@ -13,10 +13,11 @@ export default {
             <div class="mail-header">         
               <h1>Welcome To Your Mail</h1>
               <mail-filter @filtered="setFilter"></mail-filter>
-            </div>   
-            <mail-details :mail="selectedMail" v-if="selectedMail" @close="closeDetails"></mail-details>
-            <mail-list v-else :mails="mailsToShow"></mail-list>
+            </div>
+            <mail-list v-if="!selectedMail" :mails="mailsToShow"></mail-list>
+            <router-view v-else></router-view>
           </div> 
+
         </section>
     `,
 
@@ -26,6 +27,15 @@ export default {
       filterBy: null,
       selectedMail: null,
     };
+  },
+  watch: {
+    '$route.params.mailId': {
+      handler() {
+        const { mailId: mailId } = this.$route.params;
+        mailService.getMailById(mailId).then((mail) => (this.selectedMail = mail));
+      },
+      immediate: true,
+    },
   },
   created() {
     this.loadMails();
@@ -60,6 +70,6 @@ export default {
     mailFilter,
     mailDetails,
     mailList,
-    mailMenu
+    mailMenu,
   },
 };

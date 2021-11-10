@@ -14,7 +14,7 @@ export default {
       > -->
         <ul class="mail-list clean-list">
           <li v-for="mail in mails" :key="mail.id" class="mail-preview-container" >
-              <mail-preview :mail="mail" @click.native="select(mail)" />
+              <mail-preview :mail="mail"  />
           </li>
         </ul>
       <!-- </transition-group> -->

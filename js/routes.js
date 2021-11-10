@@ -37,10 +37,10 @@ const routes = [
     path: '/mail',
     component: mailApp,
     children: [
-    //   {
-    //     path: '/:mailId',
-    //     component: mailDetails,
-    //   },
+      {
+        path: ':mailId',
+        component: mailDetails,
+      },
     //   {
     //     path: '/service',
     //     component: aboutService,
@@ -53,10 +53,10 @@ const routes = [
   },
   //
   // },
-  {
-      path: '/mail/:mailId',
-      component: mailDetails
-  },
+//   {
+//       path: '/mail/:mailId',
+//       component: mailDetails
+//   },
   // {
   //     path: '/search',
   //     component: searchOnline

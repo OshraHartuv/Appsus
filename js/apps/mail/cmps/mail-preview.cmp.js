@@ -11,8 +11,10 @@ export default {
   //   to: 'momo@momo.com',
   // },
   template: `
-          <router-link :to="'/mail/'+mail.id" >
-            <div class="mail-preview" :class="{ bold: !mail.isRead}">
+          <!-- <router-link :to="'/mail/'+mail.id" > -->
+            <section class="mail-preview">
+            <router-link :to="'/mail/'+mail.id" >
+            <div class="mail-preview-container" :class="{ bold: !mail.isRead}">
             <span class="mail-preview-contact">
               <span v-if="mail.to">to: </span>
                 {{ contactToShow }}
@@ -22,8 +24,10 @@ export default {
               <span class="mail-preview-body">{{ mail.body }}</span>
             </span>
             <span class="mail-preview-date">{{ dateToShow }}</span>
-            </div>
-          </router-link>
+          </div>
+        </router-link>
+        </section>
+        
       `,
   computed: {
     subjectToShow() {
@@ -40,10 +44,8 @@ export default {
         new Date(this.mail.sentAt).toGMTString() :
         new Date(this.mail.receivedAt).toGMTString();
       if (this.mail.sentAt - Date.now() > 86400000) {
-        console.log(date, 'today');
         return date.substring(17,22);
       } else {
-        console.log(date, 'not today');
         return  date.substring(5,11)
       }
     },

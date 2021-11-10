@@ -6,12 +6,12 @@
   border-bottom: 1px solid rgba(146, 157, 168, 0.602);
 }
 
-.mail-preview {
+.mail-preview-container {
   display: flex;
   gap: 10px;
 }
 
-.mail-preview > * {
+.mail-preview-container > * {
   height: 5vh;
   text-overflow: ellipsis;
   overflow: hidden;
