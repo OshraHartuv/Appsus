@@ -10,7 +10,7 @@
 }
 
 .mail-menu-container{
-    border-right: 1px solid gray;
+    /* border-right: 1px solid gray; */
 }
 
 .mail-main{
@@ -21,7 +21,6 @@
 .mail-list-container{
     width: 70vw;
     flex-grow: 1;
-
 }
 
 .mail-header{

@@ -14,13 +14,13 @@ export default {
           <!-- <router-link :to="'/mail/'+mail.id" > -->
             <section class="mail-preview">
             <router-link :to="'/mail/'+mail.id" >
-            <div class="mail-preview-container" :class="{ bold: !mail.isRead}">
+            <div class="mail-preview-container" :class="{ bold: !mail.isRead, read: mail.isRead}">
             <span class="mail-preview-contact">
               <span v-if="mail.to">to: </span>
                 {{ contactToShow }}
             </span>
             <span class="mail-preview-text">
-              <span class="mail-preview-subject bold">{{ subjectToShow }}</span>
+              <span class="mail-preview-subject">{{ subjectToShow }}</span> - 
               <span class="mail-preview-body">{{ mail.body }}</span>
             </span>
             <span class="mail-preview-date">{{ dateToShow }}</span>

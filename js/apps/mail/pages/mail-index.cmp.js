@@ -13,7 +13,7 @@ export default {
             <mail-filter @filtered="setFilter"></mail-filter>
           </div>
           <div class="mail-main flex">
-            <mail-menu class="mail-menu-container" @mailBoxed="setMailBox"></mail-menu > 
+            <mail-menu class="mail-menu-container flex" @mailBoxed="setMailBox" :mails="mails"></mail-menu > 
             <mail-list v-if="!selectedMail" :mails="mailsToShow" class="mail-list-container"></mail-list>
             <router-view v-else></router-view>
           </div> 
@@ -61,17 +61,34 @@ export default {
   computed: {
     mailsToShow() {
       if (!this.filterBy) {
-        var mailsToShow = this.mails;
-        if (this.box === 'sent') {
-          mailsToShow = this.mails.filter((mail) => {
-            return mail.to;
-          });
-        } else if (this.box === 'inbox') {
-          mailsToShow = this.mails.filter((mail) => {
-            return mail.from;
-          });
+        var mailsToShow;
+        switch (this.box) {
+          case 'all':
+            mailsToShow = this.mails;
+            break;
+          case 'sent':
+            mailsToShow = this.mails.filter((mail) => {
+              return mail.to;
+            });
+            break;
+          case 'inbox':
+            mailsToShow = this.mails.filter((mail) => {
+              return mail.from;
+            });
+            break;
+          case 'read':
+            mailsToShow = this.mails.filter((mail) => {
+              return mail.isRead;
+            });
+            break;
+          case 'unread':
+            mailsToShow = this.mails.filter((mail) => {
+              return !mail.isRead;
+            });
+            break;
         }
         return mailsToShow;
+      }
         // const searchStr = this.filterBy.title.toLowerCase();
         // const fromPrice = this.filterBy.fromPrice || 0;
         // const toPrice = this.filterBy.toPrice || Infinity;
@@ -81,7 +98,6 @@ export default {
         //     book.listPrice.amount <= toPrice
         // });
         // return booksToShow;
-      }
     },
   },
 
