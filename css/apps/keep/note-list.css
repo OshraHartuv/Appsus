@@ -1,0 +1,17 @@
+.note-list {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, 240px);
+  grid-auto-flow: dense;
+  gap: 10px; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  height: 95vh;
+  /* height: 500px; */
+  /* list-style: none; */
+  /* column-count: 4; */
+  /* column-width: 240px; */
+  /* columns: 4; */
+  /* column-gap: 10px; */
+  /* column-fill: auto; */
+}

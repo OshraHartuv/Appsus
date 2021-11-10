@@ -1,0 +1,14 @@
+.note-preview {
+  padding: 10px;
+  width: 240px;
+  min-height: 100px;
+  max-height: 400px;
+  border: #828282 1px solid;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.note-preview img {
+  width: 100%;
+  padding: 10px;
+}
