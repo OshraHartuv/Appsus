@@ -1,6 +1,8 @@
 // import bookApp from './pages/book-app.cmp.js';
-// // import homePage from './pages/home-page.cmp.js';
-// // import aboutPage from './pages/about-page.cmp.js';
+import homePage from './pages/home-page.cmp.js';
+import aboutPage from './pages/about-page.cmp.js';
+import mailApp from './apps/mail/pages/mail-index.cmp.js';
+import keepApp from './apps/keep/pages/note-index.cmp.js';
 // // import searchOnline from './pages/search-online.cmp.js';
 // // import bookDetails from './pages/book-details.cmp.js';
 // // import reviewAdd from './pages/review-add.cmp.js';
@@ -30,8 +32,16 @@ const routes = [
     {
         path: '/about',
         component: aboutPage,
-    }
-        // children: [
+    },
+    {
+        path: '/mail',
+        component: mailApp,
+    },
+    {
+        path: '/keep',
+        component: keepApp,
+    },
+    // children: [
     //         {
     //             path: '/team',
     //             component: aboutTeam
@@ -59,7 +69,7 @@ const routes = [
     //     component: searchOnline
     // },
 
-    
+
 ];
 
 export const router = new VueRouter({ routes });
