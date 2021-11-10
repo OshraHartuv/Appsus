@@ -7,7 +7,7 @@ import mailDetails from './mail-details.cmp.js';
 export default {
   name: 'mail-index',
   template: `
-        <section class="mail-index flex">
+        <section class="mail-index flex" v-if="mails">
           <div class="mail-header flex">         
             <h1>Mail</h1>
             <mail-filter @filtered="setFilter"></mail-filter>
@@ -61,6 +61,7 @@ export default {
   computed: {
     mailsToShow() {
       if (!this.filterBy) {
+        console.log(this.box);
         var mailsToShow;
         switch (this.box) {
           case 'all':
@@ -87,6 +88,12 @@ export default {
             });
             break;
         }
+        console.log(mailsToShow);
+        mailsToShow.sort(
+          (a,b)=>{
+            return ((b.sentAt) ?  (b.sentAt) : b.receivedAt) - 
+            ((a.sentAt) ?  (a.sentAt) : a.receivedAt)
+          })
         return mailsToShow;
       }
         // const searchStr = this.filterBy.title.toLowerCase();
