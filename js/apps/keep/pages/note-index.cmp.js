@@ -33,9 +33,6 @@ export default {
             noteService.query()
                 .then(notes => this.notes = notes);
         },
-        // removeNote(id) {
-        //     noteService.remove(id);
-        // },
         selectNote(note) {
             this.selectedNote = note;
         },

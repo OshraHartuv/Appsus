@@ -17,7 +17,6 @@ export default {
                 </div>
             </form>
         </section>
-
     `,
     data() {
         return {

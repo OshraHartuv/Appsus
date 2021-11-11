@@ -1,4 +1,5 @@
 import notePreview from './note-preview.cmp.js';
+import { eventBus } from '../../../services/event-bus-service.js'
 
 export default {
     props: ['notes'],
@@ -21,19 +22,25 @@ export default {
             selectedNote: null
         }
     },
+    created() {
+        eventBus.$on('removedNote', this.toggleMenu);
+
+    },
     methods: {
         setEditMode(note) {
             this.selectedNote = note
+
         },
 
         toggleMenu() {
+            console.log('hhi');
             this.selectedNote = null
         },
     },
-
     computed: {
     },
     components: {
-        notePreview
+        notePreview,
+        eventBus
     }
 };
