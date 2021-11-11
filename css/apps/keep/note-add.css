@@ -35,7 +35,6 @@
   background-position: center;
   background-size: cover;
   cursor: pointer;
-  fill: aqua;
 }
 .btn-save {
   background-image: url(/img/save.svg);

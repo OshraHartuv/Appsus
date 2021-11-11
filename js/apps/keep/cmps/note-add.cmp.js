@@ -26,7 +26,8 @@ export default {
                 type: 'note-txt',
                 info: {
                     txt: null
-                }
+                },
+
             },
 
         };

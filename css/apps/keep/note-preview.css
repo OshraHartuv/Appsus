@@ -1,4 +1,5 @@
 .note-preview {
+  position: relative;
   padding: 10px;
   max-width: 400px;
   min-height: 100px;
@@ -9,7 +10,7 @@
   transition: box-shadow 0.3s;
 }
 .note-preview:hover {
-  box-shadow: rgb(211, 211, 211) 0px 0px 4px 1px;
+  box-shadow: rgb(155, 155, 155) 0px 0px 4px 1px;
   cursor: pointer;
 }
 /* .note-preview > * {
@@ -30,4 +31,29 @@
 .note-video iframe {
   width: 100%;
   max-width: 300px;
+}
+
+.trash {
+  position: absolute;
+  /* display: none; */
+  opacity: 0;
+  bottom: 0;
+  right: 0;
+  width: 15px;
+  height: 20px;
+  padding: 0px;
+  margin: 4px;
+  border: none;
+  background-color: white;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  background-image: url(/img/trash.svg);
+  transition: 0.3s;
+}
+
+.note-preview:hover .trash {
+  /* display: block; */
+  opacity: 1;
+  transition: 0.3s;
 }

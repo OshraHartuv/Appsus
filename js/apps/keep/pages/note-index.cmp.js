@@ -25,15 +25,17 @@ export default {
     created() {
         this.loadNotes();
         eventBus.$on('savedNote', this.loadNotes);
+        eventBus.$on('removedNote', this.removeNote);
+        eventBus.$on('setBgc', this.setBgc);
     },
     methods: {
         loadNotes() {
             noteService.query()
                 .then(notes => this.notes = notes);
         },
-        removeNote(id) {
-            noteService.remove(id);
-        },
+        // removeNote(id) {
+        //     noteService.remove(id);
+        // },
         selectNote(note) {
             this.selectedNote = note;
         },
@@ -42,6 +44,30 @@ export default {
         },
         setFilter(filterBy) {
             this.filterBy = filterBy;
+        },
+        removeNote(id) {
+            noteService.remove(id)
+                .then(() => {
+                    const msg = {
+                        txt: 'Deleted successfully',
+                        type: 'success'
+                    };
+                    eventBus.$emit('showMsg', msg);
+                    this.notes = this.notes.filter(note => note.id !== id)
+                })
+                .catch(err => {
+                    console.log('err', err);
+                    const msg = {
+                        txt: 'Error. Please try later',
+                        type: 'error'
+                    };
+                    eventBus.$emit('showMsg', msg);
+                });
+        },
+        setBgc(id, color) {
+            console.log(id, color)
+            noteService.setBgc(id, color)
+                .then(this.loadNotes)
         }
     },
     computed: {

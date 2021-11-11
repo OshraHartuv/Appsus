@@ -10,7 +10,9 @@ export const noteService = {
     getNoteById,
     getNextNoteId,
     getPreviousNoteId,
-    addNewNote
+    addNewNote,
+    remove,
+    setBgc
 };
 
 function query() {
@@ -29,7 +31,7 @@ function _createNotes() {
                     txt: "Fullstack Me Baby!"
                 },
                 style: {
-                    backgroundColor: "#000"
+                    bgc: "#8bc9ff"
                 }
             },
             {
@@ -41,7 +43,7 @@ function _createNotes() {
                     url: "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg",
                 },
                 style: {
-                    backgroundColor: "#00d"
+                    bgc: "#c5ff8b"
                 }
             },
             {
@@ -56,10 +58,9 @@ function _createNotes() {
                     ]
                 },
                 style: {
-                    backgroundColor: "#00d"
+                    bgc: "#faf38c"
                 }
             },
-
             {
                 id: "n104",
                 type: "note-video",
@@ -69,7 +70,7 @@ function _createNotes() {
                     url: "https://www.youtube.com/embed/TcMBFSGVi1c",
                 },
                 style: {
-                    backgroundColor: "#00d"
+                    bgc: "#8cfa9c"
                 }
             },
             {
@@ -80,7 +81,7 @@ function _createNotes() {
                     txt: "JavaScript Frameworks > App that use them 😂"
                 },
                 style: {
-                    backgroundColor: "#000"
+                    bgc: "#3f7bf3"
                 }
             },
             {
@@ -91,7 +92,7 @@ function _createNotes() {
                     title: "My new prince!"
                 },
                 style: {
-                    backgroundColor: "#00d"
+                    bgc: "#c983ff"
                 }
             },
             {
@@ -104,6 +105,9 @@ function _createNotes() {
                         { txt: "CSS", done: false },
                         { txt: "JavaScript", done: false }
                     ]
+                },
+                style: {
+                    bgc: "#8cfa9c"
                 }
             },
             {
@@ -115,7 +119,7 @@ function _createNotes() {
                     url: "https://www.youtube.com/watch?v=qwxoxMX5veU",
                 },
                 style: {
-                    backgroundColor: "#00d"
+                    bgc: "#faf38c"
                 }
             },
         ];
@@ -159,6 +163,9 @@ function addNewNote(note) {
                 isPinned: false,
                 info: {
                     txt: note.info.txt,
+                },
+                style: {
+                    bgc: '#ffffff'
                 }
             }
             break
@@ -175,6 +182,9 @@ function addNewNote(note) {
                 info: {
                     title: '',
                     todos: newTodos
+                },
+                style: {
+                    bgc: '#ffffff'
                 }
             }
             break
@@ -186,6 +196,9 @@ function addNewNote(note) {
                 info: {
                     url: note.info.txt,
                     title: ""
+                },
+                style: {
+                    bgc: '#ffffff'
                 }
             }
             break
@@ -197,6 +210,9 @@ function addNewNote(note) {
                 info: {
                     url: note.info.txt,
                     title: ""
+                },
+                style: {
+                    bgc: '#ffffff'
                 }
             }
             break
@@ -204,14 +220,20 @@ function addNewNote(note) {
     return save(newNote)
 }
 
-// {
-//     id: "n102",
-//     type: "note-img",
-//     info: {
-//         url: "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg",
-//         title: "Bobi and Me"
-//     },
-//     style: {
-//         backgroundColor: "#00d"
-//     }
-// },
+function remove(noteId) {
+    // return Promise.reject('Big balagan!')
+    return storageService.remove(NOTES_KEY, noteId);
+}
+
+function setBgc(noteId, color) {
+    console.log('noteId, color', noteId, color)
+    return getNoteById(noteId)
+        .then(note => {
+            console.log('note in service', note)
+            note.style.bgc = this.color
+            return note
+        })
+        .then(note => storageService.put(NOTES_KEY, note)
+        )
+
+}
