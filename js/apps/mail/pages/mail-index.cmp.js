@@ -61,8 +61,10 @@ export default {
   computed: {
     mailsToShow() {
       if (!this.filterBy) {
-        console.log(this.box);
-        var mailsToShow;
+        // this.getMailsByBox()
+        // console.log(this.box);
+        var mailsToShow ;
+
         switch (this.box) {
           case 'all':
             mailsToShow = this.mails;
@@ -88,7 +90,6 @@ export default {
             });
             break;
         }
-        console.log(mailsToShow);
         mailsToShow.sort(
           (a,b)=>{
             return ((b.sentAt) ?  (b.sentAt) : b.receivedAt) - 
@@ -106,6 +107,38 @@ export default {
         // });
         // return booksToShow;
     },
+    // // 
+    // getMailsByBox(){
+    //   console.log(this.box);
+    //     var mailsToShow;
+    //     switch (this.box) {
+    //       case 'all':
+    //         mailsToShow = this.mails;
+    //         break;
+    //       case 'sent':
+    //         mailsToShow = this.mails.filter((mail) => {
+    //           return mail.to;
+    //         });
+    //         break;
+    //       case 'inbox':
+    //         mailsToShow = this.mails.filter((mail) => {
+    //           return mail.from;
+    //         });
+    //         break;
+    //       case 'read':
+    //         mailsToShow = this.mails.filter((mail) => {
+    //           return mail.isRead;
+    //         });
+    //         break;
+    //       case 'unread':
+    //         mailsToShow = this.mails.filter((mail) => {
+    //           return !mail.isRead;
+    //         });
+    //         break;
+    //     }
+    //     console.log(mailsToShow);
+    //     return mailsToShow
+    // }
   },
 
   components: {

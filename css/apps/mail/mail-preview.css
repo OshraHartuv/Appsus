@@ -7,10 +7,6 @@
   border-bottom: 1px solid rgba(146, 157, 168, 0.602);
 }
 
-.mail-list>*{
-  /* background-color: rosybrown; */
-}
-
 .read{
   background-color: rgba(185, 173, 173, 0.226);
 }
@@ -18,7 +14,6 @@
 .mail-preview-container {
   display: flex;
   gap: 10px;
-  /* margin-left: 10px; */
 }
 
 .mail-preview-container > * {

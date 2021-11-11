@@ -20,10 +20,10 @@ export default {
                         <span class="bold">
                         {{ contactToShow }}
                         </span>
-                      <{{addressToShow}}>
+                      <{{ mailFrom }}>
                       </div>
                       <p>
-                        to: {{ destinationToShow }} 
+                        to: {{ mailTo }} 
                       </p>
                     </div>
                     <div class="mail-details-date">
@@ -98,10 +98,10 @@ export default {
         ? mailService.getUser().fullname
         : mailService.nameToShow(this.mail);
     },
-    addressToShow() {
+    mailFrom() {
       return this.mail.to ? mailService.getUser().email : this.mail.from;
     },
-    destinationToShow() {
+    mailTo() {
       return this.mail.to ? this.mail.to : 'me';
     },
     dateToShow() {

@@ -29,9 +29,9 @@ export default {
     //   },
     },
     methods: {
-      select(mail) {
-        this.$emit('selected', mail);
-      },
+      // select(mail) {
+      //   this.$emit('selected', mail);
+      // },
     //   beforeEnter: function (el) {
     //     el.style.opacity = 0;
     //     el.style.height = 0;
