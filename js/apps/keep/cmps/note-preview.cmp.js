@@ -5,7 +5,12 @@ import { noteImg } from './note-img.cmp.js';
 
 export default {
     props: ['note'],
-    template: `<component :is="note.type" :data="note"></component>`,
+    template: `
+    <section>
+    <component :is="note.type" :data="note"></component>
+    <button>X</button>
+    </section>
+    `,
     methods: {
         // setInput(ev, inputIdx) {
         //     this.answers[inputIdx] = ev;

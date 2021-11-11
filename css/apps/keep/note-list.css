@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: start;
+  max-width: 1000px;
+  margin: auto;
 
   /* grid-template-rows: 100px repeat(3, minmax(50px, 1fr)); */
   /* grid-template-rows: repeat(auto-fill, minmax(150px, 1fr)); */

@@ -59,34 +59,63 @@ function _createNotes() {
                     backgroundColor: "#00d"
                 }
             },
+
             {
                 id: "n104",
-                type: "note-txt",
-                isPinned: true,
+                type: "note-video",
+                isPinned: false,
                 info: {
-                    txt: "Fullstack Me Baby!"
-                }
-            },
-            {
-                id: "n105",
-                type: "note-img",
-                info: {
-                    url: "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg",
-                    title: "Bobi and Me"
+                    title: "Avengers:End Game trailer",
+                    url: "https://www.youtube.com/embed/TcMBFSGVi1c",
                 },
                 style: {
                     backgroundColor: "#00d"
                 }
             },
             {
+                id: "n105",
+                type: "note-txt",
+                isPinned: false,
+                info: {
+                    txt: "JavaScript Frameworks > App that use them 😂"
+                },
+                style: {
+                    backgroundColor: "#000"
+                }
+            },
+            {
                 id: "n106",
+                type: "note-img",
+                info: {
+                    url: "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_3x2.jpg",
+                    title: "My new prince!"
+                },
+                style: {
+                    backgroundColor: "#00d"
+                }
+            },
+            {
+                id: "n107",
                 type: "note-todos",
                 info: {
-                    label: "Get my stuff together",
+                    title: "Learn some code",
                     todos: [
-                        { txt: "Driving liscence", doneAt: null },
-                        { txt: "Coding power", doneAt: 187111111 }
+                        { txt: "HTML", done: false },
+                        { txt: "CSS", done: false },
+                        { txt: "JavaScript", done: false }
                     ]
+                }
+            },
+            {
+                id: "n108",
+                type: "note-video",
+                isPinned: false,
+                info: {
+                    title: "Build House Under The Wood roots",
+                    url: "https://www.youtube.com/watch?v=qwxoxMX5veU",
+                },
+                style: {
+                    backgroundColor: "#00d"
                 }
             },
         ];
@@ -134,25 +163,47 @@ function addNewNote(note) {
             }
             break
         case 'note-todos':
+            let data = note.info.txt.split(',')
+            let newTodos = []
+            data.forEach(todo => {
+                newTodos.push({ txt: todo, done: false })
+            });
+            newNote = {
+                id: null,
+                type: "note-todos",
+                isPinned: false,
+                info: {
+                    title: '',
+                    todos: newTodos
+                }
+            }
             break
         case 'note-img':
+            newNote = {
+                id: null,
+                type: "note-img",
+                isPinned: false,
+                info: {
+                    url: note.info.txt,
+                    title: ""
+                }
+            }
             break
         case 'note-video':
+            newNote = {
+                id: null,
+                type: "note-video",
+                isPinned: false,
+                info: {
+                    url: note.info.txt,
+                    title: ""
+                }
+            }
             break
     }
-
     return save(newNote)
-
 }
 
-// {
-//     id: "n101",
-//     type: "note-txt",
-//     isPinned: true,
-//     info: {
-//         txt: "Fullstack Me Baby!"
-//     }
-// },
 // {
 //     id: "n102",
 //     type: "note-img",
@@ -162,16 +213,5 @@ function addNewNote(note) {
 //     },
 //     style: {
 //         backgroundColor: "#00d"
-//     }
-// },
-// {
-//     id: "n103",
-//     type: "note-todos",
-//     info: {
-//         label: "Get my stuff together",
-//         todos: [
-//             { txt: "Driving liscence", doneAt: null },
-//             { txt: "Coding power", doneAt: 187111111 }
-//         ]
 //     }
 // },
