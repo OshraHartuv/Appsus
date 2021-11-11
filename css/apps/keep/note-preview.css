@@ -44,6 +44,11 @@
   height: 70vh;
 }
 
+.edit-mode .note-img img {
+  width: 70vw;
+  height: 60vh;
+}
+
 .actions-container {
   position: absolute;
   width: 100%;
@@ -91,27 +96,29 @@ button.color-palette-container {
 
 ul.color-palette {
   position: absolute;
-  left: 25px;
-  bottom: 10px;
+  left: 30px;
+  bottom: -25px;
   opacity: 0;
   padding: 0px;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(4, 15px);
-  grid-template-rows: repeat(3, 15px);
-  gap: 1px;
+  grid-template-rows: repeat(5, 15px);
+  gap: 6px;
   transition: 0.4s;
+  /* display: none; */
 }
 
-.color-palette-container:hover .color-palette {
+.color-palette-container:hover ul.color-palette {
+  display: grid;
   opacity: 1;
 }
 
 .color-palette > * {
   border: 1px solid black;
   border-radius: 15px;
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   transition: 0.2s;
 }
 
@@ -121,6 +128,7 @@ ul.color-palette {
 
 .note-img img {
   max-width: 100%;
+  max-height: 100%;
 }
 
 .note-video iframe {

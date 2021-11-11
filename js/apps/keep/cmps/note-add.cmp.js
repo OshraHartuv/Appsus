@@ -50,7 +50,6 @@ export default {
                     this.placeholder = "Save your Youtube video by url..."
                     break
             }
-            console.log('type', type)
             this.newNote.type = type
         },
 
