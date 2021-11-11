@@ -17,7 +17,7 @@ export const mailService = {
   composeMail,
   nameToShow,
   getUser,
-  creatNewMail
+  removeMail
 };
 
 function query() {
@@ -38,14 +38,9 @@ function getUser(){
 // subject: '',
 // body: '',
 
-function creatNewMail(newMail){
-  // const mail = {
-  //   subject: newMail.subject,
-  //   body: newMail.body,
-  //   isRead: false,
-  //   sentAt: Date.now(),
-  //   to: newMail.to
-  // }
+function removeMail(mailId) {
+  // return Promise.reject('Big balagan!')
+  return storageService.remove(MAILS_KEY, mailId);
 }
 
 function nameToShow(mail) {
@@ -89,7 +84,7 @@ function _createMails() {
         id: 'e101',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
-        isRead: false,
+        isRead: true,
         sentAt: 1631279089000,
         to: 'momo@momo.com',
       },
@@ -113,7 +108,7 @@ function _createMails() {
         id: 'e104',
         subject: 'Coding Academy is good for business',
         body: 'Here is your monthly bill from wolt.',
-        isRead: true,
+        isRead: false,
         receivedAt: 1633871089000,
         from: 'wolt@wolt.com',
       },
@@ -121,7 +116,7 @@ function _createMails() {
         id: 'e105',
         subject: 'Get ready for us!',
         body: 'Ready to find us some jobs?',
-        isRead: false,
+        isRead: true,
         sentAt: 1636722289000,
         to: 'linkedIn@linkedIn.com',
       },

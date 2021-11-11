@@ -1,11 +1,11 @@
 import { mailService } from '../services/mail.service.js';
+import { eventBus } from '../../../services/event-bus-service.js'
 import mailFilter from '../cmps/mail-filter.cmp.js';
 import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import mailAdd from '../cmps/mail-add.cmp.js';
 import mailDetails from './mail-details.cmp.js';
 import userMsg from './../../../cmps/user-msg.cmp.js';
-
 
 export default {
   name: 'mail-index',
@@ -33,7 +33,7 @@ export default {
       filterBy: null,
       selectedMail: null,
       box: 'all',
-      isCompose:false
+      isCompose: false,
     };
   },
   watch: {
@@ -42,12 +42,18 @@ export default {
         const { mailId: mailId } = this.$route.params;
         mailService
           .getMailById(mailId)
-          .then((mail) => (this.selectedMail = mail));
+          .then((mail) => {
+            this.selectedMail = mail
+            // eventBus.$on('savedMail', this.loadMails);
+          });
       },
       immediate: true,
     },
   },
   created() {
+    console.log('index created');
+    eventBus.$on('savedMail', this.loadMails);
+    eventBus.$on('delete', this.deleteMail);
     this.loadMails();
   },
   methods: {
@@ -55,29 +61,52 @@ export default {
       mailService.query().then((mails) => (this.mails = mails));
     },
     closeDetails() {
+      // this.mails = null
       this.selectedMail = null;
+      // this.loadMails();
+
     },
     setFilter(filterBy) {
-      console.log( this.filterBy);
+      console.log(this.filterBy);
       this.filterBy = filterBy;
     },
     setMailBox(box) {
       this.box = box;
       console.log(this.box);
     },
-    setNewMail(){
-      this.isCompose= true
+    setNewMail() {
+      this.isCompose = true;
       console.log('ready');
     },
-    closeCompose(){
+    closeCompose() {
       this.isCompose = false;
-      this.loadMails()
-    }
+      this.loadMails();
+    },
+    deleteMail(id) {
+      console.log(id);
+      mailService.removeMail(id)
+          .then(() => {
+              const msg = {
+                  txt: 'Deleted successfully',
+                  type: 'success'
+              };
+              eventBus.$emit('showMsg', msg);
+              this.mails = this.mails.filter(mail => mail.id !== id)
+          })
+          .catch(err => {
+              console.log('err', err);
+              const msg = {
+                  txt: 'Error. Please try later',
+                  type: 'error'
+              };
+              eventBus.$emit('showMsg', msg);
+          });
+  },
   },
   computed: {
     mailsToShow() {
       if (!this.filterBy) {
-        var mailsToShow ;
+        var mailsToShow;
 
         switch (this.box) {
           case 'all':
@@ -104,29 +133,27 @@ export default {
             });
             break;
         }
-        mailsToShow.sort(
-          (a,b)=>{
-            return (
-              // var x;
-              // if (b.sentAt) x = b.sentAt
-              // else if (b.receivedAt) x = b.receivedAt
-              // else if (b.editedAt) x= b.editedAt
-              ((b.sentAt) ?  (b.sentAt) : b.receivedAt)
-               - 
-            ((a.sentAt) ?  (a.sentAt) : a.receivedAt)
-            )
-          })
+        mailsToShow.sort((a, b) => {
+          return (
+            // var x;
+            // if (b.sentAt) x = b.sentAt
+            // else if (b.receivedAt) x = b.receivedAt
+            // else if (b.editedAt) x= b.editedAt
+            (b.sentAt ? b.sentAt : b.receivedAt) -
+            (a.sentAt ? a.sentAt : a.receivedAt)
+          );
+        });
         return mailsToShow;
       }
-        // const searchStr = this.filterBy.title.toLowerCase();
-        // const fromPrice = this.filterBy.fromPrice || 0;
-        // const toPrice = this.filterBy.toPrice || Infinity;
-        // const booksToShow = this.books.filter(book => {
-        //     return book.title.toLowerCase().includes(searchStr) &&
-        //     book.listPrice.amount >= fromPrice &&
-        //     book.listPrice.amount <= toPrice
-        // });
-        // return booksToShow;
+      // const searchStr = this.filterBy.title.toLowerCase();
+      // const fromPrice = this.filterBy.fromPrice || 0;
+      // const toPrice = this.filterBy.toPrice || Infinity;
+      // const booksToShow = this.books.filter(book => {
+      //     return book.title.toLowerCase().includes(searchStr) &&
+      //     book.listPrice.amount >= fromPrice &&
+      //     book.listPrice.amount <= toPrice
+      // });
+      // return booksToShow;
     },
   },
 
@@ -136,6 +163,6 @@ export default {
     mailList,
     mailMenu,
     mailAdd,
-    userMsg
+    userMsg,
   },
 };

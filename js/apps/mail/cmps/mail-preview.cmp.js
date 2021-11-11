@@ -1,4 +1,6 @@
 import { mailService } from '../services/mail.service.js';
+import { eventBus } from '../../../services/event-bus-service.js';
+
 
 export default {
   props: ['mail'],
@@ -30,11 +32,18 @@ export default {
             <span class="mail-preview-date">
             {{ dateToShow }}
             </span>
+            <button @click.prevent="deleteMail(mail.id)" class="delete-mail-btn"><img src="img/trash.svg" class="trash-img-preview"></button>
           </div>
         </router-link>
       </section>
         
       `,
+  methods: {
+    deleteMail(mailId){
+      console.log('deleted');
+      eventBus.$emit('delete',mailId)
+    }
+  },
   computed: {
     // subjectToShow() {
     //   return (
@@ -47,18 +56,15 @@ export default {
     },
     dateToShow() {
       var date;
-      if (this.mail.sentAt) date = new Date(this.mail.sentAt).toGMTString();
-      else if (this.mail.receivedAt)
-        date = new Date(this.mail.receivedAt).toGMTString();
-      // else if (this.mail.editedAt)  date = new Date(this.mail.editedAt).toGMTString();
+      if (this.mail.sentAt) date = new Date(this.mail.sentAt);
+      else date = new Date(this.mail.receivedAt);
       if (
-        (Date.now() - this.mail.sentAt) < 86400000 ||
-        (Date.now() - this.mail.receivedAt) < 86400000
+        Date.now() - this.mail.sentAt < 86400000 ||
+        Date.now() - this.mail.receivedAt < 86400000
       ) {
-        console.log(Date.now()-1636549489000);
-        return date.substring(17, 22);
+        return `${date}`.substring(16, 21);
       } else {
-        return date.substring(5, 11);
+        return `${date}`.substring(4, 10);
       }
     },
   },

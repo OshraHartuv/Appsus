@@ -32,7 +32,7 @@ export default {
                     </div>
                     </div>
                     <div class="mail-details-body">
-                      {{ mail.body }}
+                      <pre>{{ mail.body }}</pre>
                     </div>
                   <router-link to="/mail" class="close-details">x</router-link>
             </div>
@@ -49,6 +49,12 @@ export default {
     const { mailId: mailId } = this.$route.params;
     mailService.getMailById(mailId).then((mail) => {
       this.mail = mail;
+      this.mail.isRead = true
+      mailService.saveMail(this.mail)
+        .then(()=>{
+          eventBus.$emit('savedMail')
+        })
+      
     });
   },
   watch: {
@@ -109,11 +115,9 @@ export default {
     },
     dateToShow() {
       var date; 
-      if (this.mail.sentAt) date =  new Date(this.mail.sentAt).toGMTString()
-      else if (this.mail.receivedAt) date = new Date(this.mail.receivedAt).toGMTString();
-      // else if (this.mail.editedAt) date = new Date(this.mail.editedAt).toGMTString();
-      console.log(date);
-      return date.substring(5,22);
+      if (this.mail.sentAt) date =  new Date(this.mail.sentAt)
+      else if (this.mail.receivedAt) date = new Date(this.mail.receivedAt)
+      return `${date}`.substring(4,21);
     },
   },
   components: {},

@@ -14,6 +14,7 @@
 .mail-preview-container {
   display: flex;
   gap: 10px;
+  position: relative;
 }
 
 .mail-preview-container > * {
@@ -24,6 +25,8 @@
   line-height: 5vh;
   width: 100%;
 }
+
+
 
 .mail-preview-contact {
   padding-left: 5px;
@@ -49,5 +52,29 @@
   text-align: right;
   padding-right: 5px;
 
+}
+
+.delete-mail-btn {
+  display: none;
+  border: none;
+  max-width: 70px;
+}
+
+.delete-mail-btn:hover{
+cursor: pointer;
+}
+
+.trash-img-preview{
+height: 15px;
+width: 15px;
+}
+
+.mail-preview-container:hover .delete-mail-btn{
+  background-color: rgb(185, 173, 173);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
 }
 
