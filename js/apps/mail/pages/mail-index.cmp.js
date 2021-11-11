@@ -119,7 +119,7 @@ export default {
             break;
           case 'sent':
             mailsToShow = this.mails.filter((mail) => {
-              return mail.to;
+              return (mail.to && !mail.isDraft);
             });
             break;
           case 'inbox':
@@ -129,12 +129,17 @@ export default {
             break;
           case 'read':
             mailsToShow = this.mails.filter((mail) => {
-              return mail.isRead;
+              return (mail.isRead && !mail.isDraft);
             });
             break;
           case 'unread':
             mailsToShow = this.mails.filter((mail) => {
               return !mail.isRead;
+            });
+            break;
+          case 'drafts':
+            mailsToShow = this.mails.filter((mail) => {
+              return mail.isDraft;
             });
             break;
         }

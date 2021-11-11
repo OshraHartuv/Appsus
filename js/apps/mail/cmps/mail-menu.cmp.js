@@ -16,11 +16,12 @@ export default {
                   <div  @click="box('unread')"
                   :class="{selectedBox: currBox ==='unread'}">Unread
                   <span>
-                      {{ unreadCount }}
+                    {{ unreadCount }}
                   </span>
                   </div>
+                  <div @click="box('drafts')"
+                  :class="{selectedBox: currBox ==='draft'}">Drafts</div>
                   <div>Starred</div>
-                  <div>Drafts</div>
                   <div>Labels</div>
                 </div> 
               </router-link>
