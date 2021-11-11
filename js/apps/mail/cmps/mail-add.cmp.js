@@ -2,6 +2,7 @@ import { mailService } from '../services/mail.service.js';
 import { eventBus } from '../../../services/event-bus-service.js';
 
 export default {
+  props: ['mailToEdit'],
   template: `
           <section class="mail-add flex">
                 <div class="mail-add-header flex">
@@ -36,28 +37,33 @@ export default {
       newMail: {
         to: '',
         subject: '',
-        body: '',
+        body:  '',
         isRead: true,
         isDraft: true,
-        // editedAt: null,
-        // sentAt: null
+        // to: (this.mailToEdit) ? this.mailToEdit.to : '',
+        // subject: (this.mailToEdit) ? this.mailToEdit.subject :  '',
+        // body: (this.mailToEdit) ? this.mailToEdit.body : '',
+        // isRead: true,
+        // isDraft: true,
       },
     };
   },
+  created(){
+    // console.log(this.mailToEdit.id);
+    if (this.mailToEdit) {
+      mailService.getMailById(this.mailToEdit.id)
+        .then((mail) => {
+          this.newMail = mail
+        console.log(mail);})
+    }
+    console.log(this.mailToEdit);
+  },
   methods: {
     draftMail() {
-      // this.newMail.editedAt = Date.now();
       this.newMail.sentAt = Date.now();
-
       mailService.saveMail(this.newMail).then(() => {
-        console.log('draft');
       });
-      //   console.log(this.newMail);
     },
-    // contentEditableChange() {
-    //   this.newMail.body = document.getElementById('mail-add-body').innerHTML;
-    //   this.draftMail();
-    // },
     sendMail() {
       if (!this.newMail.to.includes('@') || !this.newMail.to.includes('.')) {
         const msg = {
@@ -74,11 +80,12 @@ export default {
       }
     },
     closeDraft() {
-        console.log('close');
+      if (!this.newMail.to && !this.newMail.subject && !this.newMail.body) {
+        this.$emit('close');
+        return
+      }
       this.newMail.sentAt = Date.now();
-      // this.newMail.editedAt = Date.now();
       mailService.saveMail(this.newMail).then(() => {
-        console.log('close');
         this.$emit('close');
 
       });

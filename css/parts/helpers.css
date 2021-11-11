@@ -12,3 +12,7 @@
 .flex{
   display: flex;
 }
+
+.red{
+  color: red;
+}

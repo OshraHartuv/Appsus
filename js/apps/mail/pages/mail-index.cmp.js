@@ -1,5 +1,5 @@
 import { mailService } from '../services/mail.service.js';
-import { eventBus } from '../../../services/event-bus-service.js'
+import { eventBus } from '../../../services/event-bus-service.js';
 import mailFilter from '../cmps/mail-filter.cmp.js';
 import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail-list.cmp.js';
@@ -12,16 +12,15 @@ export default {
   template: `
         <section class="mail-index flex" v-if="mails">
         <user-msg />
-
           <div class="mail-header flex">         
             <h1>Mail</h1>
             <mail-filter @filtered="setFilter"></mail-filter>
           </div>
           <div class="mail-main flex">
             <mail-menu class="mail-menu-container flex" @mailBoxed="setMailBox" :mails="mails" @compose="setNewMail"></mail-menu > 
-            <mail-list v-show="!selectedMail" :mails="mailsToShow" class="mail-list-container"></mail-list>
-            <router-view  v-show="selectedMail" ></router-view>
-            <mail-add v-show="isCompose" @close="closeCompose"></mail-add>
+            <mail-list v-if="!selectedMail" :mails="mailsToShow" class="mail-list-container"></mail-list>
+            <router-view  v-else></router-view>
+            <mail-add v-if="isCompose" @close="closeCompose" :mailToEdit="mailToEdit"></mail-add>
           </div> 
 
         </section>
@@ -31,30 +30,30 @@ export default {
     return {
       mails: null,
       filterBy: null,
+      mailToEdit: null,
       selectedMail: null,
       box: 'all',
       isCompose: false,
     };
   },
-  watch: {
-    '$route.params.mailId': {
-      handler() {
-        const { mailId: mailId } = this.$route.params;
-        mailService
-          .getMailById(mailId)
-          .then((mail) => {
-            this.selectedMail = mail
-            // eventBus.$on('savedMail', this.loadMails);
-          });
-      },
-      immediate: true,
-    },
-  },
   created() {
     console.log('index created');
     eventBus.$on('savedMail', this.loadMails);
     eventBus.$on('delete', this.deleteMail);
+    eventBus.$on('editDraft', this.onEditDraft);
     this.loadMails();
+  },
+  watch: {
+    '$route.params.mailId': {
+      handler() {
+        const { mailId: mailId } = this.$route.params;
+        mailService.getMailById(mailId).then((mail) => {
+          this.selectedMail = mail;
+          // eventBus.$on('savedMail', this.loadMails);
+        });
+      },
+      immediate: true,
+    },
   },
   methods: {
     loadMails() {
@@ -64,7 +63,6 @@ export default {
       // this.mails = null
       this.selectedMail = null;
       // this.loadMails();
-
     },
     setFilter(filterBy) {
       console.log(this.filterBy);
@@ -80,28 +78,35 @@ export default {
     },
     closeCompose() {
       this.isCompose = false;
+      this.mailToEdit = null;
       this.loadMails();
     },
     deleteMail(id) {
       console.log(id);
-      mailService.removeMail(id)
-          .then(() => {
-              const msg = {
-                  txt: 'Deleted successfully',
-                  type: 'success'
-              };
-              eventBus.$emit('showMsg', msg);
-              this.mails = this.mails.filter(mail => mail.id !== id)
-          })
-          .catch(err => {
-              console.log('err', err);
-              const msg = {
-                  txt: 'Error. Please try later',
-                  type: 'error'
-              };
-              eventBus.$emit('showMsg', msg);
-          });
-  },
+      mailService
+        .removeMail(id)
+        .then(() => {
+          const msg = {
+            txt: 'Deleted successfully',
+            type: 'success',
+          };
+          eventBus.$emit('showMsg', msg);
+          this.mails = this.mails.filter((mail) => mail.id !== id);
+        })
+        .catch((err) => {
+          console.log('err', err);
+          const msg = {
+            txt: 'Error. Please try later',
+            type: 'error',
+          };
+          eventBus.$emit('showMsg', msg);
+        });
+    },
+    onEditDraft(mail){
+      this.mailToEdit = mail
+      this.setNewMail()
+      console.log(mail);
+    }
   },
   computed: {
     mailsToShow() {
@@ -156,7 +161,6 @@ export default {
       // return booksToShow;
     },
   },
-
   components: {
     mailFilter,
     mailDetails,

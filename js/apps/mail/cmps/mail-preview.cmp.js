@@ -4,37 +4,32 @@ import { eventBus } from '../../../services/event-bus-service.js';
 
 export default {
   props: ['mail'],
-  // {
-  //   id: 'e101',
-  //   subject: 'Miss you!',
-  //   body: 'Would love to catch up sometimes',
-  //   isRead: false,
-  //   sentAt: 1631279089000,
-  //   to: 'momo@momo.com',
-  // },
   template: `
       <section class="mail-preview">
-        <router-link :to="'/mail/'+mail.id" >
-          <div class="mail-preview-container" :class="{ bold: !mail.isRead, read: mail.isRead}">
-            <span class="mail-preview-contact">
-              <span v-if="mail.to">to: </span>
-                {{ contactToShow }}
-            </span>
-            <span class="mail-preview-text">
-              <span class="mail-preview-subject">
-                {{ mail.subject }}
-                <!-- {{ subjectToShow }} -->
-              </span> - 
-              <span class="mail-preview-body">
-              {{ mail.body }}
+          <div  @click="switcher(mail)">
+            <div class="mail-preview-container" :class="{ bold: !mail.isRead, read: mail.isRead}">
+              <span class="mail-preview-contact">
+                <span v-if="mail.isDraft">
+                  <span class="red">Draft</span>
+                  <span v-if="contactToShow">,</span>
+                </span>
+                <span v-if="mail.to">to: </span>
+                  {{ contactToShow }}
               </span>
-            </span>
-            <span class="mail-preview-date">
-            {{ dateToShow }}
-            </span>
-            <button @click.prevent="deleteMail(mail.id)" class="delete-mail-btn"><img src="img/trash.svg" class="trash-img-preview"></button>
+              <span class="mail-preview-text">
+                <span class="mail-preview-subject">
+                  {{ mail.subject }}
+                </span> - 
+                <span class="mail-preview-body">
+                {{ mail.body }}
+                </span>
+              </span>
+              <span class="mail-preview-date">
+              {{ dateToShow }}
+              </span>
+              <button @click.prevent.stop="deleteMail(mail.id)" class="delete-mail-btn"><img src="img/trash.svg" class="trash-img-preview"></button>
+            </div>
           </div>
-        </router-link>
       </section>
         
       `,
@@ -42,6 +37,12 @@ export default {
     deleteMail(mailId){
       console.log('deleted');
       eventBus.$emit('delete',mailId)
+    },
+    switcher(mail){
+      if (!mail.isDraft) this.$router.push('/mail/'+mail.id)
+      else {
+        eventBus.$emit('editDraft',mail)
+      }
     }
   },
   computed: {
