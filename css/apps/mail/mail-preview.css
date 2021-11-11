@@ -1,27 +1,32 @@
-.mail-list>*{
+
+.mail-list>*:not(:first-child){
   border-top: 1px solid rgba(146, 157, 168, 0.602);
 }
 
-.mail-list:last-child{
+.mail-list>*:last-child{
   border-bottom: 1px solid rgba(146, 157, 168, 0.602);
 }
 
-.mail-preview {
+.read{
+  background-color: rgba(185, 173, 173, 0.226);
+}
+
+.mail-preview-container {
   display: flex;
   gap: 10px;
 }
 
-.mail-preview > * {
+.mail-preview-container > * {
   height: 5vh;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   line-height: 5vh;
-  padding-left: 5px;
-  margin-bottom: 5px;
+  width: 100%;
 }
 
 .mail-preview-contact {
+  padding-left: 5px;
   min-width: 100px;
 }
 
@@ -41,4 +46,6 @@
   min-width: 60px;
   text-align: right;
   padding-right: 5px;
+
 }
+

@@ -1,14 +1,15 @@
 .mail-details{
-    display: flex;
-}
-
-.mail-content{
-    min-height: 85vh;
-    /* flex-grow: 1; */
-    display: flex;
     flex-direction: column;
+    padding: 10px;
+    width: 70vw;
+
 }
 
-.mail-text{
-    flex-grow: 1;
+.mail-details h2{
+    margin-bottom: 20px;
+}
+
+.mail-details-info{
+    justify-content: space-between;
+    margin-bottom: 15px;
 }

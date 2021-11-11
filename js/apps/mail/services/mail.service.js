@@ -28,7 +28,6 @@ function getUser(){
 }
 
 function nameToShow(mail) {
-  console.log(mail);
   const contactMail = mail.to ? mail.to : mail.from;
   const contactName = contactMail.substring(0, contactMail.indexOf('@'));
   return contactName;
@@ -78,7 +77,7 @@ function _createMails() {
         subject: 'Rental lease',
         body: 'I\'m raising the rent by 300NIS. Please call me about renewing our list, dont forget! The list ends at the end ',
         isRead: false,
-        sentAt: 1636549489000,
+        receivedAt: 1636549489000,
         from: 'baalDira@Hara.com',
       },
       {
@@ -86,7 +85,7 @@ function _createMails() {
         subject: 'I have cookies for you',
         body: 'I baked some cookies for you. Come visit when your done with the project.',
         isRead: true,
-        sentAt: 1635599089000,
+        receivedAt: 1635599089000,
         from: 'yourMama@isAwsome.com',
       },
       {
@@ -94,7 +93,7 @@ function _createMails() {
         subject: 'Coding Academy is good for business',
         body: 'Here is your monthly bill from wolt.',
         isRead: true,
-        sentAt: 1633871089000,
+        receivedAt: 1633871089000,
         from: 'wolt@wolt.com',
       },
       {

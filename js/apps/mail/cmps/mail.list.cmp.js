@@ -14,7 +14,7 @@ export default {
       > -->
         <ul class="mail-list clean-list">
           <li v-for="mail in mails" :key="mail.id" class="mail-preview-container" >
-              <mail-preview :mail="mail" @click.native="select(mail)" />
+              <mail-preview :mail="mail"  />
           </li>
         </ul>
       <!-- </transition-group> -->
@@ -29,9 +29,9 @@ export default {
     //   },
     },
     methods: {
-      select(mail) {
-        this.$emit('selected', mail);
-      },
+      // select(mail) {
+      //   this.$emit('selected', mail);
+      // },
     //   beforeEnter: function (el) {
     //     el.style.opacity = 0;
     //     el.style.height = 0;
