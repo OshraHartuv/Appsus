@@ -1,7 +1,7 @@
 export default {
     template: `
           <div class="mail-filter">
-              <label><span class="underline">Search</span>
+              <label><span>Search</span>
               <input @input="filter" v-model="filterBy.title" type="text" placeholder="Title">
               </label>
           </div>

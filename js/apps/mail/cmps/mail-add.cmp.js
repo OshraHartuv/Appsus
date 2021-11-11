@@ -1,8 +1,6 @@
 import { mailService } from '../services/mail.service.js';
 import { eventBus } from '../../../services/event-bus-service.js';
 
-
-
 export default {
   template: `
           <section class="mail-add flex">
@@ -11,12 +9,12 @@ export default {
                     <span class="nav flex">
                         <button class="downsize">_</button>
                         <button class="expand">&#10530;</button>
-                        <button class="close-new-mail">x</button>
+                        <button class="close-new-mail" @click="closeDraft">x</button>
                     </span>
                 </div>
                 <div class="mail-add-main flex">
                     <div class="mail-add-to">
-                    <input @input="draftMail" v-model="newMail.to" type="email" id="email" name="email" class="mail-add-input" placeholder="To">
+                    <input @input="draftMail" v-model="newMail.to" type="email" class="mail-add-input" placeholder="To">
                     </div>
                     <div class="mail-add-subject">
                     <input @input="draftMail" v-model="newMail.subject" type="text" placeholder="Subject" class="mail-add-input">
@@ -27,7 +25,7 @@ export default {
                 </div>
                 <div class="mail-add-editors flex">
                     <button class="send-btn" @click="sendMail">Send</button>
-                    <button class="trash-btn flex"><img src="img/trash.svg" class="trash-img"></button>
+                    <button class="trash-btn flex" ><img src="img/trash.svg" class="trash-img"></button>
                 </div>
           </section>
       `,
@@ -38,30 +36,50 @@ export default {
         subject: '',
         body: '',
         isRead: false,
-        sentAt:'null'
+        isDraft: true,
+        // editedAt: null,
+        // sentAt: null
       },
     };
   },
   methods: {
     draftMail() {
-      console.log(this.newMail);
+      // this.newMail.editedAt = Date.now();
+      this.newMail.sentAt = Date.now();
+
+      mailService.saveMail(this.newMail).then(() => {
+        console.log('draft');
+      });
+      //   console.log(this.newMail);
     },
     contentEditableChange() {
       this.newMail.body = document.getElementById('mail-add-body').innerHTML;
       this.draftMail();
     },
     sendMail() {
-        console.log(this.newMail);
-        if(!this.newMail.to.includes('@') || !this.newMail.to.includes('.')){
-            user
-        }
-        this.newMail.sentAt= Date.now()
-        // mailService.saveMail(this.newMail)
-        //     .then(()=>{
-        //         this.$emit('sentMail')
-        //     })
-        console.log(this.newMail);
-        
+      if (!this.newMail.to.includes('@') || !this.newMail.to.includes('.')) {
+        const msg = {
+          txt: 'Mail not sent, please enter a valid e-mail address',
+          type: 'error',
+        };
+        eventBus.$emit('showMsg', msg);
+      } else {
+        this.newMail.sentAt = Date.now();
+        this.newMail.isDraft = false;
+        mailService.saveMail(this.newMail).then(() => {
+          this.$emit('close');
+        });
+      }
+    },
+    closeDraft() {
+        console.log('close');
+      this.newMail.sentAt = Date.now();
+      // this.newMail.editedAt = Date.now();
+      mailService.saveMail(this.newMail).then(() => {
+        console.log('close');
+        this.$emit('close');
+
+      });
     },
   },
 };

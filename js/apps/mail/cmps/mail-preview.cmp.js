@@ -1,4 +1,4 @@
-import { mailService } from "../services/mail.service.js";
+import { mailService } from '../services/mail.service.js';
 
 export default {
   props: ['mail'],
@@ -20,7 +20,8 @@ export default {
             </span>
             <span class="mail-preview-text">
               <span class="mail-preview-subject">
-                {{ subjectToShow }}
+                {{ mail.subject }}
+                <!-- {{ subjectToShow }} -->
               </span> - 
               <span class="mail-preview-body">
               {{ mail.body }}
@@ -35,23 +36,29 @@ export default {
         
       `,
   computed: {
-    subjectToShow() {
-      return (
-        this.mail.subject[0].toUpperCase() + this.mail.subject.substring(1)
-      );
-    },
+    // subjectToShow() {
+    //   return (
+    //      (this.mail.subject) ? this.mail.subject[0].toUpperCase() + this.mail.subject.substring(1): ''
+    //   );
+    // },
     contactToShow() {
-      return mailService.nameToShow(this.mail)
+      if (!this.mail.to && this.mail.isDraft) return '';
+      return mailService.nameToShow(this.mail);
     },
     dateToShow() {
-      const date =
-       (this.mail.sentAt) ?
-        new Date(this.mail.sentAt).toGMTString() :
-        new Date(this.mail.receivedAt).toGMTString();
-      if (this.mail.sentAt - Date.now() > 86400000) {
-        return date.substring(17,22);
+      var date;
+      if (this.mail.sentAt) date = new Date(this.mail.sentAt).toGMTString();
+      else if (this.mail.receivedAt)
+        date = new Date(this.mail.receivedAt).toGMTString();
+      // else if (this.mail.editedAt)  date = new Date(this.mail.editedAt).toGMTString();
+      if (
+        Date.now() - this.mail.sentAt < 86400000 ||
+        Date.now() - this.mail.receivedAt < 86400000
+      ) {
+        console.log(date);
+        return date.substring(17, 22);
       } else {
-        return  date.substring(5,11)
+        return date.substring(5, 11);
       }
     },
   },

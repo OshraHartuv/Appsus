@@ -4,14 +4,14 @@ import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import mailAdd from '../cmps/mail-add.cmp.js';
 import mailDetails from './mail-details.cmp.js';
-// import userMsg from './../../../services.';
+import userMsg from './../../../cmps/user-msg.cmp.js';
 
 
 export default {
   name: 'mail-index',
   template: `
         <section class="mail-index flex" v-if="mails">
-        <!-- <user-msg /> -->
+        <user-msg />
 
           <div class="mail-header flex">         
             <h1>Mail</h1>
@@ -20,8 +20,8 @@ export default {
           <div class="mail-main flex">
             <mail-menu class="mail-menu-container flex" @mailBoxed="setMailBox" :mails="mails" @compose="setNewMail"></mail-menu > 
             <mail-list v-show="!selectedMail" :mails="mailsToShow" class="mail-list-container"></mail-list>
-            <mail-add v-show="isCompose"></mail-add>
-            <router-view  v-show="selectedMail"></router-view>
+            <router-view  v-show="selectedMail" ></router-view>
+            <mail-add v-show="isCompose" @close="closeCompose"></mail-add>
           </div> 
 
         </section>
@@ -58,6 +58,7 @@ export default {
       this.selectedMail = null;
     },
     setFilter(filterBy) {
+      console.log( this.filterBy);
       this.filterBy = filterBy;
     },
     setMailBox(box) {
@@ -68,8 +69,9 @@ export default {
       this.isCompose= true
       console.log('ready');
     },
-    mailSent(){
-      console.log('sent');
+    closeCompose(){
+      this.isCompose = false;
+      this.loadMails()
     }
   },
   computed: {
@@ -104,8 +106,15 @@ export default {
         }
         mailsToShow.sort(
           (a,b)=>{
-            return ((b.sentAt) ?  (b.sentAt) : b.receivedAt) - 
+            return (
+              // var x;
+              // if (b.sentAt) x = b.sentAt
+              // else if (b.receivedAt) x = b.receivedAt
+              // else if (b.editedAt) x= b.editedAt
+              ((b.sentAt) ?  (b.sentAt) : b.receivedAt)
+               - 
             ((a.sentAt) ?  (a.sentAt) : a.receivedAt)
+            )
           })
         return mailsToShow;
       }
@@ -126,6 +135,7 @@ export default {
     mailDetails,
     mailList,
     mailMenu,
-    mailAdd
+    mailAdd,
+    userMsg
   },
 };
