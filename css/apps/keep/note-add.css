@@ -37,20 +37,20 @@
   cursor: pointer;
 }
 .btn-save {
-  background-image: url(/img/save.svg);
+  background-image: url(../../../img/save.svg);
 }
 
 .btn-txt {
-  background-image: url(/img/txt.svg);
+  background-image: url(../../../img/txt.svg);
 }
 .btn-todos {
-  background-image: url(/img/todos.svg);
+  background-image: url(../../../img/todos.svg);
 }
 .btn-img {
-  background-image: url(/img/image.svg);
+  background-image: url(../../../img/image.svg);
 }
 .btn-video {
-  background-image: url(/img/video.svg);
+  background-image: url(../../../img/video.svg);
 }
 
 .selected {
