@@ -65,7 +65,6 @@ export default {
                 });
         },
         setBgc(id, color) {
-            console.log(id, color)
             noteService.setBgc(id, color)
                 .then(this.loadNotes)
         }

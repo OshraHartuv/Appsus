@@ -1,9 +1,9 @@
 
 export const noteVideo = {
-    props: ['data'],
+    props: ['note'],
     template: `
         <div class="note-video">
-            <h4>{{data.info.title}}</h4>
+            <h4>{{note.info.title}}</h4>
             <iframe :src="urlToShow"></iframe>
         </div>
     `,
@@ -19,8 +19,8 @@ export const noteVideo = {
     },
     computed: {
         urlToShow() {
-            if (this.data.info.url.includes('watch?v=')) return this.data.info.url.replace('watch?v=', 'embed/')
-            else return this.data.info.url
+            if (this.note.info.url.includes('watch?v=')) return this.note.info.url.replace('watch?v=', 'embed/')
+            else return this.note.info.url
         }
     },
     components: {

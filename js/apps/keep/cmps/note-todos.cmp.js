@@ -1,11 +1,11 @@
 export const noteTodos = {
-    props: ['data'],
+    props: ['note'],
     template: `
         <div class="row">
 
-                {{data.info.title}}
+                {{note.info.title}}
                 <ul>
-                    <li v-for="todo in data.info.todos">{{todo.txt}}</li>
+                    <li v-for="todo in note.info.todos">{{todo.txt}}</li>
                 </ul>
                 <!-- <select v-model="selectedOpt" @blur="reportVal">
                     <option v-for="opt in data.opts">{{opt}}</option>

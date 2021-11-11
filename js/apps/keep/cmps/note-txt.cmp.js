@@ -1,10 +1,10 @@
 
 
 export const noteTxt = {
-    props: ['data'],
+    props: ['note'],
     template: `
         <section class="note-txt">          
-                {{data.info.txt}}          
+                {{note.info.txt}}          
         </section>
     `,
     data() {

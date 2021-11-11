@@ -10,6 +10,7 @@
   margin: 5px;
   /* flex: 1; */
   transition: box-shadow 0.3s;
+  transition: 0.3s;
   break-inside: avoid-column;
 }
 .note-preview:hover {
@@ -17,18 +18,42 @@
   cursor: pointer;
 }
 
+.edit-mode {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 80vw;
+  max-width: 100vw;
+  height: 80vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.edit-mode .note-video {
+  margin: auto;
+  width: 70vw;
+  height: 80vh;
+  max-width: 100vw;
+}
+
+.edit-mode .note-video iframe {
+  width: 100%;
+  max-width: 100vh;
+  height: 70vh;
+}
+
 .actions-container {
   position: absolute;
+  width: 100%;
   bottom: 0;
   left: 0;
+  background-color: rgb(255, 255, 255);
   opacity: 0;
 }
 
-.actions-container > * {
-}
-
-.trash {
-  /*button*/
+button.trash {
   width: 15px;
   height: 20px;
   padding: 0px;
@@ -46,8 +71,8 @@
   opacity: 1;
   transition: 0.3s;
 }
-.color-palette-container {
-  /* position: absolute; */
+button.color-palette-container {
+  position: relative;
   /* opacity: 0; */
   /* bottom: 0; */
   /* right: 0; */
@@ -56,7 +81,7 @@
   padding: 0px;
   margin: 4px;
   border: none;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   background-position: center;
   background-size: cover;
   cursor: pointer;
@@ -64,13 +89,18 @@
   transition: 0.3s;
 }
 
-.color-palette {
+ul.color-palette {
+  position: absolute;
+  left: 25px;
+  bottom: 10px;
   opacity: 0;
+  padding: 0px;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(6, 15px);
-  grid-template-rows: repeat(2, 15px);
+  grid-template-columns: repeat(4, 15px);
+  grid-template-rows: repeat(3, 15px);
   gap: 1px;
+  transition: 0.4s;
 }
 
 .color-palette-container:hover .color-palette {
@@ -79,8 +109,7 @@
 
 .color-palette > * {
   border: 1px solid black;
-  border-radius: 10px;
-  background-color: white;
+  border-radius: 15px;
   height: 15px;
   width: 15px;
   transition: 0.2s;
