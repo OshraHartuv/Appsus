@@ -11,9 +11,10 @@ import { eventBus } from '../../../services/event-bus-service.js';
 // }
 
 export default {
+  name: 'mail-details',
   template: `
           <section class="mail-details flex" v-if="mail">
-                    <h2>{{ subjectToShow }}</h2>
+                    <h2>{{ mail.subject }}</h2>
                     <div class="mail-details-info flex">
                     <div class="mail-details-addresses">
                       <div>
@@ -31,7 +32,7 @@ export default {
                     </div>
                     </div>
                     <div class="mail-details-body">
-                      {{ this.mail.body }}
+                      {{ mail.body }}
                     </div>
                   <router-link to="/mail" class="close-details">x</router-link>
             </div>
@@ -88,26 +89,30 @@ export default {
     //   },
   },
   computed: {
-    subjectToShow() {
-      return (
-        this.mail.subject[0].toUpperCase() + this.mail.subject.substring(1)
-      );
-    },
+    // subjectToShow() {
+    //   return (
+    //     this.mail.subject[0].toUpperCase() + this.mail.subject.substring(1)
+    //   );
+    // },
     contactToShow() {
+      if (!this.mail.to && this.mail.isDraft) return ''
       return this.mail.to
         ? mailService.getUser().fullname
         : mailService.nameToShow(this.mail);
     },
     mailFrom() {
-      return this.mail.to ? mailService.getUser().email : this.mail.from;
+      return (this.mail.to || this.mail.isDraft) ? mailService.getUser().email : this.mail.from;
     },
     mailTo() {
+      if (!this.mail.to && this.mail.isDraft) return ''
       return this.mail.to ? this.mail.to : 'me';
     },
     dateToShow() {
-      const date = this.mail.sentAt
-        ? new Date(this.mail.sentAt).toGMTString()
-        : new Date(this.mail.receivedAt).toGMTString();
+      var date; 
+      if (this.mail.sentAt) date =  new Date(this.mail.sentAt).toGMTString()
+      else if (this.mail.receivedAt) date = new Date(this.mail.receivedAt).toGMTString();
+      // else if (this.mail.editedAt) date = new Date(this.mail.editedAt).toGMTString();
+      console.log(date);
       return date.substring(5,22);
     },
   },
