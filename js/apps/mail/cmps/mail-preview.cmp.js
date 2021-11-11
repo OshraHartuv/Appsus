@@ -52,10 +52,10 @@ export default {
         date = new Date(this.mail.receivedAt).toGMTString();
       // else if (this.mail.editedAt)  date = new Date(this.mail.editedAt).toGMTString();
       if (
-        Date.now() - this.mail.sentAt < 86400000 ||
-        Date.now() - this.mail.receivedAt < 86400000
+        (Date.now() - this.mail.sentAt) < 86400000 ||
+        (Date.now() - this.mail.receivedAt) < 86400000
       ) {
-        console.log(date);
+        console.log(Date.now()-1636549489000);
         return date.substring(17, 22);
       } else {
         return date.substring(5, 11);
