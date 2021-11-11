@@ -23,6 +23,10 @@ export default {
                   :class="{selectedBox: currBox ==='draft'}">Drafts</div>
                   <div>Starred</div>
                   <div>Labels</div>
+                  <select @change="setSort" v-model="sort" class="sort-select">
+                    <option value="date" >Sort: Date</option>
+                    <option value="subject">Sort: Subject</option>
+                  </select>
                 </div> 
               </router-link>
           </section>
@@ -30,6 +34,7 @@ export default {
   data() {
     return {
       currBox: 'all',
+      sort: 'date'
     };
   },
   methods: {
@@ -39,6 +44,10 @@ export default {
     },
     onCompose(){
       this.$emit('compose')
+    },
+    setSort(){
+      this.$emit('sort', this.sort)
+      console.log(this.sort);
     }
   },
   computed: {
