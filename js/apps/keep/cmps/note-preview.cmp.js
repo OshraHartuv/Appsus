@@ -10,16 +10,22 @@ export default {
     template: `
     <section>
     <component :is="note.type" :data="note" ></component>
-    <div>
+    <div class="actions-container">
         <button class="trash" @click="remove(note.id)"></button>
         <!-- <button class="setBgc" @click="setBgc(note.id)"></button> -->
-        <input type="color" :value="bgc" class="setBgc" @input.prevent="setBgc(note.id)">
+        <!-- <input type="color" v-model:value="bgc" class="setBgc" @input.prevent="setBgc(note.id)"> -->
+        <button class = "color-palette-container">
+            <ul class = "color-palette">
+                <li v-for="color in colorArray" @click ="setBgc(note.id,color)" :style = "{'background-color':color}"></li>
+            </ul>
+        </button>
     </div>
     </section>
     `,
     data() {
         return {
-            bgc: this.note.style.bgc
+            bgc: this.note.style.bgc,
+            colorArray: ['#f28b82', '#fbbc04', '#fff475', '#ccff90', '#a7ffeb', '#cbf0f8', '#aecbfa', '#d7aefb', '#fdcfe8', '#e6c9a8', '#e8eaed', '#ffffff']
         }
     },
     methods: {
@@ -27,10 +33,12 @@ export default {
             // this.$emit('remove', noteId);
             eventBus.$emit('removedNote', noteId)
         },
-        setBgc(noteId) {
+        setBgc(noteId, color) {
             console.log('changing')
             // this.$emit('remove', noteId);
-            eventBus.$emit('setBgc', noteId, this.bgc)
+            console.log('this.bgc', this.bgc)
+            // eventBus.$emit('setBgc', noteId, this.bgc)
+            eventBus.$emit('setBgc', noteId, color)
         },
         // setInput(ev, inputIdx) {
         //     this.answers[inputIdx] = ev;
@@ -48,3 +56,5 @@ export default {
         noteImg
     }
 }
+
+//#f28b82 , #fbbc04 , #fff475 , #ccff90 , #a7ffeb , #cbf0f8 , #aecbfa , #d7aefb , #fdcfe8 , #e6c9a8 , #e8eaed , #ffffff

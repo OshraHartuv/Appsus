@@ -21,8 +21,8 @@
   /* column-count: 4;
   vertical-align: baseline; */
   /* column-width: 200px; */
-  /* columns: 200px 3;
-  column-gap: 10px;
+  columns: 3 200px;
+  /* column-gap: 10px;
   columns:  || ; */
   /* column-fill: auto; */
 }

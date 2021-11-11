@@ -226,14 +226,11 @@ function remove(noteId) {
 }
 
 function setBgc(noteId, color) {
-    console.log('noteId, color', noteId, color)
     return getNoteById(noteId)
         .then(note => {
-            console.log('note in service', note)
-            note.style.bgc = this.color
+            note.style.bgc = color
             return note
         })
         .then(note => storageService.put(NOTES_KEY, note)
         )
-
 }
