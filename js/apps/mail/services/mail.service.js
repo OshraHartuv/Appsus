@@ -16,7 +16,8 @@ export const mailService = {
   getPreviousMailId,
   composeMail,
   nameToShow,
-  getUser
+  getUser,
+  creatNewMail
 };
 
 function query() {
@@ -25,6 +26,26 @@ function query() {
 
 function getUser(){
   return loggedinUser;
+}
+// id: 'e101',
+//         subject: 'Miss you!',
+//         body: 'Would love to catch up sometimes',
+//         isRead: false,
+//         sentAt: 1631279089000,
+//         to: 'momo@momo.com',
+
+// to: '',
+// subject: '',
+// body: '',
+
+function creatNewMail(newMail){
+  // const mail = {
+  //   subject: newMail.subject,
+  //   body: newMail.body,
+  //   isRead: false,
+  //   sentAt: Date.now(),
+  //   to: newMail.to
+  // }
 }
 
 function nameToShow(mail) {

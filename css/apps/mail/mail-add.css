@@ -1,0 +1,128 @@
+.mail-add {
+  flex-direction: column;
+  min-width: 60vw;
+  background-color: white;
+  min-height: 60vh;
+  position: absolute;
+  right: 5px;
+  bottom: 0;
+  box-shadow:  5px -3px 12px -1px rgba(0,0,0,0.46);
+  border-radius: 15px 15px 0 0;
+  border: 1px solid rgb(185, 179, 179);
+  border-bottom: none;
+}
+
+.mail-add button {
+  border: none;
+  color: white;
+}
+
+.mail-add button:hover {
+  cursor: pointer;
+}
+
+/* header */
+
+.mail-add-header {
+  background-color: rgba(83, 79, 79, 0.986);
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 0 10px;
+  border-radius: 15px 15px 0 0;
+}
+
+.mail-add-header button {
+  background-color: rgba(83, 79, 79, 0.986);
+  margin: 5px 0;
+}
+
+.mail-add-header button:hover {
+  background-color: rgb(165, 162, 162);
+}
+
+.downsize {
+  padding-bottom: 5px;
+  margin-right: 10px;
+  padding: 10px 15px 15px 15px;
+}
+
+.expand {
+  padding: 15px 15px 10px 15px;
+  margin-right: 10px;
+}
+
+.close-new-mail {
+  padding: 10px 15px;
+  font-size: 15px;
+}
+
+/* main */
+
+.mail-add-main {
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 0 5px;
+}
+
+.mail-add-main > *,
+.mail-add-main > * > * {
+  width: 100%;
+}
+
+.mail-add-main > * {
+  border-bottom: 1px solid rgb(185, 179, 179);
+}
+
+.mail-add-input {
+  border: none;
+  padding: 5px 0;
+}
+
+.mail-add-input:focus-visible {
+  outline-width: 0;
+}
+
+.mail-add-input-body {
+  flex-grow: 1;
+}
+
+.mail-add-body {
+  flex-grow: 1;
+}
+
+/* footer */
+
+.mail-add-editors {
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.send-btn {
+  border-radius: 5px;
+  background-color: rgb(28, 98, 228);
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.send-btn:hover {
+  background-color: rgb(47, 107, 219);
+  box-shadow: 0px 2px 4px 0px rgb(42, 89, 175);
+}
+
+.trash-img {
+  min-width: 15px;
+}
+
+.trash-btn {
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.trash-btn:hover {
+  background-color: rgb(165, 162, 162);
+}
+
+.mail-add-header nav {
+}

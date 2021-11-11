@@ -1,21 +1,27 @@
 import { mailService } from '../services/mail.service.js';
 import mailFilter from '../cmps/mail-filter.cmp.js';
 import mailMenu from '../cmps/mail-menu.cmp.js';
-import mailList from '../cmps/mail.list.cmp.js';
+import mailList from '../cmps/mail-list.cmp.js';
+import mailAdd from '../cmps/mail-add.cmp.js';
 import mailDetails from './mail-details.cmp.js';
+// import userMsg from './../../../services.';
+
 
 export default {
   name: 'mail-index',
   template: `
         <section class="mail-index flex" v-if="mails">
+        <!-- <user-msg /> -->
+
           <div class="mail-header flex">         
             <h1>Mail</h1>
             <mail-filter @filtered="setFilter"></mail-filter>
           </div>
           <div class="mail-main flex">
-            <mail-menu class="mail-menu-container flex" @mailBoxed="setMailBox" :mails="mails"></mail-menu > 
-            <mail-list v-if="!selectedMail" :mails="mailsToShow" class="mail-list-container"></mail-list>
-            <router-view v-else></router-view>
+            <mail-menu class="mail-menu-container flex" @mailBoxed="setMailBox" :mails="mails" @compose="setNewMail"></mail-menu > 
+            <mail-list v-show="!selectedMail" :mails="mailsToShow" class="mail-list-container"></mail-list>
+            <mail-add v-show="isCompose"></mail-add>
+            <router-view  v-show="selectedMail"></router-view>
           </div> 
 
         </section>
@@ -27,6 +33,7 @@ export default {
       filterBy: null,
       selectedMail: null,
       box: 'all',
+      isCompose:false
     };
   },
   watch: {
@@ -57,12 +64,17 @@ export default {
       this.box = box;
       console.log(this.box);
     },
+    setNewMail(){
+      this.isCompose= true
+      console.log('ready');
+    },
+    mailSent(){
+      console.log('sent');
+    }
   },
   computed: {
     mailsToShow() {
       if (!this.filterBy) {
-        // this.getMailsByBox()
-        // console.log(this.box);
         var mailsToShow ;
 
         switch (this.box) {
@@ -107,38 +119,6 @@ export default {
         // });
         // return booksToShow;
     },
-    // // 
-    // getMailsByBox(){
-    //   console.log(this.box);
-    //     var mailsToShow;
-    //     switch (this.box) {
-    //       case 'all':
-    //         mailsToShow = this.mails;
-    //         break;
-    //       case 'sent':
-    //         mailsToShow = this.mails.filter((mail) => {
-    //           return mail.to;
-    //         });
-    //         break;
-    //       case 'inbox':
-    //         mailsToShow = this.mails.filter((mail) => {
-    //           return mail.from;
-    //         });
-    //         break;
-    //       case 'read':
-    //         mailsToShow = this.mails.filter((mail) => {
-    //           return mail.isRead;
-    //         });
-    //         break;
-    //       case 'unread':
-    //         mailsToShow = this.mails.filter((mail) => {
-    //           return !mail.isRead;
-    //         });
-    //         break;
-    //     }
-    //     console.log(mailsToShow);
-    //     return mailsToShow
-    // }
   },
 
   components: {
@@ -146,5 +126,6 @@ export default {
     mailDetails,
     mailList,
     mailMenu,
+    mailAdd
   },
 };

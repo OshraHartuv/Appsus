@@ -1,22 +1,22 @@
 .mail-menu{
-    /* background-color: lightsteelblue; */
-    /* padding: 10px; */
     flex-direction: column;
-    min-width: 30vw;
-    /* gap: 10px; */
+    min-width: 20vw;
+    padding-right: 20px;
 
 }
 
-.mail-menu >*{
+.mail-menu.nav >*{
     padding: 10px;
-}
-
-.mail-menu >*:not(:first-child){
-    line-height: 3vh;
+    width: 100%;
+    line-height: 1vh;
     display: flex;
     justify-content: space-between;
-    /* background-color: green; */
     border-radius: 0  30px 30px 0;
+}
+
+.mail-menu.nav >*:hover{
+    cursor: pointer;
+    background-color: rgba(161, 155, 155, 0.342);
 }
 
 .selectedBox{
@@ -24,20 +24,14 @@
     background-color: rgba(233, 101, 101, 0.486);
 }
 
-
-.mail-menu >*:not(:first-child):hover{
-    cursor: pointer;
-    background-color: rgba(161, 155, 155, 0.342);
-}
-
 .mail-menu button{
+    padding: 10px;
     border-radius: 40px;
     background-color: white;
     border: none;
     line-height: 20px;
     width: 80%;
     margin: 10px;
-    /* margin: 0 10px; */
     box-shadow: 0px 2px 4px 0px rgb(71 85 79 / 40%);
 }
 

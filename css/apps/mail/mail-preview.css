@@ -28,6 +28,7 @@
 .mail-preview-contact {
   padding-left: 5px;
   min-width: 100px;
+  max-width: 120px;
 }
 
 .mail-preview-text {
@@ -44,6 +45,7 @@
 
 .mail-preview-date {
   min-width: 60px;
+  max-width: 70px;
   text-align: right;
   padding-right: 5px;
 
