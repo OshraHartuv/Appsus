@@ -19,8 +19,10 @@ export default {
                     <div class="mail-add-subject">
                     <input @input="draftMail" v-model="newMail.subject" type="text" placeholder="Subject" class="mail-add-input">
                     </div>
-                    <div class="mail-add-body flex">
-                    <div id="mail-add-body" @input="contentEditableChange()" class="mail-add-input mail-add-input-body"  contenteditable></div>  
+                    <textarea @input="draftMail" v-model="newMail.body"  class="mail-add-input mail-add-body">
+                    </textarea>
+                    <!-- <div class="mail-add-body flex">
+                    <div id="mail-add-body" @input="contentEditableChange()" class="mail-add-input mail-add-input-body"  contenteditable></div>   -->
                     </div>
                 </div>
                 <div class="mail-add-editors flex">
@@ -35,7 +37,7 @@ export default {
         to: '',
         subject: '',
         body: '',
-        isRead: false,
+        isRead: true,
         isDraft: true,
         // editedAt: null,
         // sentAt: null
@@ -52,10 +54,10 @@ export default {
       });
       //   console.log(this.newMail);
     },
-    contentEditableChange() {
-      this.newMail.body = document.getElementById('mail-add-body').innerHTML;
-      this.draftMail();
-    },
+    // contentEditableChange() {
+    //   this.newMail.body = document.getElementById('mail-add-body').innerHTML;
+    //   this.draftMail();
+    // },
     sendMail() {
       if (!this.newMail.to.includes('@') || !this.newMail.to.includes('.')) {
         const msg = {
