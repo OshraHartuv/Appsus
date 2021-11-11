@@ -1,4 +1,5 @@
 import { noteService } from '../services/note.service.js';
+import { eventBus } from '../../../services/event-bus-service.js'
 import noteList from '../cmps/note-list.cmp.js';
 import noteAdd from '../cmps/note-add.cmp.js';
 import noteFilter from '../cmps/note-filter.cmp.js';
@@ -8,9 +9,6 @@ export default {
     name: 'note-index',
     template: `
         <section class="keep-app">
-            <!-- <h1>Welcome To Your Keep</h1> -->
-            <!-- <img src="./img/homepage.jpg" alt="" class="home-bg"> -->
-            <!-- <router-link to="/book">Shop Now!</router-link> -->
             <note-add/>
             <note-filter @filtered="setFilter" />
             <note-details v-if="selectedNote" :note="selectedNote" @close="closeDetails" />
@@ -26,6 +24,7 @@ export default {
     },
     created() {
         this.loadNotes();
+        eventBus.$on('savedNote', this.loadNotes);
     },
     methods: {
         loadNotes() {
@@ -47,7 +46,7 @@ export default {
     },
     computed: {
         notesToShow() {
-            if (!this.filterBy) return this.notes;
+            // if (!this.filterBy) return this.notes;
             // const searchStr = this.filterBy.title.toLowerCase();
 
             // const notesToShow = this.notes.filter(note => {

@@ -1,42 +1,66 @@
 // import { carService } from '../services/car-service.js';
 
+import { noteService } from "../services/note.service.js";
+import { eventBus } from '../../../services/event-bus-service.js'
+
 export default {
     template: `
-        <section class="note-add" @click.stop="editing =false">
-            <div >
-            <form class ="new-note" v-if="editing" @blur="editing =!editing"> 
-                <input type="text" placeholder="Title" ><br/>
-                <input type="text" placeholder="Take a note...">
+        <section>
+            <form @submit.prevent.stop="save" class="note-add" >
+                <input class="add-start" type="text" :placeholder="placeholder" v-model:value="newNote.info.txt" @change="save">
+                <div class="actions">
+                    <button class="btn-save" @click.prevent="save" title="Save"></button>
+                    <button class="btn-txt" @click.prevent="setType('note-txt')" title="Text"></button>
+                    <button class="btn-todos" @click.prevent="setType('note-todos')" title="Todos"></button>
+                    <button class="btn-img" @click.prevent="setType('note-img')" title="Image"></button>
+                    <button class="btn-video" @click.prevent="setType('note-video')" title="Video"></button>
+                </div>
             </form>
-            <input class="add-start" v-else type="text" @click="editing =!editing"  placeholder="Take a note..." autofocus>
-            </div>
-            <!-- <h3>Add a new car</h3>
-            <form v-if="carToEdit" @submit.prevent="save" >
-                <input v-model="carToEdit.vendor" type="text" placeholder="Vendor">
-                <input v-model.number="carToEdit.maxSpeed" type="number" placeholder="Max speed">
-                <button>Save</button>
-            </form> -->
         </section>
+
     `,
     data() {
         return {
-            carToEdit: null,
-            editing: false
+            placeholder: "Take a note...",
+            newNote: {
+                type: 'note-txt',
+                info: {
+                    txt: null
+                }
+            },
+
         };
     },
-    // created() {
-    //     const { carId } = this.$route.params;
-    //     if (carId) {
-    //         carService.getById(carId)
-    //             .then(car => this.carToEdit = car);
-    //     } else {
-    //         this.carToEdit = carService.getEmptyCar();
-    //     }
-    // },
-    // methods: {
-    //     save() {
-    //         carService.save(this.carToEdit)
-    //             .then(car => this.$router.push('/car'));
-    //     }
-    // }
+    created() {
+
+    },
+    methods: {
+        setType(type) {
+            switch (type) {
+                case 'note-txt':
+                    this.placeholder = "Take a note..."
+                    break
+                case 'note-todos':
+                    this.placeholder = "Write your todos comma separated..."
+                    break
+                case 'note-img':
+                    this.placeholder = "Save your image by url..."
+                    break
+                case 'note-video':
+                    this.placeholder = "Save your Youtube video by url..."
+                    break
+            }
+            console.log('type', type)
+            this.newNote.type = type
+        },
+
+        save() {
+            if (!this.newNote.info.txt) return
+            noteService.addNewNote(this.newNote)
+                .then(() => {
+                    eventBus.$emit('savedNote')
+                    this.newNote.info.txt = ''
+                })
+        }
+    }
 };

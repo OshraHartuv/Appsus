@@ -1,30 +1,58 @@
 .note-add {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   text-align: center;
+  margin: 5px auto 5px;
+  border: 2px black solid;
+  border-radius: 5px;
+  max-width: 600px;
 }
 
-.note-add .add-start {
-  width: 600px;
+.add-start {
   height: 45px;
+  padding-left: 10px;
+  border: none;
+  flex-grow: 1;
+}
+
+.add-start:focus-visible {
+  outline-width: 0;
+}
+
+.actions {
   margin: 10px;
-  padding-left: 10px;
-  border-radius: 5px;
 }
-.new-note {
-  display: inline;
-  /* width: 600px; */
-  /* height: 90px; */
-  margin: 5px auto 5px;
-  /* padding: 15px; */
-  border: 1px black solid;
-}
-.new-note input {
-  width: 600px;
-  height: 45px;
-  /* margin: 10px; */
+
+.actions > * {
+  width: 25px;
+  height: 25px;
+  padding: 0px;
+  margin: 4px;
   border: none;
-  padding-left: 10px;
-  /* border-radius: 5px; */
+  background-color: white;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  fill: aqua;
 }
-.new-note input:active {
-  border: none;
+.btn-save {
+  background-image: url(/img/save.svg);
+}
+
+.btn-txt {
+  background-image: url(/img/txt.svg);
+}
+.btn-todos {
+  background-image: url(/img/todos.svg);
+}
+.btn-img {
+  background-image: url(/img/image.svg);
+}
+.btn-video {
+  background-image: url(/img/video.svg);
+}
+
+.selected {
 }

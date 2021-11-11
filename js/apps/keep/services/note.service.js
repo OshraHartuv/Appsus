@@ -10,6 +10,7 @@ export const noteService = {
     getNoteById,
     getNextNoteId,
     getPreviousNoteId,
+    addNewNote
 };
 
 function query() {
@@ -23,17 +24,21 @@ function _createNotes() {
             {
                 id: "n101",
                 type: "note-txt",
-                isPinned: true,
+                isPinned: false,
                 info: {
                     txt: "Fullstack Me Baby!"
+                },
+                style: {
+                    backgroundColor: "#000"
                 }
             },
             {
                 id: "n102",
                 type: "note-img",
+                isPinned: false,
                 info: {
+                    title: "Bobi and Me",
                     url: "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg",
-                    title: "Bobi and Me"
                 },
                 style: {
                     backgroundColor: "#00d"
@@ -42,14 +47,19 @@ function _createNotes() {
             {
                 id: "n103",
                 type: "note-todos",
+                isPinned: false,
                 info: {
-                    label: "Get my stuff together",
+                    title: "Get my stuff together",
                     todos: [
                         { txt: "Driving liscence", doneAt: null },
                         { txt: "Coding power", doneAt: 187111111 }
                     ]
+                },
+                style: {
+                    backgroundColor: "#00d"
                 }
-            }, {
+            },
+            {
                 id: "n104",
                 type: "note-txt",
                 isPinned: true,
@@ -109,3 +119,59 @@ function getPreviousNoteId(noteId) {
 function getNoteById(noteId) {
     return storageService.get(NOTES_KEY, noteId);
 }
+
+function addNewNote(note) {
+    let newNote
+    switch (note.type) {
+        case 'note-txt':
+            newNote = {
+                id: null,
+                type: "note-txt",
+                isPinned: false,
+                info: {
+                    txt: note.info.txt,
+                }
+            }
+            break
+        case 'note-todos':
+            break
+        case 'note-img':
+            break
+        case 'note-video':
+            break
+    }
+
+    return save(newNote)
+
+}
+
+// {
+//     id: "n101",
+//     type: "note-txt",
+//     isPinned: true,
+//     info: {
+//         txt: "Fullstack Me Baby!"
+//     }
+// },
+// {
+//     id: "n102",
+//     type: "note-img",
+//     info: {
+//         url: "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg",
+//         title: "Bobi and Me"
+//     },
+//     style: {
+//         backgroundColor: "#00d"
+//     }
+// },
+// {
+//     id: "n103",
+//     type: "note-todos",
+//     info: {
+//         label: "Get my stuff together",
+//         todos: [
+//             { txt: "Driving liscence", doneAt: null },
+//             { txt: "Coding power", doneAt: 187111111 }
+//         ]
+//     }
+// },
