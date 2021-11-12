@@ -24,7 +24,7 @@ export const noteImg = {
     },
     methods: {
         unSelectNote() {
-            console.log(this.note);
+            // console.log(this.note);
             noteService.save(this.note)
                 .then(() => this.selected = false)
 

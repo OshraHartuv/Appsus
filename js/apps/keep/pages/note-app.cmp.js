@@ -6,7 +6,7 @@ import noteFilter from '../cmps/note-filter.cmp.js';
 import noteDetails from './note-details.cmp.js';
 
 export default {
-    name: 'note-index',
+    name: 'note-app',
     template: `
         <section class="keep-app">
             <note-add/>

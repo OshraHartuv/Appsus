@@ -12,7 +12,9 @@ export const noteService = {
     getPreviousNoteId,
     addNewNote,
     remove,
-    setBgc
+    setBgc,
+    setTxt,
+    setTodos
 };
 
 function query() {
@@ -53,8 +55,8 @@ function _createNotes() {
                 info: {
                     title: "Get my stuff together",
                     todos: [
-                        { txt: "Driving liscence", doneAt: null },
-                        { txt: "Coding power", doneAt: 187111111 }
+                        { txt: "Driving liscence", done: false },
+                        { txt: "Coding power", done: true }
                     ]
                 },
                 style: {
@@ -102,7 +104,7 @@ function _createNotes() {
                     title: "Learn some code",
                     todos: [
                         { txt: "HTML", done: false },
-                        { txt: "CSS", done: false },
+                        { txt: "CSS", done: true },
                         { txt: "JavaScript", done: false }
                     ]
                 },
@@ -234,3 +236,38 @@ function setBgc(noteId, color) {
         .then(note => storageService.put(NOTES_KEY, note)
         )
 }
+function setTxt(noteId, txt) {
+    return getNoteById(noteId)
+        .then(note => {
+            note.info.txt = txt
+            return note
+        })
+        .then(note => storageService.put(NOTES_KEY, note)
+        )
+}
+function setTodos(noteId, title, todos) {
+    return getNoteById(noteId)
+        .then(note => {
+            console.log('getNoteById', noteId)
+            console.log('todos', todos)
+            note.info.title = title
+            note.info.todos = todos
+            return note
+        })
+        .then(note => storageService.put(NOTES_KEY, note)
+        )
+}
+
+// id: "n107",
+//     type: "note-todos",
+//         info: {
+//     title: "Learn some code",
+//         todos: [
+//             { txt: "HTML", done: false },
+//             { txt: "CSS", done: true },
+//             { txt: "JavaScript", done: false }
+//         ]
+// },
+// style: {
+//     bgc: "#8cfa9c"
+// }

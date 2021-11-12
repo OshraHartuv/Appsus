@@ -8,7 +8,7 @@ export default {
                 <div class="main-screen" :class="{'menu-open':selectedNote}" @click="toggleMenu()"></div>
                 <span class="note-preview"
                 :class="{'edit-mode' : selectedNote && note.id === selectedNote.id }"
-                v-for="note in notes" 
+                v-for="note in notesToRender" 
                 :key="note.id" 
                 :style="{backgroundColor:note.style.bgc}"
                 @click="setEditMode(note)">
@@ -34,11 +34,17 @@ export default {
         },
 
         toggleMenu() {
-            eventBus.$emit('unSelect')
+            eventBus.$emit('unSelect', this.selectedNote.id)
+            console.log('this.selectedNote.id', this.selectedNote.id)
             this.selectedNote = null
         },
     },
     computed: {
+        notesToRender() {
+            if (!this.notes) return null
+            let notes = JSON.parse(JSON.stringify(this.notes))
+            return notes.reverse()
+        }
     },
     components: {
         notePreview,
