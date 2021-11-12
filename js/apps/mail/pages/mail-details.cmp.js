@@ -34,7 +34,7 @@ export default {
                     <div class="mail-details-body">
                       <pre>{{ mail.body }}</pre>
                     </div>
-                  <router-link to="/mail" class="close-details">x</router-link>
+                  <!-- <router-link to="/mail" class="close-details">x</router-link> -->
             </div>
           </section>
       `,

@@ -61,6 +61,7 @@ export default {
   methods: {
     draftMail() {
       this.newMail.sentAt = Date.now();
+      // every 5 secs
       mailService.saveMail(this.newMail).then(() => {
       });
     },

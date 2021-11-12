@@ -5,29 +5,19 @@ import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import mailAdd from '../cmps/mail-add.cmp.js';
 import mailDetails from './mail-details.cmp.js';
-import userMsg from './../../../cmps/user-msg.cmp.js';
+import userMsg from '../../../cmps/user-msg.cmp.js';
 // import VueToggleBtn from 'vue-toggle-btn';
 // Vue.use(ToggleButton)
 // Vue.component('vue-toggle-btn', VueToggleBtn);
 
 export default {
-  name: 'mail-index',
+  name: 'mail-app',
   template: `
-        <section class="mail-index flex" v-if="mails">
+        <section class="mail-app flex" v-if="mails">
         <user-msg />
           <div class="mail-header flex">         
               <h1>Mail</h1>
               <mail-filter @filtered="setFilter"></mail-filter>
-              <!-- <div class="sort-input"> 
-                <div >
-                  <input type="radio"  value="date" v-model="sortBy" />
-                  <label>Date</label>
-                </div>
-                <div>
-                  <input type="radio" value="subject" v-model="sortBy" />
-                  <label>Subject</label>
-                </div>
-              </div> -->
           </div>
           <div class="mail-main flex">
             <mail-menu class="mail-menu-container flex" @mailBoxed="setMailBox" :mails="mails" @compose="setNewMail" @sort="setSort"></mail-menu > 

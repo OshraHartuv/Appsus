@@ -6,7 +6,7 @@
 @import "./mail-preview.css";
 
 
-.mail-index{
+.mail-app{
     flex-direction: column;
 }
 

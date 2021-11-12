@@ -20,7 +20,7 @@ export default {
                   </span>
                   </div>
                   <div @click="box('drafts')"
-                  :class="{selectedBox: currBox ==='draft'}">Drafts</div>
+                  :class="{selectedBox: currBox ==='drafts'}">Drafts</div>
                   <div>Starred</div>
                   <div>Labels</div>
                   <select @change="setSort" v-model="sort" class="sort-select">
@@ -58,8 +58,8 @@ export default {
       });
       return count;
     },
-    add(accumulator, a) {
-      return accumulator + a;
-    },
+    // add(accumulator, a) {
+    //   return accumulator + a;
+    // },
   },
 };
