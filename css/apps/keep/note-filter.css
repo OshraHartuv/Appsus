@@ -1,0 +1,29 @@
+.note-filter {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  width: 300px;
+  height: 40px;
+  border: black 1px solid;
+  border-radius: 5px;
+}
+
+.note-filter input {
+  min-width: 200px;
+  height: 25px;
+  border: none;
+}
+
+.note-filter input:focus-visible {
+  outline-width: 0;
+}
+
+.note-filter select {
+  min-width: 60px;
+  height: 25px;
+  text-align: center;
+  border: none;
+}

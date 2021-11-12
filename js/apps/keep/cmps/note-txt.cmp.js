@@ -1,4 +1,4 @@
-import { noteService } from "../services/note.service.js";
+// import { noteService } from "../services/note.service.js";
 import { eventBus } from '../../../services/event-bus-service.js'
 
 
@@ -6,7 +6,10 @@ export const noteTxt = {
     props: ['note'],
     template: `
         <section class="note-txt" @click = "selected = true">
-            <pre class="txt-editor" :class="note.id" id="note-txt" contenteditable="true">{{note.info.txt}}</pre>
+            <pre class="txt-editor" 
+            :class="note.id" id="note-txt" 
+            contenteditable="true" @click.stop="" 
+            @focusout="setTxt(note.id)">{{note.info.title}}</pre>
         </section>
     `,
     data() {
@@ -15,15 +18,12 @@ export const noteTxt = {
         };
     },
     created() {
-        eventBus.$on('unSelect', this.reportVal);
     },
     methods: {
-        reportVal(noteId) {
+        setTxt(noteId) {
             if (!document.querySelector(`.txt-editor.${noteId}`)) return
             const txt = document.querySelector(`.txt-editor.${noteId}`).innerText
-            console.log(noteId, txt);
-            noteService.setTxt(noteId, txt)
-                .then(() => this.selected = false)
+            eventBus.$emit('setTxt', noteId, txt)
         },
     }
 };

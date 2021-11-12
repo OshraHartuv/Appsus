@@ -7,7 +7,7 @@ export default {
     template: `
         <section>
             <form @submit.prevent.stop="save" class="note-add" >
-                <input class="add-start" type="text" :placeholder="placeholder" v-model:value="newNote.info.txt" @change="save">
+                <input class="add-start" type="text" :placeholder="placeholder" v-model:value="newNote.info.title" @change="save" autofocus>
                 <div class="actions">
                     <button class="btn-save" @click.prevent="save" title="Save"></button>
                     <button class="btn-txt" @click.prevent="setType('note-txt')" title="Text"></button>
@@ -24,7 +24,7 @@ export default {
             newNote: {
                 type: 'note-txt',
                 info: {
-                    txt: null
+                    title: null
                 },
 
             },
@@ -54,11 +54,11 @@ export default {
         },
 
         save() {
-            if (!this.newNote.info.txt) return
+            if (!this.newNote.info.title) return
             noteService.addNewNote(this.newNote)
                 .then(() => {
                     eventBus.$emit('savedNote')
-                    this.newNote.info.txt = ''
+                    this.newNote.info.title = ''
                 })
         }
     }

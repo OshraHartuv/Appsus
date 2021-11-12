@@ -5,8 +5,8 @@
   min-height: 100px;
   /* height: fit-content; */
   /* width: 100%; */
-  border: #d6d6d6 3px solid;
-  border-radius: 7px;
+  border: #2c2c2c 1px solid;
+  border-radius: 2px;
   margin: 5px;
   /* flex: 1; */
   transition: box-shadow 0.3s;
@@ -14,14 +14,16 @@
   break-inside: avoid-column;
 }
 .note-preview:hover {
-  box-shadow: rgb(155, 155, 155) 0px 0px 4px 1px;
+  box-shadow: rgb(117, 117, 117) 0px 0px 4px 1px;
   cursor: pointer;
 }
 
 .edit-mode {
   position: absolute;
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
   width: 80vw;
   max-width: 100vw;
   height: 80vh;
@@ -30,13 +32,21 @@
   transform: translate(-50%, -50%);
   z-index: 10;
 }
-
+.note-preview pre {
+  margin: 0;
+}
 .edit-mode:hover {
   cursor: default;
 }
 
 .done {
   text-decoration-line: line-through;
+}
+.note-todos {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
 }
 
 .todos li:not(:last-child) {
@@ -53,8 +63,9 @@
 }
 
 .todos input {
-  background-color: rgba(240, 248, 255, 0);
+  background-color: rgba(52, 118, 175, 0);
   border: none;
+  flex: 1;
 }
 
 .note-txt pre {
@@ -67,15 +78,24 @@
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.edit-mode pre {
+.note-txt pre:focus-visible {
+  outline-width: 0;
+}
+
+.edit-mode .note-txt pre {
   width: 70vw;
   max-width: 70vw;
+  height: 60vh;
 }
 
 .edit-mode .note-video {
+  display: flex;
   margin: auto;
-  width: 70vw;
-  height: 80vh;
+  text-align: center;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 70vw;
+  /* height: 80vh; */
   max-width: 100vw;
 }
 
@@ -92,14 +112,21 @@
 
 .actions-container {
   position: absolute;
+  display: flex;
   width: 100%;
   bottom: 0;
   left: 0;
   background-color: rgb(255, 255, 255);
   opacity: 0;
+  transition: 0.5s;
+}
+
+.note-preview:hover .actions-container {
+  opacity: 1;
 }
 
 button.trash {
+  position: relative;
   width: 15px;
   height: 20px;
   padding: 0px;
@@ -113,15 +140,8 @@ button.trash {
   transition: 0.3s;
 }
 
-.note-preview:hover .actions-container {
-  opacity: 1;
-  transition: 0.3s;
-}
 button.color-palette-container {
   position: relative;
-  /* opacity: 0; */
-  /* bottom: 0; */
-  /* right: 0; */
   width: 20px;
   height: 20px;
   padding: 0px;
@@ -134,25 +154,36 @@ button.color-palette-container {
   background-image: url(../../../img/palette.svg);
   transition: 0.3s;
 }
+button.duplicate-note {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin: 4px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  background-image: url(../../../img/clone.svg);
+  transition: 0.3s;
+}
 
-ul.color-palette {
+.color-palette {
   position: absolute;
   left: 30px;
   bottom: -25px;
-  opacity: 0;
   padding: 0px;
   list-style: none;
-  display: grid;
+  display: none;
   grid-template-columns: repeat(4, 15px);
   grid-template-rows: repeat(5, 15px);
   gap: 6px;
   transition: 0.4s;
-  /* display: none; */
 }
 
-.color-palette-container:hover ul.color-palette {
+.show-colors .color-palette {
   display: grid;
-  opacity: 1;
 }
 
 .color-palette > * {
@@ -165,6 +196,28 @@ ul.color-palette {
 
 .color-palette li:hover {
   transform: scale(1.1);
+}
+
+.pin-note {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 15px;
+  height: 20px;
+  padding: 0px;
+  margin: 4px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  background-image: url(../../../img/pin.svg);
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.note-preview:hover .pin-note {
+  opacity: 1;
 }
 
 .note-img img {

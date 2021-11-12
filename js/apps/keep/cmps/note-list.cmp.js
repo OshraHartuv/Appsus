@@ -5,7 +5,7 @@ export default {
     props: ['notes'],
     template: `
             <section class="note-list">
-                <div class="main-screen" :class="{'menu-open':selectedNote}" @click="toggleMenu()"></div>
+                <div class="main-screen" :class="{'menu-open':selectedNote}" @click="toggleMenu"></div>
                 <span class="note-preview"
                 :class="{'edit-mode' : selectedNote && note.id === selectedNote.id }"
                 v-for="note in notesToRender" 
@@ -18,24 +18,20 @@ export default {
     `,
     data() {
         return {
-            editMode: false,
             selectedNote: null,
         }
     },
     created() {
         eventBus.$on('removedNote', this.toggleMenu);
-
     },
     methods: {
         setEditMode(note) {
             note.selected = true
             this.selectedNote = note
-
         },
 
         toggleMenu() {
             eventBus.$emit('unSelect', this.selectedNote.id)
-            console.log('this.selectedNote.id', this.selectedNote.id)
             this.selectedNote = null
         },
     },

@@ -11,8 +11,12 @@ export default {
         <section class="keep-app">
             <note-add/>
             <note-filter @filtered="setFilter" />
-            <note-details v-if="selectedNote" :note="selectedNote" @close="closeDetails" />
-            <note-list v-else :notes="notesToShow"  @selected="selectNote" />
+            <!-- <note-details v-if="selectedNote" :note="selectedNote" @close="closeDetails" /> -->
+            <hr />
+                📌Pinned Notes:
+                <note-list :notes="pinnedNotesToShow"  @selected="selectNote" />
+                <hr />
+            <note-list :notes="notesToShow"  @selected="selectNote" />
         </section>
     `,
     data() {
@@ -27,6 +31,11 @@ export default {
         eventBus.$on('savedNote', this.loadNotes);
         eventBus.$on('removedNote', this.removeNote);
         eventBus.$on('setBgc', this.setBgc);
+        eventBus.$on('setTxt', this.setTxt);
+        eventBus.$on('setTodos', this.setTodos);
+        eventBus.$on('setAnimatedNote', this.setAnimatedNote);
+        eventBus.$on('pinnedNote', this.setPinnedNote);
+        eventBus.$on('duplicateNote', this.duplicateNote);
     },
     methods: {
         loadNotes() {
@@ -36,9 +45,9 @@ export default {
         selectNote(note) {
             this.selectedNote = note;
         },
-        closeDetails() {
-            this.selectedNote = null;
-        },
+        // closeDetails() {
+        //     this.selectedNote = null;
+        // },
         setFilter(filterBy) {
             this.filterBy = filterBy;
         },
@@ -64,20 +73,45 @@ export default {
         setBgc(id, color) {
             noteService.setBgc(id, color)
                 .then(this.loadNotes)
+        },
+        setTxt(id, txt) {
+            noteService.setTxt(id, txt)
+                .then(this.loadNotes)
+        },
+        setTodos(id, title, todos) {
+            noteService.setTodos(id, title, todos)
+                .then(this.loadNotes)
+        },
+        setAnimatedNote(id, title, url) {
+            noteService.setAnimatedNote(id, title, url)
+                .then(this.loadNotes)
+        },
+        setPinnedNote(id) {
+            noteService.setPinnedNote(id)
+                .then(this.loadNotes)
+        },
+        duplicateNote(id) {
+            noteService.duplicateNote(id)
+                .then(this.loadNotes)
         }
     },
     computed: {
         notesToShow() {
-            // if (!this.filterBy) return this.notes;
-            // const searchStr = this.filterBy.title.toLowerCase();
-
-            // const notesToShow = this.notes.filter(note => {
-            //     return note.title.toLowerCase().includes(searchStr) &&
-            //         note.listPrice.amount >= lowPrice &&
-            //         note.listPrice.amount <= highPice
-            // });
-            return this.notes
+            if (!this.notes) return
+            if (!this.filterBy) return this.notes.filter(note => !note.isPinned)
+            const searchStr = this.filterBy.title.toLowerCase();
+            let notesToShow = this.notes.filter(note => {
+                return !note.isPinned && (note.type === this.filterBy.type || this.filterBy.type === 'all') &&
+                    (note.info.title.toLowerCase().includes(searchStr) ||
+                        JSON.stringify(note).toLowerCase().includes(searchStr))
+            });
+            if (this.filterBy.type === 'all' && !this.filterBy.title) return this.notes;
             return notesToShow;
+        },
+        pinnedNotesToShow() {
+            if (!this.notes) return
+            let pinnedNotesToShow = this.notes.filter(note => note.isPinned)
+            return pinnedNotesToShow
         }
     },
     components: {
