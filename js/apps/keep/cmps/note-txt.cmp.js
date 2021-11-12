@@ -1,19 +1,30 @@
+import { noteService } from "../services/note.service.js";
+import { eventBus } from '../../../services/event-bus-service.js'
 
 
 export const noteTxt = {
     props: ['note'],
     template: `
-        <section class="note-txt">          
-                {{note.info.txt}}          
+        <section class="note-txt">
+            <div contenteditable="true"> -->
+                {{note.info.txt}}
+            </div>
         </section>
     `,
     data() {
         return {
+            selected: false
         };
     },
+    created() {
+        eventBus.$on('unSelect', this.unSelectNote);
+    },
     methods: {
-        reportVal() {
-            this.$emit('setInput', this.txt);
-        }
+        unSelectNote() {
+            console.log(this.note);
+            noteService.save(this.note)
+                .then(() => this.selected = false)
+
+        },
     }
 };

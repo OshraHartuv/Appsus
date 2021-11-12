@@ -12,14 +12,14 @@ export default {
                 :key="note.id" 
                 :style="{backgroundColor:note.style.bgc}"
                 @click="setEditMode(note)">
-                    <note-preview :note="note" />
+                    <note-preview :note="(selectedNote && note.id === selectedNote.id) ? selectedNote: note" />
                 </span>
             </section>
     `,
     data() {
         return {
             editMode: false,
-            selectedNote: null
+            selectedNote: null,
         }
     },
     created() {
@@ -28,12 +28,13 @@ export default {
     },
     methods: {
         setEditMode(note) {
+            note.selected = true
             this.selectedNote = note
 
         },
 
         toggleMenu() {
-            console.log('hhi');
+            eventBus.$emit('unSelect')
             this.selectedNote = null
         },
     },

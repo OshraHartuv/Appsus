@@ -1,11 +1,14 @@
 export const noteTodos = {
     props: ['note'],
     template: `
-        <div class="row">
+        <div class="row" contenteditable="true">
                 {{note.info.title}}
+                <div contenteditable="true" autofocus>
                 <ul>
                     <li v-for="todo in note.info.todos">{{todo.txt}}</li>
                 </ul>
+                </div>
+
         </div>
     `,
     data() {

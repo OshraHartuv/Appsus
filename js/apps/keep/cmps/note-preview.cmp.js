@@ -13,7 +13,7 @@ export default {
         <button class="trash" @click="remove(note.id)"></button>
         <button class = "color-palette-container">
             <ul class = "color-palette">
-                <li v-for="color in colorArray" @click ="setBgc(note.id,color)" :style = "{'background-color':color}"></li>
+                <li v-for="color in colorArray" @click.stop ="setBgc(note.id,color)" :style = "{'background-color':color}"></li>
             </ul>
         </button>
     </div>
