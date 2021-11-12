@@ -31,6 +31,47 @@
   z-index: 10;
 }
 
+.edit-mode:hover {
+  cursor: default;
+}
+
+.done {
+  text-decoration-line: line-through;
+}
+
+.todos li:not(:last-child) {
+  display: flex;
+  justify-content: space-between;
+  min-width: 200px;
+}
+
+.todos li:last-child {
+  display: flex;
+  justify-content: flex-start;
+  min-width: 200px;
+  padding-top: 10px;
+}
+
+.todos input {
+  background-color: rgba(240, 248, 255, 0);
+  border: none;
+}
+
+.note-txt pre {
+  max-width: 300px;
+  max-height: 400px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  overflow: hidden;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.edit-mode pre {
+  width: 70vw;
+  max-width: 70vw;
+}
+
 .edit-mode .note-video {
   margin: auto;
   width: 70vw;
