@@ -47,7 +47,6 @@ export default {
     },
     setSort(){
       this.$emit('sort', this.sort)
-      console.log(this.sort);
     }
   },
   computed: {

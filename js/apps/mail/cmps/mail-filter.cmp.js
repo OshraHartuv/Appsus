@@ -1,22 +1,32 @@
 export default {
+  props: ['box'],
     template: `
           <div class="mail-filter">
-              <label><span>Search</span>
-              <input @input="filter" v-model="filterBy.title" type="text" placeholder="Title">
-              </label>
+
+              <input @input="filter" v-model="filterBy" type="text" :placeholder="setPlaceholder" value="">
           </div>
       `,
     data() {
       return {
-        filterBy: {
-          title: '',
-        },
+        filterBy: '',
       };
     },
     methods: {
       filter() {
-        console.log(this.filterBy);
-        this.$emit('filtered', { ...this.filterBy });
+        this.$emit('filtered', this.filterBy);
       },
+      cleanValue(){
+        this.filterBy =''
+      } 
     },
+    computed:{
+      setPlaceholder(){
+        // console.log(this.box);
+        this.cleanValue()
+        var placeholder = 'Search'
+        if (this.box !== 'all') placeholder +=  ` in ${this.box}`
+        return placeholder
+      },
+           
+    }
   };

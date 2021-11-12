@@ -50,7 +50,6 @@ function nameToShow(mail) {
 }
 
 function composeMail(mail) {
-  console.log(mail);
 }
 
 function getNextMailId(mailId) {

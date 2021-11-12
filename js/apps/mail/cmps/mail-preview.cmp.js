@@ -21,11 +21,11 @@ export default {
                   {{ mail.subject }}
                 </span> - 
                 <span class="mail-preview-body">
-                {{ mail.body }}
+                  {{ mail.body }}
                 </span>
               </span>
               <span class="mail-preview-date">
-              {{ dateToShow }}
+                {{ dateToShow }}
               </span>
               <button @click.prevent.stop="deleteMail(mail.id)" class="delete-mail-btn"><img src="img/trash.svg" class="trash-img-preview"></button>
             </div>
@@ -35,22 +35,14 @@ export default {
       `,
   methods: {
     deleteMail(mailId){
-      console.log('deleted');
       eventBus.$emit('delete',mailId)
     },
     switcher(mail){
       if (!mail.isDraft) this.$router.push('/mail/'+mail.id)
-      else {
-        eventBus.$emit('editDraft',mail)
-      }
+      else eventBus.$emit('editDraft',mail)
     }
   },
   computed: {
-    // subjectToShow() {
-    //   return (
-    //      (this.mail.subject) ? this.mail.subject[0].toUpperCase() + this.mail.subject.substring(1): ''
-    //   );
-    // },
     contactToShow() {
       if (!this.mail.to && this.mail.isDraft) return '';
       return mailService.nameToShow(this.mail);
