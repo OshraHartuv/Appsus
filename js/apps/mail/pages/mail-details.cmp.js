@@ -107,7 +107,6 @@ export default {
     },
     starMail(){
       (!this.mail.isStared) ? (this.mail.isStared =true) : (this.mail.isStared=false);
-      console.log(this.mail.isStared);
       mailService.saveMail(this.mail).then(() => {
         eventBus.$emit('savedMail');
       })

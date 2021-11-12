@@ -23,7 +23,6 @@
 
 .mail-details-tools {
   align-items: center;
-  /* background-color: royalblue; */
 }
 
 .mail-details-tools > * {
@@ -43,22 +42,26 @@
   cursor: pointer;
 }
 
-.mail-details button:hover .fa-envelope,
-.mail-details button:hover .fa-envelope-open,
-.mail-details-tools button:hover .fa-trash {
-  color: black;
-}
-
-
 .grey-color{
   color: rgba(116, 125, 134, 0.602); 
 }
+
 
 .mail-details-tools .fa {
   font-size: 16px;
 }
 
 .stared {
+  color: yellow;
+}
+
+/* hovering */
+
+.mail-details-tools button:hover .fa {
+  color: black;
+}
+
+.mail-details-tools button:hover .fa.stared{
   color: yellow;
 }
 
