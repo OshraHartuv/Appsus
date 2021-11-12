@@ -55,8 +55,10 @@ export default {
       else eventBus.$emit('editDraft',mail)
     },
     starMail(){
-      !this.mail.isStared ? this.mail.isStared =true : this.mail.isStared=false;
-      mailService.saveMail(this.mail).then(() => {
+      const val = (this.mail.isStared) ? false : true;
+      mailService.editAndSave(this.mail, 'isStared',val).then(() => {
+      // !this.mail.isStared ? this.mail.isStared =true : this.mail.isStared=false;
+      // mailService.saveMail(this.mail).then(() => {
         eventBus.$emit('savedMail');
       })
     }

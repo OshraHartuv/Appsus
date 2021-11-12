@@ -17,7 +17,9 @@ export const mailService = {
   composeMail,
   nameToShow,
   getUser,
-  removeMail
+  removeMail,
+  moveToTrash,
+  editAndSave
 };
 
 function query() {
@@ -27,16 +29,18 @@ function query() {
 function getUser(){
   return loggedinUser;
 }
-// id: 'e101',
-//         subject: 'Miss you!',
-//         body: 'Would love to catch up sometimes',
-//         isRead: false,
-//         sentAt: 1631279089000,
-//         to: 'momo@momo.com',
 
-// to: '',
-// subject: '',
-// body: '',
+function editAndSave(mail,key,val){
+  mail[key] = val
+  // console.log(mail[key]);
+  return saveMail(mail)
+}
+
+function moveToTrash(mailId) {
+  mail = getMailById(mailId)
+  mail.removedAt = Date.now()
+  return storageService.put(MAILS_KEY, mail)
+}
 
 function removeMail(mailId) {
   // return Promise.reject('Big balagan!')
@@ -67,6 +71,7 @@ function getPreviousMailId(mailId) {
 }
 
 function saveMail(mail) {
+  // mail.sentAt = Date.now();
   if (mail.id) return storageService.put(MAILS_KEY, mail);
   else return storageService.post(MAILS_KEY, mail);
 }

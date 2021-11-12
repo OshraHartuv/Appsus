@@ -1,7 +1,7 @@
 .mail-details {
   flex-direction: column;
   padding: 10px;
-  width: 80vw;
+  margin-top: 5vh;
 }
 
 .mail-details h2 {
@@ -9,7 +9,6 @@
 }
 
 .mail-details-info {
-  justify-content: space-between;
   margin-bottom: 15px;
 }
 
@@ -25,11 +24,12 @@
   align-items: center;
 }
 
-.mail-details-tools > * {
+.details-header > * {
   padding: 5px;
 }
 
-.mail-details-tools > *:not(:last-child){
+.mail-details-tools > *:not(:last-child) , 
+.details-nav > *:not(:last-child){
   margin-right: 5px;
 }
 
@@ -42,12 +42,11 @@
   cursor: pointer;
 }
 
-.grey-color{
-  color: rgba(116, 125, 134, 0.602); 
+.grey-color {
+  color: rgba(116, 125, 134, 0.602);
 }
 
-
-.mail-details-tools .fa {
+.details-header .fa {
   font-size: 16px;
 }
 
@@ -55,16 +54,55 @@
   color: yellow;
 }
 
+.mail-details-addresses {
+  flex-direction: column;
+}
+
+.mail-details-date {
+  color: rgba(116, 125, 134, 0.602);
+}
+
+.details-header{
+  /* align-items: center; */
+  justify-content: space-between;
+}
+
 /* hovering */
 
-.mail-details-tools button:hover .fa {
+.details-header button:hover .fa {
   color: black;
 }
 
-.mail-details-tools button:hover .fa.stared{
+.mail-details-tools button:hover .fa.stared {
   color: yellow;
 }
 
-.mail-details-tools .fa-envelope ,.mail-details-tools .fa-envelope-open ,.mail-details-tools .fa-trash{
+.mail-details-tools .fa-envelope,
+.mail-details-tools .fa-envelope-open,
+.mail-details-tools .fa-trash,
+.details-nav .fa {
   color: rgba(116, 125, 134, 0.602);
+}
+
+@media (max-width: 570px) {
+  .mail-details {
+    width: 100vw;
+    margin-left: 10px;
+  }
+
+  .mail-details-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (min-width: 570px) {
+  .mail-details {
+    width: 180vw;
+    margin-left: 20vw;
+  }
+
+  .mail-details-info {
+    justify-content: space-between;
+  }
 }

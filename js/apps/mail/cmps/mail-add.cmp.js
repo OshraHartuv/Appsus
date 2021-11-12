@@ -22,7 +22,6 @@ export default {
                     </div>
                     <textarea @input="draftMail" v-model="newMail.body"  class="mail-add-input mail-add-body">
                     </textarea>
-                    <!-- </div> -->
                 </div>
                 <div class="mail-add-editors flex">
                     <button class="send-btn" @click="sendMail">Send</button>
@@ -51,23 +50,29 @@ export default {
   },
   methods: {
     draftMail() {
-      this.newMail.sentAt = Date.now();
-      // every 5 secs
-      mailService.saveMail(this.newMail).then(() => {});
+      // this.newMail.sentAt = Date.now();
+      mailService.editAndSave(this.newMail,'sentAt',Date.now())
+      .then(() => {});
     },
     sendMail() {
       if (!this.newMail.to.includes('@') || !this.newMail.to.includes('.')) {
-        const msg = {
-          txt: 'Mail not sent, please enter a valid e-mail address',
-          type: 'error',
-        };
-        eventBus.$emit('showMsg', msg);
+        this.sendMsg('Mail not sent, please enter a valid e-mail address', 'error')   
       } else {
-        this.newMail.sentAt = Date.now();
-        this.newMail.isDraft = false;
-        mailService.saveMail(this.newMail).then(() => {
+        // this.newMail.sentAt = Date.now();
+        // this.newMail.isDraft = false;
+        // mailService.saveMail(this.newMail)
+        mailService.editAndSave(this.newMail,'sentAt',Date.now())
+        .then(() => {
+          mailService.editAndSave(this.newMail,'isDraft',false)
+        })
+        .then(() => {
+          this.sendMsg('Mail sent','success')
           this.$emit('close');
-        });
+        })
+        .catch(()=>{
+          this.sendMsg('Error, please try again later','error')
+          this.$emit('close');
+        })
       }
     },
     closeDraft() {
@@ -75,10 +80,19 @@ export default {
         this.$emit('close');
         return;
       }
-      this.newMail.sentAt = Date.now();
-      mailService.saveMail(this.newMail).then(() => {
+      mailService.editAndSave(this.newMail,'sentAt',Date.now())
+        .then(() => {
+          this.sendMsg('Daft saved','success')
+
         this.$emit('close');
       });
+    },
+    sendMsg(txt, type) {
+      const msg = {
+        txt,
+        type,
+      };
+      eventBus.$emit('showMsg', msg);
     },
   },
 };
