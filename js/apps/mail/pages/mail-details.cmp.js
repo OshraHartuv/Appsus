@@ -32,10 +32,6 @@ export default {
                   @click="starMail">
                   </span>
               </button>
-              <!-- <button class="">
-                  <span class="fa fa-envelope-open" :class="" @click="changeColor(num)">
-                  </span>
-              </button> -->
             </div>
             <div class="mail-content">
                 <h2>{{ mail.subject }}</h2>
