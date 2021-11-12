@@ -1,63 +1,96 @@
-.mail-menu{
-    flex-direction: column;
-    min-width: 20vw;
-    padding-right: 10px;
-
+.mail-menu {
+  flex-direction: column;
+  max-width: 20vw;
+  padding-right: 10px;
+  position: fixed;
+  margin-top: 5vh;
 }
 
-.mail-menu.nav >*{
-    padding: 10px;
-    width: 100%;
-    line-height: 1.7vh;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 0  30px 30px 0;
+.mail-menu-nav {
+  flex-direction: column;
+  height: 100vh;
 }
 
-.mail-menu.nav >*:hover{
-    cursor: pointer;
-    background-color: rgba(161, 155, 155, 0.342);
+.mail-menu-nav > * {
+  padding: 10px;
+  width: 100%;
+  line-height: 1.7vh;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0 30px 30px 0;
 }
 
-.selectedBox{
-    color: red;
-    background-color: rgba(233, 101, 101, 0.486);
+.mail-menu-nav > *:hover {
+  cursor: pointer;
+  background-color: rgba(161, 155, 155, 0.342);
 }
 
-.mail-menu button{
-    padding: 10px;
-    border-radius: 40px;
-    background-color: white;
-    border: none;
-    line-height: 20px;
-    width: 80%;
-    margin: 10px;
-    box-shadow: 0px 2px 4px 0px rgb(71 85 79 / 40%);
+.selectedBox {
+  color: red;
+  background-color: rgba(233, 101, 101, 0.486);
 }
 
-.mail-menu button:hover{
-    cursor: pointer;
+.mail-menu button {
+  padding: 10px;
+  border-radius: 40px;
+  background-color: white;
+  border: none;
+  line-height: 20px;
+  width: 15vw;
+  margin: 10px;
+  box-shadow: 0px 2px 4px 0px rgb(71 85 79 / 40%);
 }
 
-.sort-select{
-    border: none;
-    /* line-height: 1.1vh; */
-    margin: 0;
-    /* padding: 0; */
-    
+.mail-menu button:hover {
+  cursor: pointer;
 }
 
-.sort-select>*{
-    /* padding-right: 10px; */
-
+.sort-select {
+  border: none;
+  margin: 0;
 }
+
 select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    /* text-indent: 1vh; */
-    text-overflow: '';
-  }
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: '';
+}
 
 .sort-select:focus-visible {
-    outline-width: 0;
+  outline-width: 0;
+}
+
+@media (max-width: 570px) {
+  .hide-menu {
+    transform: translateX(-100%);
+    transition: 0.6s;
+  }
+
+  .show-menu {
+    min-width: 50vw;
+    z-index: 2;
+    transform: translateX(0);
+    transition: 0.6s;
+    background-color: white;
+  }
+
+  .mail-menu button {
+    display: none;
+  }
+
+  .mail-menu-nav:first-child {
+    margin-top: 15px;
+  }
+
+  .mail-menu-nav > * {
+    line-height: 30px;
+  }
+}
+
+/* TABLET */
+
+@media (min-width: 570px) {
+  .hamburger-menu {
+    display: none;
+  }
 }

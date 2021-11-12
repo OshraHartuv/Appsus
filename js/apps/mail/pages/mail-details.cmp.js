@@ -14,29 +14,42 @@ export default {
   name: 'mail-details',
   template: `
           <section class="mail-details flex" v-if="mail">
-            <div class="mail-details-tools flex">
-              <button @click="deleteMail" title="Delete">
-                <span class="fa fa-trash"></span>
-              </button>
-              <button class="mark-as">
-                  <span class="fa" 
-                  :class="{'fa-envelope': !mail.isRead ,  'fa-envelope-open': mail.isRead}"
-                  :title="(mail.isRead)?'Mark as unread': 'Mark as read'"
-                  @click="markAs">
-                  </span>
-              </button>
-              <button class="star">
-                  <span class="fa fa-star" 
-                  :class="{'stared':mail.isStared,'grey-color':!mail.isStared}"
-                  :title="(mail.isStared)?'Remove star': 'Star'" 
-                  @click="starMail">
-                  </span>
-              </button>
+            <div class="details-header flex">
+              <div class="mail-details-tools flex">
+                <button @click="deleteMail" title="Delete">
+                  <span class="fa fa-trash"></span>
+                </button>
+                <button class="mark-as">
+                    <span class="fa" 
+                    :class="{'fa-envelope': !mail.isRead ,  'fa-envelope-open': mail.isRead}"
+                    :title="(mail.isRead)?'Mark as unread': 'Mark as read'"
+                    @click="markAs">
+                    </span>
+                </button>
+                <button class="star">
+                    <span class="fa fa-star" 
+                    :class="{'stared':mail.isStared,'grey-color':!mail.isStared}"
+                    :title="(mail.isStared)?'Remove star': 'Star'" 
+                    @click="starMail">
+                    </span>
+                </button>
+              </div>
+              <div class="details-nav">
+                <button title="Previous mail" @click="goToPrev">
+                  <span class="fa fa-arrow-left"></span>
+                </button>
+                <button title="Next mail" @click="goToNext">
+                  <span class="fa fa-arrow-right" ></span>
+                </button>
+                <button @click="closeDetails">
+                  <span class="fa fa-times"></span>
+                </button>
+              </div>
             </div>
             <div class="mail-content">
                 <h2>{{ mail.subject }}</h2>
                 <div class="mail-details-info flex">
-                  <div class="mail-details-addresses">
+                  <div class="mail-details-addresses flex">
                     <div>
                       <span class="bold">
                         {{ contactToShow }}
@@ -68,8 +81,12 @@ export default {
     const { mailId: mailId } = this.$route.params;
     mailService.getMailById(mailId).then((mail) => {
       this.mail = mail;
-      this.mail.isRead = true;
-      mailService.saveMail(this.mail).then(() => {
+      // this.mail.isRead = true;
+      mailService.editAndSave(this.mail, 'isRead',true)
+      // this.mail = mail;
+      // this.mail.isRead = true;
+      // mailService.saveMail(this.mail)
+      .then(() => {
         eventBus.$emit('savedMail');
       });
     });
@@ -91,9 +108,10 @@ export default {
   },
   methods: {
     markAs() {
-      this.mail.isRead ? (this.mail.isRead = false) : (this.mail.isRead = true);
-      // console.log('isRead?' ,this.mail.isRead);
-      mailService.saveMail(this.mail).then(() => {
+      const val = this.mail.isRead ?  false : true;
+      mailService.editAndSave(this.mail, 'isRead',val).then(() => {
+      // this.mail.isRead ? (this.mail.isRead = false) : (this.mail.isRead = true);
+      // mailService.saveMail(this.mail).then(() => {
         eventBus.$emit('savedMail');
       });
     },
@@ -102,10 +120,22 @@ export default {
       this.$router.push('/mail')
     },
     starMail(){
-      (!this.mail.isStared) ? (this.mail.isStared =true) : (this.mail.isStared=false);
-      mailService.saveMail(this.mail).then(() => {
+      const val = (this.mail.isStared) ? false : true;
+      mailService.editAndSave(this.mail,'isStared',val).then(() => {
+      // (!this.mail.isStared) ? (this.mail.isStared =true) : (this.mail.isStared=false);
+      // mailService.saveMail(this.mail).then(() => {
         eventBus.$emit('savedMail');
       })
+    },
+    goToNext(){
+      this.$router.push('/mail/'+this.nextMailId)
+    },
+    goToPrev(){
+      this.$router.push('/mail/'+this.previousMailId)
+    },
+    closeDetails(){
+      this.$router.push('/mail')
+
     }
   },
   computed: {

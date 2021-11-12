@@ -3,13 +3,14 @@
   min-width: 60vw;
   background-color: white;
   min-height: 60vh;
-  position: absolute;
+  position: fixed;
   right: 5px;
   bottom: 0;
   box-shadow:  5px -3px 12px -1px rgba(0,0,0,0.46);
   border-radius: 15px 15px 0 0;
   border: 1px solid rgb(185, 179, 179);
   border-bottom: none;
+  z-index: 20;
 }
 
 .mail-add button {
@@ -120,5 +121,15 @@
   background-color: rgb(165, 162, 162);
 }
 
-.mail-add-header nav {
+@media (max-width: 570px) {
+  .mail-add{
+    width: 98vw;
+    height: 90vh;
+  }
+
+  .mail-add-input{
+    height: 50px;
+  }
 }
+
+

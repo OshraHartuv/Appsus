@@ -5,22 +5,34 @@ import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import mailAdd from '../cmps/mail-add.cmp.js';
 import mailDetails from './mail-details.cmp.js';
-import userMsg from '../../../cmps/user-msg.cmp.js';
 
 export default {
   name: 'mail-app',
   template: `
-        <section class="mail-app flex" v-if="mails">
-        <user-msg />
-          <div class="mail-header flex">         
+        <section class="mail-app flex" v-if="mails" >
+          <div class="mail-header flex">
+            <div class="filter-container flex">
+              <button class="hamburger-menu" @click.stop= " toggleMenu">
+                <span class="fa fa-bars"></span>
+              </button>          
               <h1>Mail</h1>
               <mail-filter @filtered="setFilter" :box="filterBy.box"></mail-filter>
+            </div>
           </div>
           <div class="mail-main flex">
-            <mail-menu class="mail-menu-container flex" @mailBoxed="setMailBox" :mails="mails" @compose="setNewMail" @sort="setSort"></mail-menu > 
+            <mail-menu class="mail-menu-container flex" @mailBoxed="setMailBox" 
+            :mails="mails" 
+            @compose="setNewMail" 
+            @sort="setSort"
+            :class="{ 'show-menu': !menuClose, 'hide-menu': menuClose}">
+            </mail-menu >
             <mail-list v-if="!selectedMail" :mails="mailsToShow" class="mail-list-container"></mail-list>
             <router-view  v-else></router-view>
             <mail-add v-if="isCompose" @close="closeCompose" :mailToEdit="mailToEdit"></mail-add>
+            <button v-show="!isCompose" class="compose-btn-mobile flex" @click="setNewMail">
+              <span class="fa fa-edit"></span>
+              Compose
+            </button>
           </div> 
 
         </section>
@@ -29,15 +41,15 @@ export default {
   data() {
     return {
       mails: null,
-      filterBy: {
-        str: '',
-        box: 'all',
-      },
       mailToEdit: null,
       selectedMail: null,
       isCompose: false,
       sortBy: 'date',
-      checked: false,
+      filterBy: {
+        str: '',
+        box: 'all',
+      },
+      menuClose: true,
     };
   },
   created() {
@@ -76,6 +88,7 @@ export default {
     setMailBox(box) {
       this.filterBy.str = '';
       this.filterBy.box = box;
+      console.log('setBox');
     },
     setNewMail() {
       this.isCompose = true;
@@ -86,23 +99,28 @@ export default {
       this.loadMails();
     },
     deleteMail(id) {
-      mailService
-        .removeMail(id)
-        .then(() => {
-          const msg = {
-            txt: 'Deleted successfully',
-            type: 'success',
-          };
-          eventBus.$emit('showMsg', msg);
-          this.mails = this.mails.filter((mail) => mail.id !== id);
-        })
-        .catch((err) => {
-          const msg = {
-            txt: 'Error. Please try later',
-            type: 'error',
-          };
-          eventBus.$emit('showMsg', msg);
-        });
+      mailService.getMailById(id).then((mail) => {
+        if (mail.removedAt)
+          mailService
+            .removeMail(id)
+            .then(() => {
+              this.sendMsg('Deleted successfully', 'success');
+              this.loadMails();
+            })
+            .catch(() => {
+              this.sendMsg('Error. Please try later', 'error');
+            });
+        else
+          mailService
+            .editAndSave(mail, 'removedAt', Date.now())
+            .then(() => {
+              this.sendMsg('Moved to trash', 'success');
+              this.loadMails();
+            })
+            .catch(() => {
+              this.sendMsg('Error. Please try later', 'error');
+            });
+      });
     },
     onEditDraft(mail) {
       this.mailToEdit = mail;
@@ -110,23 +128,47 @@ export default {
     },
     setSort(val) {
       this.sortBy = val;
-      this.loadMails();
     },
     sortMails(mails) {
       if (this.sortBy === 'date') {
+        if (this.filterBy.box !== 'trash') {
+          return mails.sort((a, b) => {
+            return (
+              (b.sentAt ? b.sentAt : b.receivedAt) -
+              (a.sentAt ? a.sentAt : a.receivedAt)
+            );
+          });
+        } else {
+          return mails.sort((a, b) => {
+            return (
+              (b.removedAt ? b.removedAt : b.removedAt) -
+              (a.removedAt ? a.removedAt : a.removedAt)
+            );
+          });
+        }
+      } else if (this.sortBy === 'subject') {
         mails.sort((a, b) => {
-          return (
-            (b.sentAt ? b.sentAt : b.receivedAt) -
-            (a.sentAt ? a.sentAt : a.receivedAt)
-          );
+          if (a.subject.toLowerCase() < b.subject.toLowerCase()) return -1;
+          if (a.subject.toLowerCase() > b.subject.toLowerCase()) return 1;
+          return 0;
         });
-      } else {
+      } else if (this.sortBy === 'body') {
         mails.sort((a, b) => {
-          if (a.subject < b.subject) return -1;
-          if (a.subject > b.subject) return 1;
+          if (a.body.toLowerCase() < b.body.toLowerCase()) return -1;
+          if (a.body.toLowerCase() > b.body.toLowerCase()) return 1;
           return 0;
         });
       }
+    },
+    toggleMenu() {
+      this.menuClose ? (this.menuClose = false) : (this.menuClose = true);
+    },
+    sendMsg(txt, type) {
+      const msg = {
+        txt,
+        type,
+      };
+      eventBus.$emit('showMsg', msg);
     },
   },
   computed: {
@@ -134,38 +176,45 @@ export default {
       var mailsToShow;
       switch (this.filterBy.box) {
         case 'all':
-          mailsToShow = this.mails;
+          mailsToShow = this.mails.filter((mail) => {
+            return !mail.removedAt;
+          });
           break;
         case 'sent':
           mailsToShow = this.mails.filter((mail) => {
-            return mail.to && !mail.isDraft;
+            return mail.to && !mail.isDraft && !mail.removedAt;
           });
           break;
         case 'inbox':
           mailsToShow = this.mails.filter((mail) => {
-            return mail.from;
+            return mail.from && !mail.removedAt;
           });
           break;
         case 'read':
           mailsToShow = this.mails.filter((mail) => {
-            return mail.isRead && !mail.isDraft && mail.from;
+            return mail.isRead && !mail.isDraft && mail.from && !mail.removedAt;
           });
           break;
         case 'unread':
           mailsToShow = this.mails.filter((mail) => {
-            return !mail.isRead;
+            return !mail.isRead && !mail.removedAt;
           });
           break;
         case 'drafts':
           mailsToShow = this.mails.filter((mail) => {
-            return mail.isDraft;
+            return mail.isDraft && !mail.removedAt;
           });
           break;
         case 'stared':
-          mailsToShow = this.mails.filter((mail)=>{
+          mailsToShow = this.mails.filter((mail) => {
             return mail.isStared;
-          })
-          break
+          });
+          break;
+        case 'trash':
+          mailsToShow = this.mails.filter((mail) => {
+            return mail.removedAt;
+          });
+          break;
       }
       if (this.filterBy.str) {
         const searchStr = this.filterBy.str.toLowerCase();
@@ -200,42 +249,5 @@ export default {
     mailList,
     mailMenu,
     mailAdd,
-    userMsg,
   },
 };
-
-// var mailsToStr = mailsToShow.filter((mail) => {
-//   if (mail.to) return mail.to.toLowerCase().includes(searchStr);
-// });
-// var mailsFromStr = mailsToShow.filter((mail) => {
-//   if (mail.from) return mail.from.toLowerCase().includes(searchStr);
-// });
-// var mailsSubStr = mailsToShow.filter((mail) => {
-//   if (mail.subject)
-//     return mail.subject.toLowerCase().includes(searchStr);
-// });
-// var mailsBodyStr = mailsToShow.filter((mail) => {
-//   if (mail.body) return mail.body.toLowerCase().includes(searchStr);
-// });
-
-// console.log('mailsToStr', mailsToStr);
-// console.log('mailsFromStr', mailsFromStr);
-// console.log('mailsSubStr', mailsSubStr);
-// console.log('mailsBodyStr', mailsBodyStr);
-// return mail.to.toLowerCase().includes(searchStr)
-
-// mailsToShow = mailsToShow.filter((mail) =>
-//         {return mail.to
-//         ? mail.to.toLowerCase().includes(searchStr)
-//         : true ||
-//         mail.from
-//         ? mail.from.toLowerCase().includes(searchStr)
-//         : true ||
-//         mail.subject
-//         ? mail.subject.toLowerCase().includes(searchStr)
-//         : true ||
-//         mail.body
-//         ? mail.body.toLowerCase().includes(searchStr)
-//         : true}
-// )
-// }

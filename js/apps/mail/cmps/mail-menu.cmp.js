@@ -4,7 +4,7 @@ export default {
           <section class="mail-menu flex" v-if="mails">
             <button @click="onCompose">Compose</button>
               <router-link to="/mail" >
-                <div class="mail-menu nav flex ">
+                <div class="mail-menu-nav flex ">
                   <div  @click="box('all')" 
                   :class="{selectedBox: currBox ==='all'}">All mail</div>
                   <div  @click="box('inbox')"
@@ -21,12 +21,16 @@ export default {
                   </div>
                   <div @click="box('drafts')"
                   :class="{selectedBox: currBox ==='drafts'}">Drafts</div>
+                  <div @click="box('trash')"
+                  :class="{selectedBox: currBox ==='trash'}">Trash</div>
                   <div @click="box('stared')"
                   :class="{selectedBox: currBox ==='stared'}">Starred</div>
                   <div>Labels</div>
                   <select @change="setSort" v-model="sort" class="sort-select">
                     <option value="date" >Sort: Date</option>
                     <option value="subject">Sort: Subject</option>
+                    <option value="body">Sort: Mail text</option>
+                    <!-- <option value="mail">Sort: contact</option> -->
                   </select>
                 </div> 
               </router-link>
@@ -58,8 +62,5 @@ export default {
       });
       return count;
     },
-    // add(accumulator, a) {
-    //   return accumulator + a;
-    // },
   },
 };
