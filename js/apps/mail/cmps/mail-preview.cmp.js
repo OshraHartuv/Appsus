@@ -8,6 +8,15 @@ export default {
       <section class="mail-preview">
           <div  @click="switcher(mail)">
             <div class="mail-preview-container" :class="{ bold: !mail.isRead, read: mail.isRead}">
+            <button class="star" 
+            @click.stop="starMail" 
+            :title="mail.isStared ? 'Remove star': 'Star'">
+                  <span class="fa fa-star" 
+                  :class="{'stared':mail.isStared,'black-stroke':!mail.isStared}"
+                   
+                  >
+                  </span>
+              </button>
               <span class="mail-preview-contact">
                 <span v-if="mail.isDraft">
                   <span class="red">Draft</span>
@@ -27,7 +36,11 @@ export default {
               <span class="mail-preview-date">
                 {{ dateToShow }}
               </span>
-              <button @click.prevent.stop="deleteMail(mail.id)" class="delete-mail-btn"><img src="img/trash.svg" class="trash-img-preview"></button>
+              <button @click.stop="deleteMail(mail.id)"
+              title="Delete" 
+              class="delete-mail-btn">
+                <span class="fa fa-trash"></span>
+              </button>
             </div>
           </div>
       </section>
@@ -40,6 +53,12 @@ export default {
     switcher(mail){
       if (!mail.isDraft) this.$router.push('/mail/'+mail.id)
       else eventBus.$emit('editDraft',mail)
+    },
+    starMail(){
+      !this.mail.isStared ? this.mail.isStared =true : this.mail.isStared=false;
+      mailService.saveMail(this.mail).then(() => {
+        eventBus.$emit('savedMail');
+      })
     }
   },
   computed: {

@@ -148,7 +148,7 @@ export default {
           break;
         case 'read':
           mailsToShow = this.mails.filter((mail) => {
-            return mail.isRead && !mail.isDraft;
+            return mail.isRead && !mail.isDraft && mail.from;
           });
           break;
         case 'unread':
@@ -161,6 +161,11 @@ export default {
             return mail.isDraft;
           });
           break;
+        case 'stared':
+          mailsToShow = this.mails.filter((mail)=>{
+            return mail.isStared;
+          })
+          break
       }
       if (this.filterBy.str) {
         const searchStr = this.filterBy.str.toLowerCase();

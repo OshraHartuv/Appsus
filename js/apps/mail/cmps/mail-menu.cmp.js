@@ -21,7 +21,8 @@ export default {
                   </div>
                   <div @click="box('drafts')"
                   :class="{selectedBox: currBox ==='drafts'}">Drafts</div>
-                  <div>Starred</div>
+                  <div @click="box('stared')"
+                  :class="{selectedBox: currBox ==='stared'}">Starred</div>
                   <div>Labels</div>
                   <select @change="setSort" v-model="sort" class="sort-select">
                     <option value="date" >Sort: Date</option>

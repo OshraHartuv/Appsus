@@ -1,22 +1,67 @@
-.mail-details{
-    flex-direction: column;
-    padding: 10px;
-    width: 80vw;
-
+.mail-details {
+  flex-direction: column;
+  padding: 10px;
+  width: 80vw;
 }
 
-.mail-details h2{
-    margin-bottom: 20px;
+.mail-details h2 {
+  margin-bottom: 20px;
 }
 
-.mail-details-info{
-    justify-content: space-between;
-    margin-bottom: 15px;
+.mail-details-info {
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.mail-details-body pre{
-    text-overflow: ellipsis;
+.mail-details-body pre {
+  text-overflow: ellipsis;
   white-space: pre-wrap;
   overflow: hidden;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+/* tools */
+
+.mail-details-tools {
+  align-items: center;
+  /* background-color: royalblue; */
+}
+
+.mail-details-tools > * {
+  padding: 5px;
+}
+
+.mail-details-tools > *:not(:last-child){
+  margin-right: 5px;
+}
+
+.mail-details button {
+  border: none;
+  background-color: white;
+}
+
+.mail-details button:hover {
+  cursor: pointer;
+}
+
+.mail-details button:hover .fa-envelope,
+.mail-details button:hover .fa-envelope-open,
+.mail-details-tools button:hover .fa-trash {
+  color: black;
+}
+
+
+.grey-color{
+  color: rgba(116, 125, 134, 0.602); 
+}
+
+.mail-details-tools .fa {
+  font-size: 16px;
+}
+
+.stared {
+  color: yellow;
+}
+
+.mail-details-tools .fa-envelope ,.mail-details-tools .fa-envelope-open ,.mail-details-tools .fa-trash{
+  color: rgba(116, 125, 134, 0.602);
 }
