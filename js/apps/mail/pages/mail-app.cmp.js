@@ -172,16 +172,17 @@ export default {
       eventBus.$emit('showMsg', msg);
     },
     composeNote(note){
-      // var note = JSON.parse(note.note)
       console.log(note);
-      // var noteEdit= note +'}}'
-      var noteEdit = JSON.parse(note)
+      // noteStr
+      var noteEdit= JSON.parse(note)
+      // var noteToEdit = 
       console.log(noteEdit);
-      this.mailToEdit=noteEdit
-      this.mailToEdit['type'] = 'note'
+      // noteEdit['type'] = 'note'
+      // this.mailToEdit= noteEdit
+      // this.mailToEdit 
       // this.mailToEdit['subject'] = 'hi'
-      console.log(this.mailToEdit);
-      this.setNewMail()
+      // console.log(this.mailToEdit);
+      // this.setNewMail()
       // if (noteEdit.title) this.mailToEdit.subject = noteEdit.title;
       // if (noteEdit.todos && noteEdit.todos.length) this.mailToEdit.body = noteEdit.todos.join(' ');
       // this.setNewMail;
