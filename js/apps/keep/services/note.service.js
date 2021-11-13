@@ -14,7 +14,10 @@ export const noteService = {
     remove,
     setBgc,
     setTxt,
-    setTodos
+    setTodos,
+    setAnimatedNote,
+    setPinnedNote,
+    duplicateNote
 };
 
 function query() {
@@ -30,7 +33,7 @@ function _createNotes() {
                 type: "note-txt",
                 isPinned: false,
                 info: {
-                    txt: "Fullstack Me Baby!"
+                    title: "Fullstack Me Baby!"
                 },
                 style: {
                     bgc: "#8bc9ff"
@@ -80,7 +83,7 @@ function _createNotes() {
                 type: "note-txt",
                 isPinned: false,
                 info: {
-                    txt: "JavaScript Frameworks > App that use them 😂"
+                    title: "JavaScript Frameworks > App that use them 😂"
                 },
                 style: {
                     bgc: "#3f7bf3"
@@ -164,7 +167,7 @@ function addNewNote(note) {
                 type: "note-txt",
                 isPinned: false,
                 info: {
-                    txt: note.info.txt,
+                    title: note.info.title,
                 },
                 style: {
                     bgc: '#ffffff'
@@ -172,7 +175,7 @@ function addNewNote(note) {
             }
             break
         case 'note-todos':
-            let data = note.info.txt.split(',')
+            let data = note.info.title.split(',')
             let newTodos = []
             data.forEach(todo => {
                 newTodos.push({ txt: todo, done: false })
@@ -182,7 +185,7 @@ function addNewNote(note) {
                 type: "note-todos",
                 isPinned: false,
                 info: {
-                    title: '',
+                    title: 'Click to edit',
                     todos: newTodos
                 },
                 style: {
@@ -239,7 +242,7 @@ function setBgc(noteId, color) {
 function setTxt(noteId, txt) {
     return getNoteById(noteId)
         .then(note => {
-            note.info.txt = txt
+            note.info.title = txt
             return note
         })
         .then(note => storageService.put(NOTES_KEY, note)
@@ -248,8 +251,6 @@ function setTxt(noteId, txt) {
 function setTodos(noteId, title, todos) {
     return getNoteById(noteId)
         .then(note => {
-            console.log('getNoteById', noteId)
-            console.log('todos', todos)
             note.info.title = title
             note.info.todos = todos
             return note
@@ -258,16 +259,32 @@ function setTodos(noteId, title, todos) {
         )
 }
 
-// id: "n107",
-//     type: "note-todos",
-//         info: {
-//     title: "Learn some code",
-//         todos: [
-//             { txt: "HTML", done: false },
-//             { txt: "CSS", done: true },
-//             { txt: "JavaScript", done: false }
-//         ]
-// },
-// style: {
-//     bgc: "#8cfa9c"
-// }
+function setAnimatedNote(noteId, title, url) {
+    return getNoteById(noteId)
+        .then(note => {
+            note.info.title = title
+            note.info.url = url
+            return note
+        })
+        .then(note => storageService.put(NOTES_KEY, note))
+}
+
+function setPinnedNote(noteId) {
+    return getNoteById(noteId)
+        .then(note => {
+            note.isPinned = !note.isPinned
+            return note
+        })
+        .then(note => storageService.put(NOTES_KEY, note)
+        )
+}
+
+function duplicateNote(noteId) {
+    return getNoteById(noteId)
+        .then(note => {
+            let duplicatedNote = JSON.parse(JSON.stringify(note))
+            duplicatedNote.id = null
+            return note
+        })
+        .then(note => storageService.post(NOTES_KEY, note))
+}
