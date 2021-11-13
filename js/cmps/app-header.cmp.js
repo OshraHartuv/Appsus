@@ -1,15 +1,16 @@
 export default {
     template: `
-        <header class="app-header">
-        <router-link to="/" active-class="active-link" exact>
-             <div class="logo">
-                <h3>Appsus</h3>
-            </div>
-        </router-link>
-            <nav>
-                <router-link active-class="active" to="/mail">Mail </router-link>|
-                <router-link to="/keep">Keep</router-link>
-            </nav>
-        </header>
+    <header class="app-header">
+        
+        <nav>
+            <router-link to="/" active-class="active-link" exact>
+                <div class="logo">
+                    <img src="img/logo.png">
+                </div>
+            </router-link>
+            <router-link active-class="active" class="header-link" to="/mail">Mail </router-link>|
+            <router-link class="header-link" to="/keep">Keep</router-link>
+        </nav>
+    </header>
     `,
 }

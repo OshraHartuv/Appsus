@@ -40,7 +40,16 @@
 
 .mail-filter {
   position: relative;
-  right: 10px;
+  /* right: 10px; */
+}
+
+.mail-filter input{
+  width: 40vw;
+}
+
+.fa.fa-envelope.mail-logo{
+  color: rgba(238, 66, 66, 0.486);
+  font-size: 30px;
 }
 
 
@@ -102,7 +111,7 @@
     padding: 0 10px;
   }
 
-  .filter-container h1 {
+  .filter-container .mail-logo {
     display: none;
   }
 

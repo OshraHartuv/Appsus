@@ -1,9 +1,32 @@
 .app-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 10px;
   height: 5vh;
-  background-color: rgb(109, 194, 236);
+  border-bottom: 1px solid gray;
+  /* background-color: rgb(109, 194, 236); */
   margin: 0;
+
+}
+
+.logo img{
+  height: 4vh;
+}
+
+.app-header nav{
+  display: flex;
+  align-items:center;
+  gap:20px;
+  color: rgb(184, 184, 184);
+}
+
+.app-header nav>*:first-child{
+margin-right: 10px;
+
+}
+
+.header-link{
+  color: rgb(138, 132, 132);
+
 }
