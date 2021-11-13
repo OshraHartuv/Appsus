@@ -47,8 +47,8 @@ export default {
             eventBus.$emit('duplicateNote', noteId)
         },
         sendByMail() {
-            console.log('note', this.note)
-            let msg = JSON.stringify(this.note)
+            let noteToSend = JSON.parse(JSON.stringify(this.note))
+            let msg = JSON.stringify(noteToSend.info)
             this.$router.push(`/mail/compose/${msg}`);
         }
 
