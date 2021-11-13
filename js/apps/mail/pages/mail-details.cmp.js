@@ -35,6 +35,9 @@ export default {
                 </button>
               </div>
               <div class="details-nav">
+                <button title="save note" @click="saveNote">
+                  <span >note</span>
+                </button>
                 <button title="Previous mail" @click="goToPrev">
                   <span class="fa fa-arrow-left"></span>
                 </button>
@@ -136,6 +139,10 @@ export default {
     closeDetails(){
       this.$router.push('/mail')
 
+    },
+    saveNote(){
+      let msg = JSON.stringify(this.mail)
+      this.$router.push(`/keep/notefrommail/${msg}`);
     }
   },
   computed: {

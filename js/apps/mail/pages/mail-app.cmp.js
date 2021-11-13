@@ -4,6 +4,7 @@ import mailFilter from '../cmps/mail-filter.cmp.js';
 import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import mailAdd from '../cmps/mail-add.cmp.js';
+// import mailHeader from '../cmps/mail-header.cmp.js';
 import mailDetails from './mail-details.cmp.js';
 
 export default {
@@ -15,7 +16,7 @@ export default {
               <button class="hamburger-menu" @click.stop= " toggleMenu">
                 <span class="fa fa-bars"></span>
               </button>          
-              <h1>Mail</h1>
+              <span class="fa fa-envelope mail-logo"></span>
               <mail-filter @filtered="setFilter" :box="filterBy.box"></mail-filter>
             </div>
           </div>
@@ -62,11 +63,29 @@ export default {
   watch: {
     '$route.params.mailId': {
       handler() {
-        const { mailId: mailId } = this.$route.params;
-        mailService.getMailById(mailId).then((mail) => {
-          this.selectedMail = mail;
-          // eventBus.$on('savedMail', this.loadMails);
-        });
+          console.log(this.$route.params);
+          const { mailId: mailId } = this.$route.params;
+             mailService.getMailById(mailId)
+            .then((mail) => {
+              this.selectedMail = mail;
+            });
+      },
+      immediate: true,
+    },
+    '$route.params.note': {
+      handler() {
+        console.log(this.$route.params);
+        const {note} = this.$route.params;
+        console.log(note);
+          // // if (this.$route.params.mailId){
+          //   if (mailId.type==='note') this.composeNote(this.$route.params)
+          //   else
+          //    mailService.getMailById(mailId)
+          //   .then((mail) => {
+          //     this.selectedMail = mail;
+          //   });
+          // }
+          // else  this.$router.push('/mail')
       },
       immediate: true,
     },
@@ -131,21 +150,12 @@ export default {
     },
     sortMails(mails) {
       if (this.sortBy === 'date') {
-        if (this.filterBy.box !== 'trash') {
-          return mails.sort((a, b) => {
-            return (
-              (b.sentAt ? b.sentAt : b.receivedAt) -
-              (a.sentAt ? a.sentAt : a.receivedAt)
-            );
-          });
-        } else {
-          return mails.sort((a, b) => {
-            return (
-              (b.removedAt ? b.removedAt : b.removedAt) -
-              (a.removedAt ? a.removedAt : a.removedAt)
-            );
-          });
-        }
+        return mails.sort((a, b) => {
+          return (
+            (b.sentAt ? b.sentAt : b.receivedAt) -
+            (a.sentAt ? a.sentAt : a.receivedAt)
+          );
+        });
       } else if (this.sortBy === 'subject') {
         mails.sort((a, b) => {
           if (a.subject.toLowerCase() < b.subject.toLowerCase()) return -1;
@@ -170,6 +180,9 @@ export default {
       };
       eventBus.$emit('showMsg', msg);
     },
+    composeNote(params){
+      console.log(params);
+    }
   },
   computed: {
     mailsToShow() {
@@ -249,5 +262,6 @@ export default {
     mailList,
     mailMenu,
     mailAdd,
+    // mailHeader
   },
 };

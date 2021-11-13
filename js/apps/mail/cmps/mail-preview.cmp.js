@@ -51,7 +51,7 @@ export default {
       eventBus.$emit('delete',mailId)
     },
     switcher(mail){
-      if (!mail.isDraft) this.$router.push('/mail/'+mail.id)
+      if (!mail.isDraft) this.$router.push('/mail/details/'+mail.id)
       else eventBus.$emit('editDraft',mail)
     },
     starMail(){

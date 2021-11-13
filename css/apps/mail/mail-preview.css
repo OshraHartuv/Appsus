@@ -1,18 +1,16 @@
-
-.mail-list>*:not(:first-child){
+.mail-list > *:not(:first-child) {
   border-top: 1px solid rgba(146, 157, 168, 0.602);
 }
 
-.mail-list>*:last-child{
+.mail-list > *:last-child {
   border-bottom: 1px solid rgba(146, 157, 168, 0.602);
 }
 
-
-.mail-list>:first-child{
+.mail-list > :first-child {
   margin-top: 5vh;
 }
 
-.read{
+.read {
   background-color: rgba(185, 173, 173, 0.226);
 }
 
@@ -24,13 +22,16 @@
   /* max-width: 80vw; */
 }
 
+.mail-preview-container:hover{
+  cursor: pointer;
+}
+
 .mail-preview-container > *:not(:first-child) {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-
 }
-.mail-preview-container > *{
+.mail-preview-container > * {
   height: 5vh;
   line-height: 5vh;
   width: 100%;
@@ -44,7 +45,6 @@
 
 .mail-preview-text {
   flex-grow: 1;
-
 }
 
 .mail-preview-body {
@@ -68,38 +68,12 @@
   max-width: 70px;
 }
 
-.delete-mail-btn .fa{
+.delete-mail-btn .fa {
   font-size: 20px;
 }
 
-.delete-mail-btn .fa-trash{
-  color: rgba(116, 125, 134, 0.602); 
-}
-
-/* hovering */
-
-.delete-mail-btn:hover{
-cursor: pointer;
-}
-
-.delete-mail-btn:hover .fa-trash{
-  color: black;
-}
-
-.mail-preview-container:hover .mail-preview-date{
-  display: none;
-}
-.mail-preview-container:hover .mail-preview-text{
-  margin-right: 80px;
-}
-
-.mail-preview-container:hover .delete-mail-btn{
-  background-color: rgba(255, 255, 255, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
+.delete-mail-btn .fa-trash {
+  color: rgba(116, 125, 134, 0.602);
 }
 
 /* star */
@@ -111,25 +85,53 @@ cursor: pointer;
   -webkit-text-stroke-color: black;
 }
 
-.mail-preview-container .star{
+.mail-preview-container .star {
   border: none;
   background-color: rgba(185, 173, 173, 0);
   width: 40px;
 }
 
-.star:hover{
+.star:hover {
   cursor: pointer;
 }
 
+/* hovering */
+
+.delete-mail-btn:hover {
+  cursor: pointer;
+}
+
+.delete-mail-btn:hover .fa-trash {
+  color: black;
+}
+
+/* .mail-preview-container:hover .mail-preview-date {
+  display: none;
+}
+.mail-preview-container:hover .mail-preview-text {
+  margin-right: 80px;
+} */
+
+.mail-preview-container:hover .delete-mail-btn {
+  background-color: rgba(255, 255, 255, 0);
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+}
 
 @media (max-width: 570px) {
   .mail-preview-container {
     max-width: 100vw;
   }
-  
-  .star{
-    padding-left: 10px;
 
+  .star {
+    padding-left: 10px;
+  }
+
+  .mail-preview-container:hover .delete-mail-btn{
+    display: none;
   }
 }
 
@@ -138,7 +140,18 @@ cursor: pointer;
     max-width: 80vw;
   }
 
-  .mail-list>*{
+  .mail-list > * {
     margin-left: 20vw;
+  }
+
+  .mail-preview-container:hover .delete-mail-btn {
+    display: flex;
+  }
+
+  .mail-preview-container:hover .mail-preview-date {
+    display: none;
+  }
+  .mail-preview-container:hover .mail-preview-text {
+    margin-right: 80px;
   }
 }
