@@ -1,15 +1,6 @@
 import { mailService } from '../services/mail.service.js';
 import { eventBus } from '../../../services/event-bus-service.js';
 
-// {
-//   id: 'e101',
-//   subject: 'Miss you!',
-//   body: 'Would love to catch up sometimes',
-//   isRead: false,
-//   sentAt: 1631279089000,
-//   to: 'momo@momo.com',
-// }
-
 export default {
   name: 'mail-details',
   template: `
@@ -86,11 +77,7 @@ export default {
     const { mailId: mailId } = this.$route.params;
     mailService.getMailById(mailId).then((mail) => {
       this.mail = mail;
-      // this.mail.isRead = true;
       mailService.editAndSave(this.mail, 'isRead',true)
-      // this.mail = mail;
-      // this.mail.isRead = true;
-      // mailService.saveMail(this.mail)
       .then(() => {
         eventBus.$emit('savedMail');
       });
@@ -114,9 +101,8 @@ export default {
   methods: {
     markAs() {
       const val = this.mail.isRead ?  false : true;
-      mailService.editAndSave(this.mail, 'isRead',val).then(() => {
-      // this.mail.isRead ? (this.mail.isRead = false) : (this.mail.isRead = true);
-      // mailService.saveMail(this.mail).then(() => {
+      mailService.editAndSave(this.mail, 'isRead',val)
+        .then(() => {
         eventBus.$emit('savedMail');
       });
     },
@@ -126,21 +112,20 @@ export default {
     },
     starMail(){
       const val = (this.mail.isStared) ? false : true;
-      mailService.editAndSave(this.mail,'isStared',val).then(() => {
-      // (!this.mail.isStared) ? (this.mail.isStared =true) : (this.mail.isStared=false);
-      // mailService.saveMail(this.mail).then(() => {
+      mailService.editAndSave(this.mail,'isStared',val)
+        .then(() => {
         eventBus.$emit('savedMail');
       })
     },
     goToNext(){
-      this.$router.push('/mail/'+this.nextMailId)
+      console.log(this.nextMailId);
+      this.$router.push('/mail/details/'+this.nextMailId)
     },
     goToPrev(){
-      this.$router.push('/mail/'+this.previousMailId)
+      this.$router.push('/mail/details/'+this.previousMailId)
     },
     closeDetails(){
       this.$router.push('/mail')
-
     },
     saveNote(){
       let msg = JSON.stringify(this.mail)

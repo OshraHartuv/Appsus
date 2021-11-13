@@ -4,7 +4,7 @@ export default {
             <div class="home-img">
                 <img src="img/logo.png">
                 <div class="home-header">
-                    <h1 class="black-stroke">Welcome to Apssus</h1>
+                    <h1 class="black-stroke">Welcome to Appsus</h1>
                     <h3 class="black-stroke">All you need is right here.</h3>
                 </div>
             </div>

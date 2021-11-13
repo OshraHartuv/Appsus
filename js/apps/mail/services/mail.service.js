@@ -14,7 +14,6 @@ export const mailService = {
   getMailById,
   getNextMailId,
   getPreviousMailId,
-  composeMail,
   nameToShow,
   getUser,
   removeMail,
@@ -32,7 +31,6 @@ function getUser() {
 
 function editAndSave(mail, key, val) {
   mail[key] = val;
-  // console.log(mail[key]);
   return saveMail(mail);
 }
 
@@ -43,7 +41,6 @@ function moveToTrash(mailId) {
 }
 
 function removeMail(mailId) {
-  // return Promise.reject('Big balagan!')
   return storageService.remove(MAILS_KEY, mailId);
 }
 
@@ -52,8 +49,6 @@ function nameToShow(mail) {
   const contactName = contactMail.substring(0, contactMail.indexOf('@'));
   return contactName;
 }
-
-function composeMail(mail) {}
 
 function getNextMailId(mailId) {
   return query().then((mails) => {
@@ -70,7 +65,6 @@ function getPreviousMailId(mailId) {
 }
 
 function saveMail(mail) {
-  // mail.sentAt = Date.now();
   if (mail.id) return storageService.put(MAILS_KEY, mail);
   else return storageService.post(MAILS_KEY, mail);
 }
@@ -226,7 +220,6 @@ function _createMails() {
         to: 'shubi@papa.com',
         removedAt: 1636823315177,
       },
-
       {
         id: 'e118',
         subject: 'GO!',
@@ -236,7 +229,6 @@ function _createMails() {
         from: 'tiny@mailiz.com',
         isStared: true,
       },
-
       {
         id: 'e119',
         subject: 'KOOOOO!',
@@ -287,4 +279,3 @@ function _createMails() {
   return mails;
 }
 
-// 1636823315177

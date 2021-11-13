@@ -4,7 +4,6 @@ import mailFilter from '../cmps/mail-filter.cmp.js';
 import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import mailAdd from '../cmps/mail-add.cmp.js';
-// import mailHeader from '../cmps/mail-header.cmp.js';
 import mailDetails from './mail-details.cmp.js';
 
 export default {
@@ -16,7 +15,6 @@ export default {
               <button class="hamburger-menu" @click.stop= " toggleMenu">
                 <span class="fa fa-bars"></span>
               </button>          
-              <!-- <span class="fa fa-envelope mail-logo"></span> -->
               <mail-filter @filtered="setFilter" :box="filterBy.box"></mail-filter>
             </div>
           </div>
@@ -65,7 +63,7 @@ export default {
     '$route.params.mailId': {
       handler() {
           const { mailId: mailId } = this.$route.params;
-             mailService.getMailById(mailId)
+            mailService.getMailById(mailId)
             .then((mail) => {
               this.selectedMail = mail;
             });
@@ -85,7 +83,6 @@ export default {
       mailService.query().then((mails) => {
         this.sortMails(mails);
         this.mails = mails;
-        // console.log(mails);
       });
     },
     closeDetails() {
@@ -165,7 +162,7 @@ export default {
       }
     },
     toggleMenu() {
-      this.menuClose ? (this.menuClose = false) : (this.menuClose = true);
+      this.menuClose ? this.menuClose = false : this.menuClose = true;
     },
     sendMsg(txt, type) {
       const msg = {
@@ -261,6 +258,5 @@ export default {
     mailList,
     mailMenu,
     mailAdd,
-    // mailHeader
   },
 };

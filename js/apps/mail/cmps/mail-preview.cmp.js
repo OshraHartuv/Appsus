@@ -8,39 +8,37 @@ export default {
       <section class="mail-preview">
           <div  @click="switcher(mail)">
             <div class="mail-preview-container" :class="{ bold: !mail.isRead, read: mail.isRead}">
-            <button class="star" 
-            @click.stop="starMail" 
-            :title="mail.isStared ? 'Remove star': 'Star'">
-                  <span class="fa fa-star" 
-                  :class="{'stared':mail.isStared,'black-stroke':!mail.isStared}"
-                   
-                  >
+              <button class="star" 
+              @click.stop="starMail" 
+              :title="mail.isStared ? 'Remove star': 'Star'">
+                    <span class="fa fa-star" 
+                    :class="{'stared':mail.isStared,'black-stroke':!mail.isStared}">
+                    </span>
+              </button>
+                <span class="mail-preview-contact">
+                  <span v-if="mail.isDraft">
+                    <span class="red">Draft</span>
+                    <span v-if="contactToShow">,</span>
                   </span>
-              </button>
-              <span class="mail-preview-contact">
-                <span v-if="mail.isDraft">
-                  <span class="red">Draft</span>
-                  <span v-if="contactToShow">,</span>
+                  <span v-if="mail.to">to: </span>
+                    {{ contactToShow }}
                 </span>
-                <span v-if="mail.to">to: </span>
-                  {{ contactToShow }}
-              </span>
-              <span class="mail-preview-text">
-                <span class="mail-preview-subject">
-                  {{ mail.subject }}
-                </span> - 
-                <span class="mail-preview-body">
-                  {{ mail.body }}
+                <span class="mail-preview-text">
+                  <span class="mail-preview-subject">
+                    {{ mail.subject }}
+                  </span> - 
+                  <span class="mail-preview-body">
+                    {{ mail.body }}
+                  </span>
                 </span>
-              </span>
-              <span class="mail-preview-date">
-                {{ dateToShow }}
-              </span>
-              <button @click.stop="deleteMail(mail.id)"
-              title="Delete" 
-              class="delete-mail-btn">
+                <span class="mail-preview-date">
+                  {{ dateToShow }}
+                </span>
+                <button @click.stop="deleteMail(mail.id)"
+                title="Delete" 
+                class="delete-mail-btn">
                 <span class="fa fa-trash"></span>
-              </button>
+                </button>
             </div>
           </div>
       </section>
@@ -57,8 +55,6 @@ export default {
     starMail(){
       const val = (this.mail.isStared) ? false : true;
       mailService.editAndSave(this.mail, 'isStared',val).then(() => {
-      // !this.mail.isStared ? this.mail.isStared =true : this.mail.isStared=false;
-      // mailService.saveMail(this.mail).then(() => {
         eventBus.$emit('savedMail');
       })
     }

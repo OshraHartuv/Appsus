@@ -28,12 +28,10 @@ export default {
                   :class="{selectedBox: currBox ==='trash'}">Trash</div>
                   <div @click="box('stared')"
                   :class="{selectedBox: currBox ==='stared'}">Starred</div>
-                  <div>Labels</div>
                   <select @change="setSort" v-model="sort" class="sort-select">
                     <option value="date" >Sort: Date</option>
                     <option value="subject">Sort: Subject</option>
                     <option value="body">Sort: Mail text</option>
-                    <!-- <option value="mail">Sort: contact</option> -->
                   </select>
                 </div> 
               </router-link>
