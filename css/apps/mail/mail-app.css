@@ -29,6 +29,7 @@
   justify-content: space-between;
   padding: 0 10px;
   height: 5vh;
+  min-height: 41px;
   border-bottom: 1px solid gray;
   position: fixed;
   max-width: 100vw;
@@ -88,9 +89,9 @@
     outline-width: 0;
   }
 
-  .mail-filter input:focus{
+  /* .mail-filter input:focus{
     max-height: 30px;
-  }
+  } */
 
   .filter-container {
     width: 80vw;
