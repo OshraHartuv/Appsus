@@ -121,8 +121,114 @@ function _createNotes() {
                 type: "note-video",
                 isPinned: false,
                 info: {
-                    title: "Build House Under The Wood roots",
-                    url: "https://www.youtube.com/watch?v=qwxoxMX5veU",
+                    title: "Limitless with Chris Hemsworth",
+                    url: "https://www.youtube.com/watch?v=4AxfL9Y4boE",
+                },
+                style: {
+                    bgc: "#ffffff"
+                }
+            },
+            {
+                id: "n109",
+                type: "note-txt",
+                isPinned: false,
+                info: {
+                    title: "JavaScript Frameworks > App that use them 😂"
+                },
+                style: {
+                    bgc: "#ffffff"
+                }
+            },
+            {
+                id: "n110",
+                type: "note-img",
+                info: {
+                    url: "https://pbs.twimg.com/media/EFu0UIhVAAAfNfs.png",
+                    title: "Front & Back"
+                },
+                style: {
+                    bgc: "#ffffff"
+                }
+            },
+            {
+                id: "n111",
+                type: "note-todos",
+                info: {
+                    title: "Morning retual",
+                    todos: [
+                        { txt: "Drink water", done: true },
+                        { txt: "Read a book", done: false },
+                        { txt: "Yoga", done: false },
+                        { txt: "Big breakfast", done: false },
+                        { txt: "Meditate", done: false },
+                    ]
+                },
+                style: {
+                    bgc: "#ffffff"
+                }
+            },
+            {
+                id: "n112",
+                type: "note-video",
+                isPinned: false,
+                info: {
+                    title: "Ambient Study Music To Concentrate",
+                    url: "https://www.youtube.com/watch?v=sjkrrmBnpGE",
+                },
+                style: {
+                    bgc: "#ffffff"
+                }
+            },
+            {
+                id: "n113",
+                type: "note-txt",
+                isPinned: true,
+                info: {
+                    title: "What’s the best thing about Switzerland? I don’t know, but the flag is a big plus."
+                },
+                style: {
+                    bgc: "#ffffff"
+                }
+            },
+            {
+                id: "n114",
+                type: "note-img",
+                info: {
+                    url: "https://i.pinimg.com/736x/8d/e2/12/8de212bf8bf77bb26fddb74dc000d650.jpg",
+                    title: "🤣🤣🤣"
+                },
+                style: {
+                    bgc: "#ffffff"
+                }
+            },
+            {
+                id: "n115",
+                type: "note-todos",
+                info: {
+                    title: "רשימה לעל האש",
+                    todos: [
+                        { txt: "פיתות", done: false },
+                        { txt: "חומוס", done: true },
+                        { txt: "צ'יפס", done: true },
+                        { txt: "פרגיות", done: false },
+                        { txt: "סטייקים", done: false },
+                        { txt: "לבבות", done: false },
+                        { txt: "נפנף", done: true },
+                        { txt: "שתייה", done: false },
+                        { txt: "מנגל", done: true },
+                    ]
+                },
+                style: {
+                    bgc: "#ffffff"
+                }
+            },
+            {
+                id: "n116",
+                type: "note-video",
+                isPinned: false,
+                info: {
+                    title: "BEST HIPHOP MIX - 50 Cent, Method Man, Ice Cube , Snoop Dogg",
+                    url: "https://www.youtube.com/watch?v=3wDuRqYLtbo",
                 },
                 style: {
                     bgc: "#ffffff"
@@ -200,8 +306,8 @@ function addNewNote(note) {
                 type: "note-img",
                 isPinned: false,
                 info: {
-                    url: note.info.txt,
-                    title: ""
+                    url: note.info.title,
+                    title: "Click to edit"
                 },
                 style: {
                     bgc: '#ffffff'
@@ -214,8 +320,8 @@ function addNewNote(note) {
                 type: "note-video",
                 isPinned: false,
                 info: {
-                    url: note.info.txt,
-                    title: ""
+                    url: note.info.title,
+                    title: "Click to edit"
                 },
                 style: {
                     bgc: '#ffffff'
@@ -291,11 +397,14 @@ function duplicateNote(noteId) {
 }
 
 function noteFromMail(mail) {
-    let content = `Subject: ${mail.subject}
-    
-    ${mail.body}
+    let subject = (mail.subject) ? `Subject: ${mail.subject}` : ' '
+    // let body =(mail.body)? mail.body : ' '
 
-    ${mail.from}
+    let content = `${subject}
+    
+    ${mail.body || ' '}
+
+    ${mail.from || mail.to || ' '}
     `
     let newNote = {
         id: null,

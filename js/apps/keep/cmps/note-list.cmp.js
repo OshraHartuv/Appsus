@@ -23,9 +23,7 @@ export default {
             selectedNote: null,
         }
     },
-    created() {
-        eventBus.$on('removedNote', this.toggleMenu);
-    },
+
     methods: {
         setEditMode(note) {
             note.selected = true

@@ -33,7 +33,6 @@ export default {
         };
     },
     created() {
-        // this.active = this.newNote.type
 
     },
     methods: {
