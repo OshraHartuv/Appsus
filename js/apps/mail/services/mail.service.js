@@ -221,11 +221,11 @@ function _createMails() {
       },
       {
         id: 'e118',
-        subject: 'GO!',
+        subject: 'What are you eating?',
         body: 'Eius ipsum aspernatur molestiae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum ex magni eius ipsum aspernatur molestiae nihil ea suscipit accusantium eligendi qui, voluptate, inventore, saepe mollitia impedit quia tenetur deserunt molestias',
         isRead: true,
         receivedAt: 1636814000177,
-        from: 'tiny@mailiz.com',
+        from: 'tinto@mailiz.com',
         isStared: true,
       },
       {
