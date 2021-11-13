@@ -1,0 +1,57 @@
+@import "./book-list.css";
+@import "./book-filter.css";
+@import "./book-header.css";
+@import "./book-details.css";
+@import "./book-preview.css";
+/* @import "./book-review-add.css";
+@import "./book-search-online.css"; */
+/* 
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+} */
+
+pre {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.app-main {
+  min-height: 90vh;
+  max-width: 100vw;
+}
+
+@media (max-width: 570px) {
+  .review-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  .book-filter {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 620px) {
+  .book-filter {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,73 @@
+.review-container {
+  background-color: white;
+  border: 1px solid gray;
+  width: 30vw;
+  padding: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.review-container:hover {
+  box-shadow: rgba(14, 14, 26, 0.692) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.527) 0px 3px 7px -3px;
+}
+
+.review-container li {
+  overflow: auto;
+}
+
+.review-container li div {
+  margin-bottom: 3px;
+}
+
+.review-container button {
+  margin-top: 10px;
+  background-color: rgba(185, 173, 173, 0.226);
+  border: 1px solid gray;
+  border-radius: 15px;
+  transition: 0.6s;
+}
+
+.review-container button:hover {
+  cursor: pointer;
+  background-color: rgba(185, 173, 173, 0.972);
+  transition: 0.6s;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.review-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.review-add {
+  padding: 10px;
+  text-align: center;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  margin: 10px auto;
+  justify-content: space-between;
+  height: 40vh;
+}
+
+.stars span {
+  color: rgb(223, 223, 167);
+}
+
+span.checked {
+  color: orange;
+}

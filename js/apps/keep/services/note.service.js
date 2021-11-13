@@ -17,7 +17,8 @@ export const noteService = {
     setTodos,
     setAnimatedNote,
     setPinnedNote,
-    duplicateNote
+    duplicateNote,
+    noteFromMail
 };
 
 function query() {
@@ -287,4 +288,26 @@ function duplicateNote(noteId) {
             return note
         })
         .then(note => storageService.post(NOTES_KEY, note))
+}
+
+function noteFromMail(mail) {
+    let content = `Subject: ${mail.subject}
+    
+    ${mail.body}
+
+    ${mail.from}
+    `
+    let newNote = {
+        id: null,
+        type: "note-txt",
+        selected: true,
+        isPinned: false,
+        info: {
+            title: content
+        },
+        style: {
+            bgc: '#ffffff'
+        }
+    }
+    return storageService.post(NOTES_KEY, newNote)
 }

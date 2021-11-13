@@ -1,0 +1,30 @@
+.book-list {
+  margin: 0;
+  padding: 20px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-content: flex-start;
+  min-height: 85vh;
+}
+
+.book-list ul {
+  margin: 0;
+}
+
+.book-list li {
+  height: auto !important;
+  flex-basis: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

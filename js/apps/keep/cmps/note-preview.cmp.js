@@ -48,7 +48,8 @@ export default {
         },
         sendByMail() {
             let noteToSend = JSON.parse(JSON.stringify(this.note))
-            let msg = JSON.stringify(noteToSend.info)
+            let msg = JSON.stringify(noteToSend.info.title)
+            console.log('msg', msg)
             this.$router.push(`/mail/compose/${msg}`);
         }
 
