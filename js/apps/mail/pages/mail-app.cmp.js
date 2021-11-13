@@ -16,7 +16,7 @@ export default {
               <button class="hamburger-menu" @click.stop= " toggleMenu">
                 <span class="fa fa-bars"></span>
               </button>          
-              <span class="fa fa-envelope mail-logo"></span>
+              <!-- <span class="fa fa-envelope mail-logo"></span> -->
               <mail-filter @filtered="setFilter" :box="filterBy.box"></mail-filter>
             </div>
           </div>

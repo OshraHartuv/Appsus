@@ -35,8 +35,10 @@ export default {
                 </button>
               </div>
               <div class="details-nav">
-                <button title="save note" @click="saveNote">
-                  <span >note</span>
+                <button title="save note" 
+                @click="saveNote"
+                title="save as note">
+                  <span class="fa fa-sticky-note"></span>
                 </button>
                 <button title="Previous mail" @click="goToPrev">
                   <span class="fa fa-arrow-left"></span>

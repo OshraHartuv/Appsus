@@ -2,7 +2,10 @@ export default {
   props: ['mails'],
   template: `
           <section class="mail-menu flex" v-if="mails">
-            <button @click="onCompose">Compose</button>
+            <button @click="onCompose">
+              <span class="fa fa-envelope"></span>
+              Compose
+            </button>
               <router-link to="/mail" >
                 <div class="mail-menu-nav flex ">
                   <div  @click="box('all')" 
