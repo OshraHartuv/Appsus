@@ -94,7 +94,6 @@ export default {
     setMailBox(box) {
       this.filterBy.str = '';
       this.filterBy.box = box;
-      console.log('setBox');
     },
     setNewMail() {
       this.isCompose = true;

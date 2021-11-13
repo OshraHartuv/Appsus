@@ -20,7 +20,6 @@ function query() {
 
 function addReview(review, bookId) {
   return getById(bookId).then((book) => {
-    console.log('from addReview', book);
     if (!book.reviews) book.reviews = [];
     book.reviews.push(review);
     return storageService.put(BOOKS_KEY, book);

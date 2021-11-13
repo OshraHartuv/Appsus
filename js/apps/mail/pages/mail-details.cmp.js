@@ -87,7 +87,14 @@ export default {
     '$route.params.mailId': {
       handler() {
         const { mailId: mailId } = this.$route.params;
-        mailService.getMailById(mailId).then((mail) => (this.mail = mail));
+        mailService.getMailById(mailId)
+        .then((mail) => {
+          this.mail = mail
+          mailService.editAndSave(this.mail, 'isRead',true)
+            .then(() => {
+            eventBus.$emit('savedMail');
+            });
+        });
         mailService
           .getNextMailId(mailId)
           .then((mailId) => (this.nextMailId = mailId));
@@ -118,7 +125,6 @@ export default {
       })
     },
     goToNext(){
-      console.log(this.nextMailId);
       this.$router.push('/mail/details/'+this.nextMailId)
     },
     goToPrev(){
