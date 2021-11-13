@@ -1,6 +1,6 @@
 .note-list {
   margin: auto;
-  columns: 4 200px;
+  columns: 3 200px;
   max-width: 1000px;
   gap: 15px;
 }

@@ -34,7 +34,6 @@ export default {
     },
     methods: {
         pin(noteId) {
-            console.log('noteId', noteId)
             eventBus.$emit('pinnedNote', noteId)
         },
         remove(noteId) {
@@ -44,7 +43,6 @@ export default {
             eventBus.$emit('setBgc', noteId, color)
         },
         duplicate(noteId) {
-            console.log('noteId', noteId)
             eventBus.$emit('duplicateNote', noteId)
         },
         sendByMail() {
