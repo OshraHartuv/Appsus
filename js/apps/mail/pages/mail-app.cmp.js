@@ -46,7 +46,7 @@ export default {
       sortBy: 'date',
       filterBy: {
         str: '',
-        box: 'all',
+        box: 'inbox',
       },
       menuClose: true,
       noteToEdit: false

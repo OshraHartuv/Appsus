@@ -133,7 +133,6 @@ function _createMails() {
         isRead: true,
         receivedAt: 1636823311177,
         from: 'linkedIn@linkedIn.com',
-        isDraft: true,
       },
       {
         id: 'e108',
