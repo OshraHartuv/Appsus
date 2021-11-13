@@ -52,7 +52,6 @@ export default {
           eventBus.$emit('showMsg', msg);
         })
         .catch((err) => {
-          console.log('err', err);
           const msg = {
             txt: 'Error. Please try later',
             type: 'error',
