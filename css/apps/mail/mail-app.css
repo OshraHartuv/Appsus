@@ -88,6 +88,10 @@
     outline-width: 0;
   }
 
+  .mail-filter input:focus{
+    max-height: 30px;
+  }
+
   .filter-container {
     width: 80vw;
     margin: 0 auto;

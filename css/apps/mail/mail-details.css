@@ -67,15 +67,7 @@
   justify-content: space-between;
 }
 
-/* hovering */
 
-.details-header button:hover .fa {
-  color: black;
-}
-
-.mail-details-tools button:hover .fa.stared {
-  color: yellow;
-}
 
 .mail-details-tools .fa-envelope,
 .mail-details-tools .fa-envelope-open,
@@ -105,4 +97,14 @@
   .mail-details-info {
     justify-content: space-between;
   }
+
+  /* hovering */
+
+.details-header button:hover .fa {
+  color: black;
+}
+
+.mail-details-tools button:hover .fa.stared {
+  color: yellow;
+}
 }
