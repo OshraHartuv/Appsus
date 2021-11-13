@@ -8,14 +8,14 @@ export default {
     props: ['note'],
     template: `
     <section>
-    <component :is="note.type" :note="note" ></component>
+    <component :is="note.type" :note="note" :selected="selected" ></component>
     <section class="pin-container"><a class="fa fa-map-pin pin-note" @click.stop="pin(note.id)"title="Pin note">
     </a></section>
     <div class="actions-container">
-        <a class="fa fa-trash" @click="remove(note.id)"title="Delete note"></a>
+        <a class="fa fa-trash" @click.stop="remove(note.id)"title="Delete note"></a>
         <a class="fa fa-clone duplicate-note" @click.stop="duplicate(note.id)"title="Duplicate note"></a>
-        <!-- <router-link @click.stop="sendByMail" :to="'/mail/'+note.id" >Details</router-link> -->
-        <button @click.stop="sendByMail">+mail</button>
+        <a class="fa fa-envelope" @click.stop="sendByMail"></a>
+        <a class="" @click="">&#10530</a>
         <a class = "fa fa-paint-brush color-palette-container" :class="{'show-colors':showColors}"  @click.stop="showColors=!showColors" title="Pick color" >
             <ul class = "color-palette">
                 <li v-for="color in colorArray" @click.stop ="setBgc(note.id,color),showColors=!showColors" :style = "{'background-color':color}"></li>
@@ -28,7 +28,8 @@ export default {
         return {
             bgc: this.note.style.bgc,
             colorArray: ['#f28b82', '#fbbc04', '#fff475', '#ccff90', '#a7ffeb', '#cbf0f8', '#aecbfa', '#d7aefb', '#fdcfe8', '#e6c9a8', '#e8eaed', '#ffffff'],
-            showColors: false
+            showColors: false,
+            selected: false
         }
     },
     methods: {
@@ -47,9 +48,17 @@ export default {
             eventBus.$emit('duplicateNote', noteId)
         },
         sendByMail() {
+            if (this.note.type === 'note-img' || this.note.type === 'note-video') {
+                const msg = {
+                    txt: 'Send only text or list notes',
+                    type: 'error',
+                };
+                eventBus.$emit('showMsg', msg);
+                return
+            }
+
             let noteToSend = JSON.parse(JSON.stringify(this.note))
             let msg = JSON.stringify(noteToSend.info)
-            console.log('msg', msg)
             this.$router.push(`/mail/compose/${msg}`);
         }
 
@@ -68,38 +77,3 @@ export default {
         noteImg
     }
 }
-/* methods: {
-  sayAndClose() {
-      console.log('Just saying');
-      this.$router.push('/car');
-  }
-},
-watch: {
-  '$route.params.carId': {
-      handler() {
-          const { carId } = this.$route.params;
-          carService.getById(carId)
-              .then(car => this.car = car);
-          carService.getNextCarId(carId)
-              .then(carId => this.nextCarId = carId);
-      },
-      immediate: true
-  }
-} */
-/*
-watch: {
-  // can watch : data , route, computed, props
-  txt(newVal, oldVal) {
-      console.log('txt has changed!');
-      console.log('was', oldVal, 'now is', newVal);
-  },
-  msg: {
-      handler(newVal, oldVal) {
-          console.log('msg has changed!');
-      },
-      deep: true
-  },
-  'msg.txt'(newVal){
-      console.log('msg txt has changed!');
-  }
-}, */

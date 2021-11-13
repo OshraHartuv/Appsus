@@ -5,12 +5,8 @@ export const noteVideo = {
     props: ['note'],
     template: `
         <section class="note-video" >
-            <pre class="video-editor" :class="note.id" contenteditable="true">{{note.info.title}}</pre>
+            <pre class="video-editor" :class="note.id" contenteditable="true" @click.stop="">{{note.info.title}}</pre>
             <iframe :src="urlToShow"></iframe>
-            <!-- <div v-if="selected">
-                 <span>change videos URL: </span>
-                 <form @submit.prevent="reportVal"><input type="text" v-model:value=urlToEdit></form>
-            </div> -->
         </section>
     `,
     data() {
@@ -32,6 +28,7 @@ export const noteVideo = {
                 .then(() => this.selected = false)
         },
     },
+
     computed: {
         urlToShow() {
             if (this.urlToEdit.includes('watch?v=')) return this.urlToEdit.replace('watch?v=', 'embed/')

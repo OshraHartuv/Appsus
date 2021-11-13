@@ -1,18 +1,17 @@
 .user-msg {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    padding: 10px;
-    border-radius: 5px 0 0 5px;
-  }
+  position: fixed;
+  top: 50px;
+  right: 0;
+  padding: 10px;
+  border-radius: 5px 0 0 5px;
+}
 
-  .success {
-    background-color: rgb(81, 158, 81);
-    z-index: 100;
-  }
-  
-  .error {
-    background-color: rgb(170, 122, 122);
-    z-index: 100;
+.success {
+  background-color: rgb(81, 158, 81);
+  z-index: 100;
+}
 
-  }
+.error {
+  background-color: rgb(170, 122, 122);
+  z-index: 100;
+}

@@ -3,7 +3,7 @@ import { eventBus } from '../../../services/event-bus-service.js'
 import noteList from '../cmps/note-list.cmp.js';
 import noteAdd from '../cmps/note-add.cmp.js';
 import noteFilter from '../cmps/note-filter.cmp.js';
-import noteDetails from './note-details.cmp.js';
+// import noteDetails from './note-details.cmp.js';
 
 export default {
     name: 'note-app',
@@ -53,6 +53,7 @@ export default {
             this.filterBy = filterBy;
         },
         removeNote(id) {
+            if (!id) return
             noteService.remove(id)
                 .then(() => {
                     const msg = {
@@ -129,7 +130,6 @@ export default {
     components: {
         noteList,
         noteFilter,
-        noteDetails,
         noteAdd,
     }
 };
