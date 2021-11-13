@@ -3,8 +3,8 @@
 @import "./book-header.css";
 @import "./book-details.css";
 @import "./book-preview.css";
-/* @import "./book-review-add.css";
-@import "./book-search-online.css"; */
+@import "./review-add.css";
+@import "./search-online.css";
 /* 
 * {
   box-sizing: border-box;

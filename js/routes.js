@@ -43,18 +43,16 @@ const routes = [
     ]
   },
   {
-    path: '/books',
+    path: '/book',
     component: bookApp,
-    children: [
-      {
-        path: '/book/:bookId/review-add',
-        component: reviewAdd
-      },
-      {
-        path: '/book/:bookId',
-        component: bookDetails
-      },
-    ]
+  },
+  {
+    path: '/book/:bookId/review-add',
+    component: reviewAdd
+  },
+  {
+    path: '/book/:bookId',
+    component: bookDetails
   },
   {
     path: '/search',

@@ -100,8 +100,7 @@ export default {
         '$route.params.mail': {
             handler() {
                 const { mail } = this.$route.params;
-                console.log('mailId', mail)
-                console.log('mailId', JSON.parse(mail))
+                if (!mail) return
                 noteService.noteFromMail(JSON.parse(mail))
                     .then(this.loadNotes)
             },
