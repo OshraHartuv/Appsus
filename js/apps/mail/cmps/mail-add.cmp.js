@@ -41,11 +41,22 @@ export default {
     };
   },
   created() {
-    if (this.mailToEdit) {
+    if (this.mailToEdit && !this.mailToEdit.type) {
       mailService.getMailById(this.mailToEdit.id)
       .then((mail) => {
         this.newMail = mail;
       });
+    }
+    else if (this.mailToEdit && this.mailToEdit.type){
+      if (this.mailToEdit.title ) this.newMail.body += this.mailToEdit.title
+      if (this.mailToEdit.todos && this.mailToEdit.todos.length) {
+        this.mailToEdit.todos.forEach(todo=>{
+          this.newMail.body += `${todo.txt}
+`
+        })
+      }
+      if(this.mailToEdit.url) this.newMail.body +=`
+Check this out: ${this.mailToEdit.url}`
     }
   },
   methods: {

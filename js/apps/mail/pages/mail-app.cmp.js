@@ -76,17 +76,7 @@ export default {
       handler() {
         console.log(this.$route.params);
         const {note} = this.$route.params;
-        this.composeNote(note)
-        console.log(note);
-          // // if (this.$route.params.mailId){
-          //   if (mailId.type==='note') this.composeNote(this.$route.params)
-          //   else
-          //    mailService.getMailById(mailId)
-          //   .then((mail) => {
-          //     this.selectedMail = mail;
-          //   });
-          // }
-          // else  this.$router.push('/mail')
+        if (note) this.composeNote(note)
       },
       immediate: true,
     },
@@ -182,7 +172,20 @@ export default {
       eventBus.$emit('showMsg', msg);
     },
     composeNote(note){
+      // var note = JSON.parse(note.note)
       console.log(note);
+      // var noteEdit= note +'}}'
+      var noteEdit = JSON.parse(note)
+      console.log(noteEdit);
+      this.mailToEdit=noteEdit
+      this.mailToEdit['type'] = 'note'
+      // this.mailToEdit['subject'] = 'hi'
+      console.log(this.mailToEdit);
+      this.setNewMail()
+      // if (noteEdit.title) this.mailToEdit.subject = noteEdit.title;
+      // if (noteEdit.todos && noteEdit.todos.length) this.mailToEdit.body = noteEdit.todos.join(' ');
+      // this.setNewMail;
+
     }
   },
   computed: {
