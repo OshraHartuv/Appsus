@@ -1,7 +1,7 @@
 .mail-details {
   flex-direction: column;
   padding: 10px;
-  margin-top: 5vh;
+  /* margin-top: 5vh; */
 }
 
 .mail-details h2 {

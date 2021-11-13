@@ -51,6 +51,7 @@ export default {
         box: 'all',
       },
       menuClose: true,
+      noteToEdit: false
     };
   },
   created() {
@@ -63,7 +64,6 @@ export default {
   watch: {
     '$route.params.mailId': {
       handler() {
-          console.log(this.$route.params);
           const { mailId: mailId } = this.$route.params;
              mailService.getMailById(mailId)
             .then((mail) => {
@@ -74,7 +74,6 @@ export default {
     },
     '$route.params.note': {
       handler() {
-        console.log(this.$route.params);
         const {note} = this.$route.params;
         if (note) this.composeNote(note)
       },
@@ -106,6 +105,10 @@ export default {
     closeCompose() {
       this.isCompose = false;
       this.mailToEdit = null;
+      if (this.noteToEdit) {
+        this.noteToEdit = false
+        this.$router.push('/mail')
+      }
       this.loadMails();
     },
     deleteMail(id) {
@@ -172,20 +175,11 @@ export default {
       eventBus.$emit('showMsg', msg);
     },
     composeNote(note){
-      console.log(note);
-      // noteStr
+      this.noteToEdit = true;
       var noteEdit= JSON.parse(note)
-      // var noteToEdit = 
-      console.log(noteEdit);
-      // noteEdit['type'] = 'note'
-      // this.mailToEdit= noteEdit
-      // this.mailToEdit 
-      // this.mailToEdit['subject'] = 'hi'
-      // console.log(this.mailToEdit);
-      // this.setNewMail()
-      // if (noteEdit.title) this.mailToEdit.subject = noteEdit.title;
-      // if (noteEdit.todos && noteEdit.todos.length) this.mailToEdit.body = noteEdit.todos.join(' ');
-      // this.setNewMail;
+      noteEdit['type'] = 'note'
+      this.mailToEdit= noteEdit
+      this.setNewMail();
 
     }
   },

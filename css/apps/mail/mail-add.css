@@ -123,12 +123,16 @@
 
 @media (max-width: 570px) {
   .mail-add{
-    width: 98vw;
+    width: 90vw;
     height: 90vh;
   }
 
   .mail-add-input{
     height: 50px;
+  }
+
+  .mail-add-editors>*{
+    height: 40px;
   }
 }
 

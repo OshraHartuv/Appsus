@@ -35,7 +35,7 @@ export default {
                 </button>
               </div>
               <div class="details-nav">
-                <button title="save note" 
+                <button  
                 @click="saveNote"
                 title="save as note">
                   <span class="fa fa-sticky-note"></span>
