@@ -76,8 +76,8 @@ export default {
       handler() {
         console.log(this.$route.params);
         const {note} = this.$route.params;
+        // console.log(note);
         this.composeNote(note)
-        console.log(note);
           // // if (this.$route.params.mailId){
           //   if (mailId.type==='note') this.composeNote(this.$route.params)
           //   else
@@ -182,7 +182,12 @@ export default {
       eventBus.$emit('showMsg', msg);
     },
     composeNote(note){
+      // var note = JSON.parse(note.note)
       console.log(note);
+      // var noteEdit= note +'}}'
+      var noteEdit = JSON.parse(note)
+      // console.log(noteEdit);
+      console.log(noteEdit);
     }
   },
   computed: {
