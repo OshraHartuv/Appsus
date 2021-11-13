@@ -12,8 +12,8 @@ export default {
                   :class="{selectedBox: currBox ==='inbox'}">Inbox</div>
                   <div  @click="box('sent')"
                   :class="{selectedBox: currBox ==='sent'}">Sent</div>
-                  <div  @click="box('all')" 
-                  :class="{selectedBox: currBox ==='all'}">All mail</div>
+                  <div @click="box('stared')"
+                  :class="{selectedBox: currBox ==='stared'}">Starred</div>
                   <div  @click="box('read')"
                   :class="{selectedBox: currBox ==='read'}">Read</div>
                   <div  @click="box('unread')"
@@ -22,12 +22,13 @@ export default {
                     {{ unreadCount }}
                   </span>
                   </div>
+                  <div  @click="box('all')" 
+                  :class="{selectedBox: currBox ==='all'}">All mail</div>
                   <div @click="box('drafts')"
                   :class="{selectedBox: currBox ==='drafts'}">Drafts</div>
                   <div @click="box('trash')"
                   :class="{selectedBox: currBox ==='trash'}">Trash</div>
-                  <div @click="box('stared')"
-                  :class="{selectedBox: currBox ==='stared'}">Starred</div>
+                  
                   <select @change="setSort" v-model="sort" class="sort-select">
                     <option value="date" >Sort: Date</option>
                     <option value="subject">Sort: Subject</option>
