@@ -4,7 +4,6 @@ import mailFilter from '../cmps/mail-filter.cmp.js';
 import mailMenu from '../cmps/mail-menu.cmp.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import mailAdd from '../cmps/mail-add.cmp.js';
-// import mailHeader from '../cmps/mail-header.cmp.js';
 import mailDetails from './mail-details.cmp.js';
 
 export default {
@@ -16,7 +15,6 @@ export default {
               <button class="hamburger-menu" @click.stop= " toggleMenu">
                 <span class="fa fa-bars"></span>
               </button>          
-              <!-- <span class="fa fa-envelope mail-logo"></span> -->
               <mail-filter @filtered="setFilter" :box="filterBy.box"></mail-filter>
             </div>
           </div>
@@ -48,9 +46,10 @@ export default {
       sortBy: 'date',
       filterBy: {
         str: '',
-        box: 'all',
+        box: 'inbox',
       },
       menuClose: true,
+      noteToEdit: false
     };
   },
   created() {
@@ -63,9 +62,8 @@ export default {
   watch: {
     '$route.params.mailId': {
       handler() {
-          console.log(this.$route.params);
           const { mailId: mailId } = this.$route.params;
-             mailService.getMailById(mailId)
+            mailService.getMailById(mailId)
             .then((mail) => {
               this.selectedMail = mail;
             });
@@ -74,7 +72,6 @@ export default {
     },
     '$route.params.note': {
       handler() {
-        console.log(this.$route.params);
         const {note} = this.$route.params;
         if (note) this.composeNote(note)
       },
@@ -86,7 +83,6 @@ export default {
       mailService.query().then((mails) => {
         this.sortMails(mails);
         this.mails = mails;
-        // console.log(mails);
       });
     },
     closeDetails() {
@@ -106,6 +102,10 @@ export default {
     closeCompose() {
       this.isCompose = false;
       this.mailToEdit = null;
+      if (this.noteToEdit) {
+        this.noteToEdit = false
+        this.$router.push('/mail')
+      }
       this.loadMails();
     },
     deleteMail(id) {
@@ -162,7 +162,7 @@ export default {
       }
     },
     toggleMenu() {
-      this.menuClose ? (this.menuClose = false) : (this.menuClose = true);
+      this.menuClose ? this.menuClose = false : this.menuClose = true;
     },
     sendMsg(txt, type) {
       const msg = {
@@ -172,19 +172,11 @@ export default {
       eventBus.$emit('showMsg', msg);
     },
     composeNote(note){
-      // var note = JSON.parse(note.note)
-      console.log(note);
-      // var noteEdit= note +'}}'
-      var noteEdit = JSON.parse(note)
-      console.log(noteEdit);
-      this.mailToEdit=noteEdit
-      this.mailToEdit['type'] = 'note'
-      // this.mailToEdit['subject'] = 'hi'
-      console.log(this.mailToEdit);
-      this.setNewMail()
-      // if (noteEdit.title) this.mailToEdit.subject = noteEdit.title;
-      // if (noteEdit.todos && noteEdit.todos.length) this.mailToEdit.body = noteEdit.todos.join(' ');
-      // this.setNewMail;
+      this.noteToEdit = true;
+      var noteEdit= JSON.parse(note)
+      noteEdit['type'] = 'note'
+      this.mailToEdit= noteEdit
+      this.setNewMail();
 
     }
   },
@@ -266,6 +258,5 @@ export default {
     mailList,
     mailMenu,
     mailAdd,
-    // mailHeader
   },
 };

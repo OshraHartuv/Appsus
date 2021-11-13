@@ -25,7 +25,17 @@ export default {
                 </div>
                 <div class="mail-add-editors flex">
                     <button class="send-btn" @click="sendMail">Send</button>
-                    <button class="trash-btn flex" ><img src="img/trash.svg" class="trash-img"></button>
+                    <div class="mail-add-save-delete flex">
+                    <button 
+                    class="add-save-as" 
+                @click="saveNote"
+                title="save as note">
+                  <span class="fa fa-sticky-note"></span>
+                </button>
+                    <button class="trash-btn flex" >
+                    <span class="fa fa-trash"></span>
+                    </button>
+                    </div>
                 </div>
           </section>
       `,
@@ -61,7 +71,6 @@ Check this out: ${this.mailToEdit.url}`
   },
   methods: {
     draftMail() {
-      // this.newMail.sentAt = Date.now();
       mailService.editAndSave(this.newMail,'sentAt',Date.now())
       .then(() => {});
     },
@@ -69,9 +78,6 @@ Check this out: ${this.mailToEdit.url}`
       if (!this.newMail.to.includes('@') || !this.newMail.to.includes('.')) {
         this.sendMsg('Mail not sent, please enter a valid e-mail address', 'error')   
       } else {
-        // this.newMail.sentAt = Date.now();
-        // this.newMail.isDraft = false;
-        // mailService.saveMail(this.newMail)
         mailService.editAndSave(this.newMail,'sentAt',Date.now())
         .then(() => {
           mailService.editAndSave(this.newMail,'isDraft',false)
@@ -93,7 +99,7 @@ Check this out: ${this.mailToEdit.url}`
       }
       mailService.editAndSave(this.newMail,'sentAt',Date.now())
         .then(() => {
-          this.sendMsg('Daft saved','success')
+          this.sendMsg('Draft saved','success')
 
         this.$emit('close');
       });
@@ -105,5 +111,9 @@ Check this out: ${this.mailToEdit.url}`
       };
       eventBus.$emit('showMsg', msg);
     },
+    saveNote(){
+      let msg = JSON.stringify(this.newMail)
+      this.$router.push(`/keep/notefrommail/${msg}`);
+    }
   },
 };

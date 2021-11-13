@@ -1,7 +1,6 @@
 .mail-details {
   flex-direction: column;
   padding: 10px;
-  margin-top: 5vh;
 }
 
 .mail-details h2 {
@@ -63,11 +62,8 @@
 }
 
 .details-header{
-  /* align-items: center; */
   justify-content: space-between;
 }
-
-
 
 .mail-details-tools .fa-envelope,
 .mail-details-tools .fa-envelope-open,
