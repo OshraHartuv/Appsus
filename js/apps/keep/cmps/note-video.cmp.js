@@ -7,10 +7,10 @@ export const noteVideo = {
         <section class="note-video" >
             <pre class="video-editor" :class="note.id" contenteditable="true">{{note.info.title}}</pre>
             <iframe :src="urlToShow"></iframe>
-            <div v-if="selected">
+            <!-- <div v-if="selected">
                  <span>change videos URL: </span>
                  <form @submit.prevent="reportVal"><input type="text" v-model:value=urlToEdit></form>
-            </div>
+            </div> -->
         </section>
     `,
     data() {

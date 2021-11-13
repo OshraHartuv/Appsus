@@ -36,7 +36,7 @@ function _createNotes() {
                     title: "Fullstack Me Baby!"
                 },
                 style: {
-                    bgc: "#8bc9ff"
+                    bgc: "#ffffff"
                 }
             },
             {
@@ -48,7 +48,7 @@ function _createNotes() {
                     url: "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg",
                 },
                 style: {
-                    bgc: "#c5ff8b"
+                    bgc: "#ffffff"
                 }
             },
             {
@@ -63,7 +63,7 @@ function _createNotes() {
                     ]
                 },
                 style: {
-                    bgc: "#faf38c"
+                    bgc: "#ffffff"
                 }
             },
             {
@@ -75,7 +75,7 @@ function _createNotes() {
                     url: "https://www.youtube.com/embed/TcMBFSGVi1c",
                 },
                 style: {
-                    bgc: "#8cfa9c"
+                    bgc: "#ffffff"
                 }
             },
             {
@@ -86,7 +86,7 @@ function _createNotes() {
                     title: "JavaScript Frameworks > App that use them 😂"
                 },
                 style: {
-                    bgc: "#3f7bf3"
+                    bgc: "#ffffff"
                 }
             },
             {
@@ -97,7 +97,7 @@ function _createNotes() {
                     title: "My new prince!"
                 },
                 style: {
-                    bgc: "#c983ff"
+                    bgc: "#ffffff"
                 }
             },
             {
@@ -112,7 +112,7 @@ function _createNotes() {
                     ]
                 },
                 style: {
-                    bgc: "#8cfa9c"
+                    bgc: "#ffffff"
                 }
             },
             {
@@ -124,7 +124,7 @@ function _createNotes() {
                     url: "https://www.youtube.com/watch?v=qwxoxMX5veU",
                 },
                 style: {
-                    bgc: "#faf38c"
+                    bgc: "#ffffff"
                 }
             },
         ];

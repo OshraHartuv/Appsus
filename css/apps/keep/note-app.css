@@ -4,3 +4,36 @@
 @import "./note-preview.css";
 @import "./note-add.css";
 @import "./note-txt.css";
+
+.note-app {
+}
+
+.pin-header {
+  display: block;
+  margin: 10px;
+}
+
+/* MOBILE FIRST */
+
+@media (max-width: 840px) {
+  .keep-app {
+    margin: 10px;
+  }
+}
+
+/* small */
+
+@media (min-width: 600px) and (max-width: 1020px) {
+}
+
+@media (min-width: 600px) {
+  /* medium */
+
+  @media (min-width: 840px) {
+  }
+
+  /* large */
+
+  @media (min-width: 1020px) {
+  }
+}

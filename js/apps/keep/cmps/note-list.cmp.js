@@ -6,16 +6,18 @@ export default {
     template: `
             <section class="note-list">
                 <div class="main-screen" :class="{'menu-open':selectedNote}" @click="toggleMenu"></div>
-                <span class="note-preview"
+                <section class="note-preview"
                 :class="{'edit-mode' : selectedNote && note.id === selectedNote.id }"
                 v-for="note in notesToRender" 
                 :key="note.id" 
                 :style="{backgroundColor:note.style.bgc}"
-                @click="setEditMode(note)">
+                @click="setEditMode(note)"
+                >
                     <note-preview :note="(selectedNote && note.id === selectedNote.id) ? selectedNote: note" />
-                </span>
+                </section>
             </section>
     `,
+    // @click="setEditMode(note)"
     data() {
         return {
             selectedNote: null,

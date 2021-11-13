@@ -13,7 +13,8 @@ export default {
             <note-filter @filtered="setFilter" />
             <!-- <note-details v-if="selectedNote" :note="selectedNote" @close="closeDetails" /> -->
             <hr />
-                📌Pinned Notes:
+                <span class="pin-header">📌Pinned Notes:</span>
+                  
                 <note-list :notes="pinnedNotesToShow"  @selected="selectNote" />
                 <hr />
             <note-list :notes="notesToShow"  @selected="selectNote" />

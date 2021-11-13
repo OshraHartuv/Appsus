@@ -9,11 +9,11 @@ export default {
             <form @submit.prevent.stop="save" class="note-add" >
                 <input class="add-start" type="text" :placeholder="placeholder" v-model:value="newNote.info.title" @change="save" autofocus>
                 <div class="actions">
-                    <button class="btn-save" @click.prevent="save" title="Save"></button>
-                    <button class="btn-txt" @click.prevent="setType('note-txt')" title="Text"></button>
-                    <button class="btn-todos" @click.prevent="setType('note-todos')" title="Todos"></button>
-                    <button class="btn-img" @click.prevent="setType('note-img')" title="Image"></button>
-                    <button class="btn-video" @click.prevent="setType('note-video')" title="Video"></button>
+                    <a class="btn-save fa fa-save" :class="{saved:active}" @click.prevent="save" title="Save"></a>
+                    <a class="btn-txt fa fa-font" :class="{active:newNote.type === 'note-txt'}" @click.prevent="setType('note-txt')" title="Text"></a>
+                    <a class="btn-todos fa fa-list" :class="{active:newNote.type === 'note-todos'}" @click.prevent="setType('note-todos')" title="Todos"></a>
+                    <a class="btn-img fa fa-image":class="{active:newNote.type === 'note-img'}" @click.prevent="setType('note-img')" title="Image"></a>
+                    <a class="btn-video fa fa-youtube" :class="{active:newNote.type === 'note-video'}" @click.prevent="setType('note-video')" title="Video"></a>
                 </div>
             </form>
         </section>
@@ -28,10 +28,12 @@ export default {
                 },
 
             },
+            active: null
 
         };
     },
     created() {
+        // this.active = this.newNote.type
 
     },
     methods: {
@@ -59,6 +61,10 @@ export default {
                 .then(() => {
                     eventBus.$emit('savedNote')
                     this.newNote.info.title = ''
+                    this.active = true
+                    setTimeout(() => {
+                        this.active = false
+                    }, 1500);
                 })
         }
     }
