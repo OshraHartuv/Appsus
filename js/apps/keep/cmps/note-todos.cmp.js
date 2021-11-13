@@ -32,7 +32,6 @@ export const noteTodos = {
         }
     },
     created() {
-        // eventBus.$on('unSelect', this.reportVal);
         this.todosToEdit = JSON.parse(JSON.stringify(this.note.info.todos))
     },
     methods: {

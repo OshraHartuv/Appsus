@@ -34,7 +34,7 @@ function _createNotes() {
                 type: "note-txt",
                 isPinned: false,
                 info: {
-                    title: "Fullstack Me Baby!"
+                    title: `A man tells his doctor, "Doc, help me. I’m addicted to Twitter!" The doctor replies, “Sorry, I don’t follow you …`
                 },
                 style: {
                     bgc: "#ffffff"
@@ -98,7 +98,7 @@ function _createNotes() {
                     title: "My new prince!"
                 },
                 style: {
-                    bgc: "#ffffff"
+                    bgc: '#fdcfe8'
                 }
             },
             {
@@ -133,7 +133,7 @@ function _createNotes() {
                 type: "note-txt",
                 isPinned: false,
                 info: {
-                    title: "JavaScript Frameworks > App that use them 😂"
+                    title: "Hear about the new restaurant called Karma? There’s no menu: You get what you deserve."
                 },
                 style: {
                     bgc: "#ffffff"
@@ -176,7 +176,7 @@ function _createNotes() {
                     url: "https://www.youtube.com/watch?v=sjkrrmBnpGE",
                 },
                 style: {
-                    bgc: "#ffffff"
+                    bgc: '#aecbfa'
                 }
             },
             {
@@ -219,7 +219,7 @@ function _createNotes() {
                     ]
                 },
                 style: {
-                    bgc: "#ffffff"
+                    bgc: "#fff475"
                 }
             },
             {
