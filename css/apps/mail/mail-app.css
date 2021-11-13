@@ -149,6 +149,13 @@
   .hamburger-menu {
     display: none;
   }
+
+  .mail-filter input{
+   border-radius: 15px;
+   border:1px solid gray;
+   padding: 0 7px
+  }
+
 }
 
 
