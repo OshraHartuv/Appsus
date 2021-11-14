@@ -20,7 +20,7 @@ export default {
             </router-link>
         </div>
         <div class="home-books flex">
-            <router-link to="/books">
+            <router-link to="/book">
                 
                 <span class="fa fa-book"></span>
                     <p>Save book and review them right here! 
